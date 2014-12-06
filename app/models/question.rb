@@ -1,3 +1,4 @@
 class Question < ActiveRecord::Base
-  # validate :title, presence: true
+  validates_presence_of :title, :text
+  validates_uniqueness_of :title
 end
