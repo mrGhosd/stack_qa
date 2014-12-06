@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206195241) do
+ActiveRecord::Schema.define(version: 20141206202951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(version: 20141206195241) do
     t.boolean  "is_closed",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "questions", ["is_closed"], name: "index_questions_on_is_closed", using: :btree
+  add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "surname"
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
+    t.boolean  "is_confirmed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["password"], name: "index_users_on_password", using: :btree
 
 end
