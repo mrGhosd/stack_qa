@@ -27,11 +27,19 @@ describe QuestionsController do
   end
 
   describe "GET #edit" do
-    
+    it "locate a question" do
+      get :edit, id: question.id
+      expect(assigns(:question)).to eq(question)
+    end
+
+    it "render edit template" do
+      get :edit, id: question.id
+      expect(response).to render_template :edit
+    end
   end
 
   describe "POST #create" do
-
+    
   end
 
   describe "PUT #update" do
