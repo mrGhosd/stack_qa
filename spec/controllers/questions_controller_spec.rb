@@ -6,7 +6,7 @@ describe QuestionsController do
   describe "GET #index" do
     it "return list of all questions" do
       get :index
-      expect(Question.all).to match_array(question)
+      expect(assings(:questions)).to match_array(Question.all)
     end
 
     it "render the index  template" do
@@ -40,34 +40,48 @@ describe QuestionsController do
   end
 
   describe "POST #create" do
-    it "create a new question" do
-      expect{post :create, question: attributes_for(:question)}.to change(Question, :count).by(1)
+    context "with valid attributes" do
+      it "create a new question" do
+        expect{post :create, question: attributes_for(:question)}.to change(Question, :count).by(1)
+      end
+
+      it "redirect to questions list" do
+        post :create, question: attributes_for(:question)
+        expect(response).to redirect_to questions_path
+      end
     end
 
-    it "redirect to questions list" do
-      post :create, question: attributes_for(:question)
-      expect(response).to redirect_to questions_path
+    context "with invalid attributes" do
+
     end
   end
 
   describe "PUT #update" do
-    it "update question parameters" do
-      put :update, question: attributes_for(:question, title: "adawkdawokd;awd")
-      question.reload
-      expect(question.title).to eq("adawkdawokd;awd")
-    end
+    context "with valid attributes" do
+      it "update question parameters" do
+        put :update, question: attributes_for(:question, title: "adawkdawokd;awd")
+        question.reload
+        expect(question.title).to eq("adawkdawokd;awd")
+      end
 
-    it "redirect to show question page" do
-      put :update, question: attributes_for(:question)
-      expect(response).to redirect_to question_path(id: question.id)
+      it "redirect to show question page" do
+        put :update, question: attributes_for(:question)
+        expect(response).to redirect_to question_path(id: question.id)
+      end
+    end
+    context "with invalid attributes" do
+
     end
   end
 
   describe "DELETE #destroy" do
     it "destroy the choosen question" do
-
+      expect{delete :destroy, id: question.id}.to change(Question, :count).by(-1)
     end
 
-    
+    it "return 200 status" do
+      delete :destroy, id: question.id
+      expect(response.status).to eq(200)
+    end
   end
 end
