@@ -6,7 +6,7 @@ describe QuestionsController do
   describe "GET #index" do
     it "return list of all questions" do
       get :index
-      expect(assings(:questions)).to match_array(Question.all)
+      expect(assigns(:questions)).to eq(Question.all)
     end
 
     it "render the index  template" do
@@ -23,7 +23,7 @@ describe QuestionsController do
 
     it "render the show template" do
       get :show, id: question.id
-      expect(repsponse).to render_template :show
+      expect(response).to render_template :show
     end
   end
 
@@ -42,11 +42,11 @@ describe QuestionsController do
   describe "POST #create" do
     context "with valid attributes" do
       it "create a new question" do
-        expect{post :create, question: attributes_for(:question)}.to change(Question, :count).by(1)
+        expect{post :create, question: attributes_for(:question, title: "1")}.to change(Question, :count).by(1)
       end
 
       it "redirect to questions list" do
-        post :create, question: attributes_for(:question)
+        post :create, question: attributes_for(:question, title: "2")
         expect(response).to redirect_to questions_path
       end
     end
@@ -59,13 +59,13 @@ describe QuestionsController do
   describe "PUT #update" do
     context "with valid attributes" do
       it "update question parameters" do
-        put :update, question: attributes_for(:question, title: "adawkdawokd;awd")
+        put :update, id: question, question: attributes_for(:question, title: "adawkdawokd;awd")
         question.reload
         expect(question.title).to eq("adawkdawokd;awd")
       end
 
       it "redirect to show question page" do
-        put :update, question: attributes_for(:question)
+        put :update, id: question, question: attributes_for(:question)
         expect(response).to redirect_to question_path(id: question.id)
       end
     end
