@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe QuestionsController do
   let!(:question) { create :question, :unclosed }
+
   describe "GET #index" do
     it "return list of all questions" do
       get :index
@@ -39,14 +40,34 @@ describe QuestionsController do
   end
 
   describe "POST #create" do
-    
+    it "create a new question" do
+      expect{post :create, question: attributes_for(:question)}.to change(Question, :count).by(1)
+    end
+
+    it "redirect to questions list" do
+      post :create, question: attributes_for(:question)
+      expect(response).to redirect_to questions_path
+    end
   end
 
   describe "PUT #update" do
+    it "update question parameters" do
+      put :update, question: attributes_for(:question, title: "adawkdawokd;awd")
+      question.reload
+      expect(question.title).to eq("adawkdawokd;awd")
+    end
 
+    it "redirect to show question page" do
+      put :update, question: attributes_for(:question)
+      expect(response).to redirect_to question_path(id: question.id)
+    end
   end
 
   describe "DELETE #destroy" do
+    it "destroy the choosen question" do
 
+    end
+
+    
   end
 end
