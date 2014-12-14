@@ -15,11 +15,19 @@ describe QuestionsController do
   end
 
   describe "GET #show" do
+    it "locate a current questions" do
+      get :show, id: question.id
+      expect(assigns(:question)).to eq(question)
+    end
 
+    it "render the show template" do
+      get :show, id: question.id
+      expect(repsponse).to render_template :show
+    end
   end
 
   describe "GET #edit" do
-
+    
   end
 
   describe "POST #create" do
