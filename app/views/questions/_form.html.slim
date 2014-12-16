@@ -1,0 +1,11 @@
+= form_for @question, html: {class: 'form-horizontal'} do |f|
+  .form-group
+    = f.label 'Заголовок:'
+    .col-md-4
+      = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label 'Текст вопроса:'
+    .col-md-4
+      = f.text_field :text, class: 'form-control redactor', rows: 120, cols: 40
+
+  = f.submit 'Сохранить', class: 'btn btn-success'

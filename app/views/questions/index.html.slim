@@ -1,0 +1,9 @@
+= link_to "Создать вопрос...", new_question_path, class: 'btn btn-info'
+table.table.table-bordered
+  tr
+    th="Заголовок: "
+    th="Текст: "
+  - @questions.each do |question|
+    tr
+      td= question.title
+      td= question.text
