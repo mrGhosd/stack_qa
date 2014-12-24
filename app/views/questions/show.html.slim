@@ -1,0 +1,12 @@
+.question-show
+  fieldset
+    legend
+      = @question.title
+      span.question-time= @question.created_at
+    .row
+      .col-md-8
+        .question-text
+          = @question.text
+  .actions-panel
+    = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
+    = link_to 'Назад', questions_path, class: 'btn btn-default'

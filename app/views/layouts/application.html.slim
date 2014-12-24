@@ -6,4 +6,15 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
-    = yield
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          .logo
+            = link_to "StackQ&A", root_path
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li= link_to "О нас", "#"
+            li= link_to "FAQ", "#"
+
+    .container
+      = yield

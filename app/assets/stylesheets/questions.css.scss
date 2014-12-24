@@ -1,0 +1,22 @@
+.question-item{
+  border: 2px solid #dddddd;
+  border-radius: 8px;
+  margin: 10px 0px 10px 0px;
+  .title{
+    padding: 10px;
+  }
+  .question-text{
+    padding:10px;
+  }
+  .actions-panel{
+    a{
+      margin-left: 10px;
+    }
+  }
+}
+.question-show{
+  .question-time{
+    font-size: 13px;
+    font-style: italic;
+  }
+}

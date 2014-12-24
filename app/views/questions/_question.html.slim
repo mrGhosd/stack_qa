@@ -1,0 +1,16 @@
+.question-item
+  .row
+    .col-md-2
+      .title
+        = link_to question.title, question_path(question)
+  .row
+    .col-md-4
+      .question-text
+        = question.text
+    .col-md-2
+      .question-time
+        = question.created_at
+    .col-md-2
+      .actions-panel
+        = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-success"
+        = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-danger delete-question", data: {question: question.id}
