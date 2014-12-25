@@ -6,6 +6,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
+    = render template: "shared/modal_window"
     .navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
@@ -15,6 +16,9 @@ html
           ul.nav.navbar-nav
             li= link_to "О нас", "#"
             li= link_to "FAQ", "#"
-
+          .navbar-form.navbar-right
+            .authentication-links
+              = link_to "Регистрация", "#", class: "btn btn-primary", remote: true, data: {action: "authorization"}
+              = link_to "Войти", "#", class: "btn btn-success", remote: true, data: {action: "registration"}
     .container
       = yield

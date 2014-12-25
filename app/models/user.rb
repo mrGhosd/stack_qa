@@ -8,4 +8,6 @@ class User <ActiveRecord::Base
 
   validates :email, :password, presence: true
   validates :email, uniqueness: true
+
+  devise :database_authenticatable, :registerable, :confirmable, :recoverable, stretches: 20
 end

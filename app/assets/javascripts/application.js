@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require redactor-rails
+//= require bootstrap-sprockets
+//= require questions
+//= require modal_window
 //= require_tree .
