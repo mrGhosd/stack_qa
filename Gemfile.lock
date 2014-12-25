@@ -227,7 +227,6 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   database_cleaner
-  devise
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails

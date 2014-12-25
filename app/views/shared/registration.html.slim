@@ -1,14 +1,16 @@
 #registration.tab-pane
-  = form_tag "/users/sign_up", class: "form-horizontal" do
+  = form_tag "/users", class: "form-horizontal" do
     .form-group
       = label_tag "Электронная почта:", nil, for: :email, class: 'control-label col-md-4'
       .col-md-4
-        = text_field_tag :email, nil, class: "form-control"
+        = email_field_tag :email, nil, class: "form-control"
     .form-group
       = label_tag "Пароль:", nil, for: :password, class: 'control-label col-md-4'
       .col-md-4
-        = text_field_tag :password, nil, class: "form-control"
+        = password_field_tag :password, nil, class: "form-control"
     .form-group
       = label_tag "Повторите пароль:", nil, for: :password_confirmation, class: 'control-label col-md-4'
       .col-md-4
-        = text_field_tag :password_confirmation, nil, class: "form-control"
+        = password_field_tag :password_confirmation, nil, class: "form-control"
+    .form-actions
+      = submit_tag "Отправить",  class: 'btn btn-success'

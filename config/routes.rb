@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   mount RedactorRails::Engine => '/redactor_rails'
   root "questions#index"
   resources :questions
