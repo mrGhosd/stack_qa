@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "User", :js do
+feature "Question", :js do
 
   let!(:question) { create :question, :unclosed }
 
