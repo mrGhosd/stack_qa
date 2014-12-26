@@ -18,7 +18,10 @@ html
             li= link_to "FAQ", "#"
           .navbar-form.navbar-right
             .authentication-links
-              = link_to "Регистрация", "#", class: "btn btn-primary", remote: true, data: {action: "registration"}
-              = link_to "Войти", "#", class: "btn btn-success", remote: true, data: {action: "authorization"}
+              - if current_user
+                = link_to "Выйти", destroy_user_session_path, class: 'btn btn-danger', data: {method: 'delete'}
+              - else
+                = link_to "Регистрация", "#", class: "btn btn-primary", remote: true, data: {action: "registration"}
+                = link_to "Войти", "#", class: "btn btn-success", remote: true, data: {action: "authorization"}
     .container
       = yield

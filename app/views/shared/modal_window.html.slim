@@ -9,8 +9,8 @@
           li= link_to "Авторизация", "#authorization", data: {toggle: "tab"}
           li= link_to "Регистрация", "#registration", data: {toggle: "tab"}
         .tab-content
-          = render template: "shared/login"
-          = render template: "shared/registration"
+          = render template: "devise/sessions/new"
+          = render template: "devise/registrations/new"
       .modal-footer
         button.btn.btn-default data-dismiss="modal" type="button"  Закрыть
         button.btn.btn-success.form-delegate type="button"  Отправить

@@ -11,17 +11,23 @@ $ ->
     $(this).tab('show')
 
   $("#myModal .form-delegate").click ->
+    $("#myModal input").removeClass("error")
+    $("#myModal .error-text").remove()
     form = $("#myModal .tab-content .tab-pane.active").find("form")
     url = $(form).attr("action")
-    console.log url
     console.log form.serialize()
     $.ajax url,
       type: "POST"
       data: form.serialize()
       dataType: "json"
       success: (data, textStatus, jqXHR)->
-        console.log data
+        window.location.reload()
       error: (jqXHR, textStatus, errorThrown) ->
-        console.log errorThrown
-        console.log jqXHR
-        console.log textStatus
+        object = JSON.parse(jqXHR.responseText)
+        $.each(object.errors, (key, value)->
+          $("#myModal #user_"+key).addClass("error")
+          $.each(value, (element) ->
+            $("#myModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
+          )
+        )
+
