@@ -1,4 +1,5 @@
 = form_for @question, html: {class: 'form-horizontal'} do |f|
+  = f.hidden_field :user_id, value: current_user.id
   .form-group
     = f.label 'Заголовок:'
     .col-md-4

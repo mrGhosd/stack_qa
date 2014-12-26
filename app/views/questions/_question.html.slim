@@ -11,6 +11,7 @@
       .question-time
         = question.created_at
     .col-md-2
-      .actions-panel
-        = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-success"
-        = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-danger delete-question", data: {question: question.id}
+      - if current_user && question.in?(current_user.questions)
+        .actions-panel
+          = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-success"
+          = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-danger delete-question", data: {question: question.id}

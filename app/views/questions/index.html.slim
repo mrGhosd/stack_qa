@@ -1,4 +1,5 @@
-= link_to "Создать вопрос...", new_question_path, class: 'btn btn-info'
+- if current_user
+  = link_to "Создать вопрос...", new_question_path, class: 'btn btn-info'
 
 - @questions.each do |question|
   = render partial: 'question', locals: {question: question}

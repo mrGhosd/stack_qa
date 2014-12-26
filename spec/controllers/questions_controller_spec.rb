@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe QuestionsController do
-  let!(:question) { create :question, :unclosed }
+  login_user
+  let!(:question) { create :question, :unclosed, user_id: subject.current_user.id }
 
   describe "GET #index" do
     it "return list of all questions" do
@@ -42,11 +43,11 @@ describe QuestionsController do
   describe "POST #create" do
     context "with valid attributes" do
       it "create a new question" do
-        expect{post :create, question: attributes_for(:question, title: "1")}.to change(Question, :count).by(1)
+        expect{post :create, question: attributes_for(:question, title: "1", user_id: subject.current_user.id)}.to change(Question, :count).by(1)
       end
 
       it "redirect to questions list" do
-        post :create, question: attributes_for(:question, title: "2")
+        post :create, question: attributes_for(:question, title: "2", user_id: subject.current_user.id)
         expect(response).to redirect_to questions_path
       end
     end
@@ -59,13 +60,13 @@ describe QuestionsController do
   describe "PUT #update" do
     context "with valid attributes" do
       it "update question parameters" do
-        put :update, id: question, question: attributes_for(:question, title: "adawkdawokd;awd")
+        put :update, id: question, question: attributes_for(:question, title: "adawkdawokd;awd", user_id: subject.current_user.id)
         question.reload
         expect(question.title).to eq("adawkdawokd;awd")
       end
 
       it "redirect to show question page" do
-        put :update, id: question, question: attributes_for(:question)
+        put :update, id: question, question: attributes_for(:question, user_id: subject.current_user.id)
         expect(response).to redirect_to question_path(id: question.id)
       end
     end

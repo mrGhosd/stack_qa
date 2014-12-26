@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :define_question, only: [:edit, :show, :update, :destroy]
 
   def index
@@ -44,6 +44,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :text)
+    params.require(:question).permit(:title, :text, :user_id)
   end
 end
