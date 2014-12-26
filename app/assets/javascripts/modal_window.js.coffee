@@ -24,6 +24,10 @@ $ ->
         window.location.reload()
       error: (jqXHR, textStatus, errorThrown) ->
         object = JSON.parse(jqXHR.responseText)
+        if url == "/users/sign_in"
+          $("#myModal form input").addClass("error")
+          $("#myModal form #user_password").parent().append("<div class='error-text'>#{object.error}</div>")
+
         $.each(object.errors, (key, value)->
           $("#myModal #user_"+key).addClass("error")
           $.each(value, (element) ->
