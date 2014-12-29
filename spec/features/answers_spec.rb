@@ -10,6 +10,14 @@ feature "Answers for unsigned user", :js do
   end
 end
 
-feature "Answers for signed in user" do
+feature "Answers for signed in user", :js do
+  let!(:question) { create :question, :unclosed }
   let!(:user) { create :user, :confirmed }
+
+  scenario "is available from question page" do
+    sign_in user
+    find(".question-item .title a", match: :first).click
+    expect(page).to have_content(question.title)
+    expect(page).to have_content("Ответить...")
+  end
 end
