@@ -9,7 +9,8 @@
           = @question.text
 
   .question-action
-    = link_to "Ответить...", "#", class:'btn btn-primary', remote: true
+    - if current_user
+      = link_to "Ответить...", "#", class:'btn btn-primary add-answer',data: {question: @question.id}, remote: true
   .actions-panel
     = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
     = link_to 'Назад', questions_path, class: 'btn btn-default'

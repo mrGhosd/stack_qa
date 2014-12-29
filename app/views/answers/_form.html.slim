@@ -1,0 +1,6 @@
+= form_for [@question, @answer], class: 'form-horizontal' do |f|
+  = f.hidden_field :question_id, value: params[:question_id]
+  = f.hidden_field :user_id, value: current_user.id
+  = f.label "Текст"
+  = f.text_area :text
+  = f.submit "Отправить"

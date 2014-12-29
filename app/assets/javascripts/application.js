@@ -17,5 +17,6 @@
 //= require redactor-rails
 //= require bootstrap-sprockets
 //= require questions
+//= require answers
 //= require modal_window
 //= require_tree .
