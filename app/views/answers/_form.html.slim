@@ -6,3 +6,5 @@
       .col-md-4
         = f.text_area :text, class: 'form-control', placeholder: 'Текст'
     = f.submit "Отправить", class: 'btn btn-success submit-answer', remote: true, data: {question: @question.id}
+    - if params[:action] == "edit"
+      = link_to "Отменить", "#", class:'btn btn-default remove-edit-form', remote: true

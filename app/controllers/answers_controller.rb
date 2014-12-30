@@ -15,11 +15,24 @@ class AnswersController < ApplicationController
   end
 
   def edit
-
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:id])
+    render template: 'answers/edit', layout: false
   end
 
   def update
+    answer = Answer.find(params[:id])
+    if answer.update(answers_params)
+      render json: answer.to_json, status: 200
+    else
+      render json: answer.errors.to_json, status: :forbidden
+    end
+  end
 
+  def destroy
+    answer = Answer.find(params[:id])
+    answer.destroy
+    head :ok
   end
 
   def answers_params

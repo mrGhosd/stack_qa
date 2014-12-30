@@ -17,8 +17,8 @@
         span.time= answer.created_at
         - if answer.in?(current_user.answers)
           .answer-actions
-            = link_to "Редактировать", "#", class: 'btn btn-info', remote: true
-            = link_to "Удалить", "#", class: 'btn btn-danger', remote: true
+            = link_to "Редактировать", "#", class: 'btn btn-info edit-answer', data: {question: @question.id, answer: answer.id}, remote: true
+            = link_to "Удалить", "#", class: 'btn btn-danger remove-answer', data: {question: @question.id, answer: answer.id}, remote: true
 
   .actions-panel
     - if @question.in?(current_user.questions)
