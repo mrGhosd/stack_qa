@@ -7,10 +7,20 @@
       .col-md-8
         .question-text
           = @question.text
-
   .question-action
     - if current_user
-      = link_to "Ответить...", "#", class:'btn btn-primary add-answer',data: {question: @question.id}, remote: true
+      = link_to "Ответить...", "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
+  .answers-list
+    - @question.answers.each do |answer|
+      .answer-item
+        span.text= answer.text
+        span.time= answer.created_at
+        - if answer.in?(current_user.answers)
+          .answer-actions
+            = link_to "Редактировать", "#", class: 'btn btn-info', remote: true
+            = link_to "Удалить", "#", class: 'btn btn-danger', remote: true
+
   .actions-panel
-    = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
+    - if @question.in?(current_user.questions)
+      = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
     = link_to 'Назад', questions_path, class: 'btn btn-default'
