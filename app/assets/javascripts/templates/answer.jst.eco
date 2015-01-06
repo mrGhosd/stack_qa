@@ -2,7 +2,7 @@
   <span class="text"><%= @answer.text %></span>
   <span class="time"><%= @answer.created_at %></span>
   <div class="answers-actions">
-    <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-info edit-answer">Редактировать</a>
-    <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-danger remove-answer">Удалить</a>
+    <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-info edit-answer glyphicon glyphicon-pencil"></a>
+    <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-danger remove-answer glyphicon glyphicon-remove"></a>
   </div>
 </div>

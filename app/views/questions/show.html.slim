@@ -12,15 +12,9 @@
       = link_to "Ответить...", "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
   .answers-list
     - @question.answers.each do |answer|
-      .answer-item
-        span.text= answer.text
-        span.time= answer.created_at
-        - if answer.in?(current_user.answers)
-          .answer-actions
-            = link_to "Редактировать", "#", class: 'btn btn-info edit-answer', data: {question: @question.id, answer: answer.id}, remote: true
-            = link_to "Удалить", "#", class: 'btn btn-danger remove-answer', data: {question: @question.id, answer: answer.id}, remote: true
+      = render partial: 'answers/answer', locals: { answer: answer }
 
   .actions-panel
-    - if @question.in?(current_user.questions)
+    - if current_user && @question.in?(current_user.questions)
       = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
     = link_to 'Назад', questions_path, class: 'btn btn-default'

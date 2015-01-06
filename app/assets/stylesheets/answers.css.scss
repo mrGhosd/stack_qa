@@ -1,0 +1,13 @@
+.answer-item{
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #CCCCCC;
+  border-radius: 6px;
+  margin-left: 70px;
+  position: relative;
+  .time{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+}

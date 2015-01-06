@@ -1,0 +1,7 @@
+.answer-item
+  span.text= answer.text
+  span.time= answer.created_at.strftime("%H:%M:%S %d.%m.%Y")
+  - if current_user && answer.in?(current_user.answers)
+    .answer-actions
+      = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: @question.id, answer: answer.id}, remote: true
+      = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: @question.id, answer: answer.id}, remote: true

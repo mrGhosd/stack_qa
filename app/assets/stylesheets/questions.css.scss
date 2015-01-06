@@ -15,8 +15,14 @@
   }
 }
 .question-show{
+  legend{
+    position: relative;
+  }
   .question-time{
     font-size: 13px;
     font-style: italic;
+    position: absolute;
+    right: 15px;
+    bottom: 5px;
   }
 }

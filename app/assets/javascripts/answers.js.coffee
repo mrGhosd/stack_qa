@@ -5,7 +5,6 @@ $ ->
     else
       question = $(this).data("question")
       $.get "/questions/#{question}/answers/new", (html) ->
-        console.log html
         $(".question-action").append(html)
 
   $(".edit-answer").click ->
@@ -58,7 +57,7 @@ $(document).delegate("#new_answer", "submit", (event)->
     type: "POST"
     data: $("#new_answer").serialize()
     success: (data)->
-      $(".answers-list").append JST["templates/answer"](answer: data)
+      $(".answers-list").prepend JST["templates/answer"](answer: data)
       $(".answer-form.row").remove()
     error: (error) ->
       object = JSON.parse(error.responseText)
