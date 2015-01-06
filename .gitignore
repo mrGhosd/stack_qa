@@ -12,3 +12,6 @@
 /tmp
 config/database.yml
 .idea
+/public/public
+/public/system
+/public/uploads

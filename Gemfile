@@ -12,6 +12,7 @@ gem "mini_magick"
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass'
 gem 'redactor-rails'
+gem "markitup-rails"
 gem 'eco'
 
 # Use Uglifier as compressor for JavaScript assets
