@@ -1,12 +1,12 @@
 = form_for @question, html: {class: 'form-horizontal'} do |f|
   = f.hidden_field :user_id, value: current_user.id
   .form-group
-    = f.label 'Заголовок:'
+    = f.label 'Заголовок:', class: 'col-md-2 control-label'
     .col-md-4
       = f.text_field :title, class: 'form-control'
   .form-group
-    = f.label 'Текст вопроса:'
-    .col-md-4
+    = f.label 'Текст вопроса:', class: 'col-md-2 control-label'
+    .col-md-5
       = f.text_area :text, class: 'form-control redactor', rows: 120, cols: 100
 
   = f.submit 'Сохранить', class: 'btn btn-success'

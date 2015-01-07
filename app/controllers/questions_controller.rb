@@ -19,9 +19,9 @@ class QuestionsController < ApplicationController
   def create
     question = Question.new(question_params)
     if question.save
-      redirect_to questions_path and return
+      render json: {success: true}, status: :ok
     else
-      render :new
+      render json: question.errors.to_json, status: :forbidden
     end
   end
 
