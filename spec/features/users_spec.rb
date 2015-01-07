@@ -33,7 +33,7 @@ feature "Existing user", :js do
     visit root_path
     click_link "Войти"
     within "#new_user" do
-      fill_in 'Электронная почта:', with: user.email
+      fill_in 'user_email', with: user.email
       fill_in 'user_password', with: user.password
     end
     click_button "Отправить"

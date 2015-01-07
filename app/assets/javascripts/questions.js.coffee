@@ -22,11 +22,6 @@ $(document).delegate("#new_question", "submit", (event)->
       console.log error
       object = error.responseJSON
       $.each(object, (key, value)->
-        console.log key
         $("#new_question #question_#{key}").addClass("error").parent().append("<div class='error-text'>#{value[0]}</div>")
-        console.log value
       )
-#        console.log object[property]
-#      $("#new_answer textarea").addClass("error")
-#      $("#new_answer textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
 )
