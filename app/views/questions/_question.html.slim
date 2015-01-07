@@ -6,7 +6,7 @@
   .row
     .col-md-4
       .question-text
-        = question.text
+        = question.text.html_safe.first(20)<<"..."
     .col-md-2
       .question-time
         = question.created_at

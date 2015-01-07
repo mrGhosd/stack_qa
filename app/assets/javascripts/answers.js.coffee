@@ -6,6 +6,19 @@ $ ->
       question = $(this).data("question")
       $.get "/questions/#{question}/answers/new", (html) ->
         $(".question-action").append(html)
+        $(".redactor").redactor(
+          imageFloatMargin: '10px',
+          imageGetJson: false
+          imageUpload: '/redactor_rails/pictures'
+          imageUploadParam: 'file'
+          fileUpload: true
+          fileUploadParam: 'file'
+          clipboardUpload: true
+          clipboardUploadUrl: false
+          dragUpload: true
+          dnbImageTypes: ['image/png', 'image/jpeg', 'image/gif']
+          imageResizable: true
+        )
 
   $(".edit-answer").click ->
     $(".row.answer-form").remove()
@@ -17,9 +30,21 @@ $ ->
     console.log question
     console.log answer
     $.get "/questions/#{question}/answers/#{answer}/edit", (html) ->
-      console.log html
       $(html).insertAfter($(button).closest(".answer-item"))
       $(item).hide()
+      $(".redactor").redactor(
+        imageFloatMargin: '10px',
+        imageGetJson: false
+        imageUpload: '/redactor_rails/pictures'
+        imageUploadParam: 'file'
+        fileUpload: true
+        fileUploadParam: 'file'
+        clipboardUpload: true
+        clipboardUploadUrl: false
+        dragUpload: true
+        dnbImageTypes: ['image/png', 'image/jpeg', 'image/gif']
+        imageResizable: true
+      )
       $(".answer-form .remove-edit-form").click ->
         item.show()
         $(".row.answer-form").remove()
