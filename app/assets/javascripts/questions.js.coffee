@@ -18,7 +18,7 @@ $(document).delegate(".question_form", "submit", (event)->
   type
   action = $("#question_action")
 
-  if action
+  if action.length > 0
     url = "/questions/#{action.data('question')}"
     type = "PATCH"
   else
@@ -29,7 +29,7 @@ $(document).delegate(".question_form", "submit", (event)->
     type: type
     data: $(".question_form").serialize()
     success: (data)->
-      if action
+      if action.length > 0
         window.location.href = "/questions/#{action.data('question')}"
       else
         window.location.href = "/"
