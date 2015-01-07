@@ -8,20 +8,35 @@ $ ->
         link.fadeOut('slow')
 
 
-$(document).delegate("#new_question", "submit", (event)->
+$(document).delegate(".question_form", "submit", (event)->
   event.preventDefault()
   event.stopPropagation()
   event.stopImmediatePropagation()
-  question = $("#new_answer .submit-answer").data("question")
-  $.ajax "/questions",
-    type: "POST"
-    data: $("#new_question").serialize()
+  $(".question_form input, .question_form textarea").removeClass("error")
+  $(".error-text").remove()
+  url
+  type
+  action = $("#question_action")
+
+  if action
+    url = "/questions/#{action.data('question')}"
+    type = "PATCH"
+  else
+    url = "/questions"
+    type = "POST"
+
+  $.ajax url,
+    type: type
+    data: $(".question_form").serialize()
     success: (data)->
-      window.location.href = "/"
+      if action
+        window.location.href = "/questions/#{action.data('question')}"
+      else
+        window.location.href = "/"
     error: (error) ->
       console.log error
       object = error.responseJSON
       $.each(object, (key, value)->
-        $("#new_question #question_#{key}").addClass("error").parent().append("<div class='error-text'>#{value[0]}</div>")
+        $(".question_form #question_#{key}").addClass("error").parent().append("<div class='error-text'>#{value[0]}</div>")
       )
 )

@@ -48,12 +48,23 @@ describe QuestionsController do
 
       it "redirect to questions list" do
         post :create, question: attributes_for(:question, title: "2", user_id: subject.current_user.id)
-        expect(response).to redirect_to questions_path
+        expect(response.status).to eq(200)
       end
     end
 
     context "with invalid attributes" do
+      it "doesn't create a question" do
+        expect{post :create,
+        question: attributes_for(:question,
+        title: "", user_id: subject.current_user.id)}.to change(Question, :count).by(0)
+      end
 
+      it "return questions errors" do
+        post :create,
+        question: attributes_for(:question,
+        title: "", user_id: subject.current_user.id)
+        expect(response.status).to eq(403)
+      end
     end
   end
 
@@ -65,13 +76,22 @@ describe QuestionsController do
         expect(question.title).to eq("adawkdawokd;awd")
       end
 
-      it "redirect to show question page" do
+      it "return success json" do
         put :update, id: question, question: attributes_for(:question, user_id: subject.current_user.id)
-        expect(response).to redirect_to question_path(id: question.id)
+        expect(response.body).to eq({success: true}.to_json)
       end
     end
     context "with invalid attributes" do
+      it "doesn't change questions attributes" do
+        put :update, id: question, question: attributes_for(:question, title: "", user_id: subject.current_user.id)
+        question.reload
+        expect(question.title).to eq(question.title)
+      end
 
+      it "return questions errors" do
+        put :update, id: question, question: attributes_for(:question, title: "", user_id: subject.current_user.id)
+        expect(response.status).to eq(403)
+      end
     end
   end
 

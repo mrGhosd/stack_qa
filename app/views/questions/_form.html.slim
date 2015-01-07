@@ -1,5 +1,7 @@
-= form_for @question, html: {class: 'form-horizontal'} do |f|
+= form_for @question, html: {class: "form-horizontal question_form"} do |f|
   = f.hidden_field :user_id, value: current_user.id
+  - if params[:action] == "edit"
+    = f.hidden_field :action, value: "edit", data: {question: @question.id}
   .form-group
     = f.label 'Заголовок:', class: 'col-md-2 control-label'
     .col-md-4

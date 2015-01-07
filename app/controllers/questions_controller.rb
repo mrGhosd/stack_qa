@@ -27,9 +27,9 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      redirect_to question_path(@question)
+      render json: {success: true}, status: :ok
     else
-      render :edit
+      render json: @question.errors.to_json, status: :forbidden
     end
   end
 
