@@ -10,6 +10,7 @@
   .question-action
     - if current_user
       = link_to "Ответить...", "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
+      = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info", data: {question: @question.id}, remote: true
   .answers-list
     - @question.answers.each do |answer|
       = render partial: 'answers/answer', locals: { answer: answer }

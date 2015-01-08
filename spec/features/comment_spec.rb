@@ -30,6 +30,6 @@ feature "Signed in user", :js do
   end
 
   scenario "see link for adding an comment" do
-    expect(page).to have_content(".glyphicon.glyphicon-comment")
+    expect(page).to have_css(".glyphicon.glyphicon-comment")
   end
 end
