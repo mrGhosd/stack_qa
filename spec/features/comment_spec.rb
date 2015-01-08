@@ -32,4 +32,9 @@ feature "Signed in user", :js do
   scenario "see link for adding an comment" do
     expect(page).to have_css(".glyphicon.glyphicon-comment")
   end
+
+  scenario "show new comment form" do
+    find(:css, ".add-comment").click
+    expect(page).to have_content("comment-form")
+  end
 end
