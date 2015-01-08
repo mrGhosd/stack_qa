@@ -19,10 +19,11 @@ $(document).delegate(".comment-form", "submit", (event)->
     type: "POST"
     data: $(".comment-form").serialize()
     success: (data)->
-      $(".comment-list").prepend JST["templates/comment"](comment: data)
-      $(".answer-form.row").remove()
+      console.log data.text
+      $(".comments-list").prepend JST["templates/comment"](comment: data)
+      $(".comment-form").remove()
     error: (error) ->
-      object = JSON.parse(error.responseText)
-      $("#new_answer textarea").addClass("error")
-      $("#new_answer textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
+#      object = JSON.parse(error.responseText)
+#      $("#new_answer textarea").addClass("error")
+#      $("#new_answer textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
 )
