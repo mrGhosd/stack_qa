@@ -1,7 +1,8 @@
 $ ->
   $(".add-answer").click ->
-    if $(".answer-form.row").length > 0
+    if $(".answer-form.row").length > 0 || $(".comment-form").length > 0
       $(".answer-form.row").remove()
+      $(".comment-form").remove()
     else
       question = $(this).data("question")
       $.get "/questions/#{question}/answers/new", (html) ->

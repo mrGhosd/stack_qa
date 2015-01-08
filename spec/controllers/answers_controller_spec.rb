@@ -9,7 +9,7 @@ describe AnswersController do
     it "create empty entity of answer" do
       get :new, question_id: question.id
       expect(assigns(:question)).to eq(question)
-      expect(assigns(:answer)).to eq(question.answers.build(user_id: subject.current_user.id))
+      expect(assigns(:answer).attributes).to eq(question.answers.build(user_id: subject.current_user.id).attributes)
     end
 
     it "render 'new' template" do
@@ -56,7 +56,13 @@ describe AnswersController do
 
       it "return updated answer" do
         put :update, question_id: question.id, id: answer.id, answer: attributes_for(:answer, text: "1")
-        expect(response.body).to eq(answer.to_json)
+        json = JSON.parse(response.body)
+        json['created_at'] = json['created_at'].to_datetime
+        json['updated_at'] = json['updated_at'].to_datetime
+        answer.created_at = answer.created_at.to_datetime.utc
+        answer.updated_at = answer.updated_at.to_datetime.utc
+        answer.save
+        expect(json).to eq(answer.attributes)
       end
     end
   end
