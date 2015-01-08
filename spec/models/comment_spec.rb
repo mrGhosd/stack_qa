@@ -1,6 +1,6 @@
 require 'rails_helper'
 
 describe Comment do
-  it { should belongs_to :user }
-  it { should belongs_to :question }
+  it { should belong_to :user }
+  it { should belong_to :question }
 end
