@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
   root "questions#index"
   resources :questions do
+    resources :comments
     resources :answers
   end
   # The priority is based upon order of creation: first created -> highest priority.
