@@ -18,3 +18,18 @@ feature "Unsigned user", :js do
     expect(page).to_not have_content(".glyphicon.glyphicon-comment")
   end
 end
+
+feature "Signed in user", :js do
+  let!(:user){ create :user }
+  let!(:question){ create :question, user_id: user.id }
+  let!(:comment) { create :comment, user_id: user.id, question_id: question.id }
+
+  before do
+    sign_in user
+    click_link("#{question.title}")
+  end
+
+  scenario "see link for adding an comment" do
+    expect(page).to have_content(".glyphicon.glyphicon-comment")
+  end
+end
