@@ -4,4 +4,5 @@ class CommentsController < ApplicationController
     @comment = Comment.new(user_id: current_user.id, question_id: @question.id)
     render template: "comments/new", layout: false
   end
+  
 end

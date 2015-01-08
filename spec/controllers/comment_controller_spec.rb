@@ -17,4 +17,10 @@ describe CommentsController do
       expect(response).to render_template :new
     end
   end
+
+  describe "POST #create" do
+    it "create a new comment" do
+
+    end
+  end
 end

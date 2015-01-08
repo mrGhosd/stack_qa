@@ -11,6 +11,9 @@
     - if current_user
       = link_to "Ответить...", "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
       = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: @question.id}, remote: true
+  .comments-list
+    - @question.comments.each do |comment|
+      = render partial: 'comments/comment', locals: {comment: comment}
   .answers-list
     - @question.answers.each do |answer|
       = render partial: 'answers/answer', locals: { answer: answer }

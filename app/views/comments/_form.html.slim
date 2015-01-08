@@ -4,4 +4,4 @@
   .form-group
     .col-md-5
       = f.text_area :text, class: 'form-control', placeholder: 'Текст'
-  = f.submit "Отправить", class: 'btn btn-success submit-answer', remote: true, data: {question: @question.id}
+  = f.submit "Отправить", class: 'btn btn-success submit-comment', remote: true, data: {question: @question.id}
