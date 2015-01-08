@@ -1,0 +1,7 @@
+= form_for [@question, @comment], class: "form-horizontal comment-form"
+  = f.hidden_field :question_id, value: params[:question_id]
+  = f.hidden_field :user_id, value: current_user.id
+  .form-group
+    .col-md-5
+      = f.text_area :text, class: 'form-control', placeholder: 'Текст'
+  = f.submit "Отправить", class: 'btn btn-success submit-answer', remote: true, data: {question: @question.id}

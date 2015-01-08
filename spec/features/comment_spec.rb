@@ -35,6 +35,6 @@ feature "Signed in user", :js do
 
   scenario "show new comment form" do
     find(:css, ".add-comment").click
-    expect(page).to have_content("comment-form")
+    expect(page).to have_css(".comment-form")
   end
 end

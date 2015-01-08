@@ -18,5 +18,6 @@
 //= require bootstrap-sprockets
 //= require questions
 //= require answers
+//= require comment
 //= require modal_window
 //= require_tree .
