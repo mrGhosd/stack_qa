@@ -28,8 +28,6 @@ $ ->
     answer = $(this).data("answer")
     button = $(this)
     item = $(this).closest(".answer-item")
-    console.log question
-    console.log answer
     $.get "/questions/#{question}/answers/#{answer}/edit", (html) ->
       $(html).insertAfter($(button).closest(".answer-item"))
       $(item).hide()

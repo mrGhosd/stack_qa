@@ -15,6 +15,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @question = Question.find(params[:question_id])
+    @comment = Comment.find(params[:id])
+    render template: 'comments/edit', layout: false
+  end
+
   private
   def comment_params
     params.require(:comment).permit(:user_id, :question_id, :text)

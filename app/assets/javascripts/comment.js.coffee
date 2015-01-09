@@ -1,5 +1,5 @@
 $ ->
- $(".add-comment").click ->
+  $(".add-comment").click ->
    if $(".comment-form").length > 0 || $(".answer-form.row").length > 0
      $(".comment-form").remove()
      $(".answer-form.row").remove()
@@ -7,6 +7,34 @@ $ ->
      question = $(this).data("question")
      $.get "/questions/#{question}/comments/new", (html) ->
        $(".question-action").append(html)
+
+  $(".edit-comment").click ->
+    question = $(this).data("question")
+    comment = $(this).data("comment")
+    button = $(this)
+    item = button.closest('.comment-item')
+    $.get "/questions/#{question}/comments/#{comment}/edit", (html) ->
+      $(html).insertAfter(item)
+      $(item).hide()
+      $(".comment-form .remove-edit-form").click ->
+        item.show()
+        $(".comment-form").remove()
+      $(".comment-form .submit-comment").click (event)->
+        event.preventDefault()
+        event.stopPropagation()
+        event.stopImmediatePropagation()
+        $.ajax "/questions/#{question}/comments/#{comment}",
+          type: "PUT"
+          data: $(".comment-form").serialize()
+          success: (data) ->
+            $(".comment-form").remove()
+            item.remove()
+            $(".comments-list").prepend JST["templates/comment"](comment: data)
+          error: (error) ->
+            object = JSON.parse(error.responseText)
+            $(".comment-form textarea").addClass("error")
+            $(".comment-form textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
+
 
 
 
