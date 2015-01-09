@@ -15,15 +15,16 @@ $(document).delegate(".comment-form", "submit", (event)->
   event.stopPropagation()
   event.stopImmediatePropagation()
   question = $(".comment-form .submit-comment").data("question")
+  form = $(".comment-form")
   $.ajax "/questions/#{question}/comments",
     type: "POST"
-    data: $(".comment-form").serialize()
+    data: form.serialize()
     success: (data)->
-      console.log data.text
       $(".comments-list").prepend JST["templates/comment"](comment: data)
       $(".comment-form").remove()
     error: (error) ->
-#      object = JSON.parse(error.responseText)
+      object = JSON.parse(error.responseText)
+      console.log object
 #      $("#new_answer textarea").addClass("error")
 #      $("#new_answer textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
 )
