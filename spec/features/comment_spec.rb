@@ -74,6 +74,19 @@ feature "Signed in user", :js do
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
     end
+
+    scenario "update an existed comment" do
+      find(:css, ".edit-comment").click
+      expect(page).to have_css(".comment-form")
+      within ".comment-form" do
+        fill_in "comment_text", with: ""
+        click_button "Отправить"
+      end
+      sleep 1
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
   end
 
 end

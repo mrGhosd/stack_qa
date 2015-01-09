@@ -21,6 +21,15 @@ class CommentsController < ApplicationController
     render template: 'comments/edit', layout: false
   end
 
+  def update
+    comment = Comment.find(params[:id])
+    if comment.update(comment_params)
+      render json: comment.to_json, status: :ok
+    else
+      render json: comment.errors.to_json, status: :forbidden
+    end
+  end
+
   private
   def comment_params
     params.require(:comment).permit(:user_id, :question_id, :text)
