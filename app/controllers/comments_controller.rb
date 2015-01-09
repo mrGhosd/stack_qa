@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
     if comment.save
       render json: comment.to_json, status: :ok
     else
-      binding.pry
       render json: comment.errors.to_json, status: :forbidden
     end
   end

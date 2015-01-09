@@ -52,7 +52,7 @@ describe CommentsController do
         comment: attributes_for(:comment,
         user_id: subject.current_user.id,
         question_id: question.id, text: "")
-
+        expect(JSON.parse(response.body)).to have_key('text')
       end
     end
   end

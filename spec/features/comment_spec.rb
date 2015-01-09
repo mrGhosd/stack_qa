@@ -37,15 +37,31 @@ feature "Signed in user", :js do
     find(:css, ".add-comment").click
     expect(page).to have_css(".comment-form")
   end
-
-  scenario "create a new comment" do
-    find(:css, ".add-comment").click
-    expect(page).to have_css(".comment-form")
-    within ".comment-form" do
-      fill_in "comment_text", with: "TEXT"
-      click_button "Отправить"
+  context "with valid attributes" do
+    scenario "create a new comment" do
+      find(:css, ".add-comment").click
+      expect(page).to have_css(".comment-form")
+      within ".comment-form" do
+        fill_in "comment_text", with: "TEXT"
+        click_button "Отправить"
+      end
+      sleep 1
+      expect(page).to have_content("TEXT")
     end
-    sleep 1
-    expect(page).to have_content("TEXT")
   end
+
+  context "with invalid attributes" do
+    scenario "create a new comment" do
+      find(:css, ".add-comment").click
+      expect(page).to have_css(".comment-form")
+      within ".comment-form" do
+        click_button "Отправить"
+      end
+      sleep 1
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
+  end
+
 end
