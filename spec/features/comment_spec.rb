@@ -89,4 +89,10 @@ feature "Signed in user", :js do
     end
   end
 
+  scenario "delete existing comment" do
+    find(:css, ".remove-comment").click
+    sleep 1
+    expect(page).to_not have_content(comment.text)
+  end
+
 end

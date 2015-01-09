@@ -92,7 +92,30 @@ describe CommentsController do
     end
 
     context "with invalid attributes" do
+      it "stay comment attributes same" do
+        put :update, question_id: question.id, id: comment.id, comment: attributes_for(:comment, text: "")
+        comment.reload
+        expect(comment.text).to eq(comment.text)
+      end
 
+      it "return array of comment errors" do
+        put :update, question_id: question.id, id: comment.id, comment: attributes_for(:comment, text: "")
+        expect(JSON.parse(response.body)).to have_key('text')
+      end
+    end
+  end
+
+  describe "DELETE #destory" do
+    it "remove existing comment" do
+      expect{delete :destroy,
+      question_id: question.id,
+      id: comment.id}.to change(Comment, :count).by(-1)
+
+    end
+
+    it "return 200 status" do
+      delete :destroy, question_id: question.id, id: comment.id
+      expect(response.status).to eq(200)
     end
   end
 end
