@@ -35,6 +35,15 @@ $ ->
             $(".comment-form textarea").addClass("error")
             $(".comment-form textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
 
+  $(".remove-comment").click ->
+    question = $(this).data("question")
+    comment = $(this).data("comment")
+    item = $(this).closest(".comment-item")
+    $.ajax "/questions/#{question}/comments/#{comment}",
+      type: "DELETE"
+      success: ->
+        $(item).fadeOut('slow')
+
 
 
 
