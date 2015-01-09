@@ -37,6 +37,7 @@ feature "Signed in user", :js do
     find(:css, ".add-comment").click
     expect(page).to have_css(".comment-form")
   end
+
   context "with valid attributes" do
     scenario "create a new comment" do
       find(:css, ".add-comment").click
@@ -47,6 +48,17 @@ feature "Signed in user", :js do
       end
       sleep 1
       expect(page).to have_content("TEXT")
+    end
+
+    scenario "update an existed comment" do
+      find(:css, ".edit-comment").click
+      expect(page).to have_css(".comment-form")
+      within ".comment-form" do
+        fill_in "comment_text", with: "OLOLO"
+        click_button "Отправить"
+      end
+      sleep 1
+      expect(page).to have_content("OLOLO")
     end
   end
 
