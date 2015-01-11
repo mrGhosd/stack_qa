@@ -1,1 +1,16 @@
 = link_to "На список категорий", admin_categories_path, class: 'btn btn-primary'
+= form_for [:admin, @category], html: { class: 'form-horizontal category-form' } do |f|
+  .form-group
+    = f.label 'Заголовок:', class: 'control-label col-md-2'
+    .col-md-4
+      = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label 'Описание:', class: 'control-label col-md-2'
+    .col-md-4
+      = f.text_area :title, class: 'redactor'
+  .form-group
+    = f.label 'Изображение:', class: 'control-label col-md-2'
+    .col-md-4
+      = f.file_field :image
+  .col-md-offset-1
+    = f.submit "Отправить"
