@@ -1,16 +1,18 @@
 = link_to "На список категорий", admin_categories_path, class: 'btn btn-primary'
-= form_for [:admin, @category], html: { class: 'form-horizontal category-form' } do |f|
+= form_for [:admin, @category], html: { class: 'form-horizontal category-form' }, data: {remote: true} do |f|
+  - if params[:action] == "edit"
+    = f.hidden_field :action, value: "edit", data: {category: @category.id}
   .form-group
     = f.label 'Заголовок:', class: 'control-label col-md-2'
     .col-md-4
-      = f.text_field :title, class: 'form-control'
+      = f.text_field :title, class: 'form-control', data: {name: "title"}
   .form-group
     = f.label 'Описание:', class: 'control-label col-md-2'
     .col-md-4
-      = f.text_area :description, class: 'redactor'
+      = f.text_area :description, class: 'redactor', data: {name: "description"}
   .form-group
     = f.label 'Изображение:', class: 'control-label col-md-2'
     .col-md-4
-      = f.file_field :image
+      = f.file_field :image, data: {name: "image"}
   .col-md-offset-1
     = f.submit "Сохранить", class: 'btn btn-success'

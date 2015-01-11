@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'redactor-rails'
 gem "markitup-rails"
 gem 'eco'
+gem 'remotipart'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
