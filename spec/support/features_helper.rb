@@ -15,6 +15,6 @@ end
 def fill_redactor_editor(id, text)
   page.execute_script %Q{
       $('.redactor_editor').text(#{text});
-      $('##{id}').val(#{text});
+      $("##{id}").val(#{text});
     }
 end

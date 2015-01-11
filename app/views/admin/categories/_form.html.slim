@@ -7,10 +7,10 @@
   .form-group
     = f.label 'Описание:', class: 'control-label col-md-2'
     .col-md-4
-      = f.text_area :title, class: 'redactor'
+      = f.text_area :description, class: 'redactor'
   .form-group
     = f.label 'Изображение:', class: 'control-label col-md-2'
     .col-md-4
       = f.file_field :image
   .col-md-offset-1
-    = f.submit "Отправить"
+    = f.submit "Сохранить", class: 'btn btn-success'
