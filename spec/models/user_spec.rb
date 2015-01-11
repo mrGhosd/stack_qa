@@ -10,4 +10,14 @@ describe User do
 
   it { should have_db_index :email }
   it { should have_db_index :password }
+
+  let!(:user) { create :user }
+  let!(:admin) { create :user, email: 'sokol.v93@mail.ru', role: 'admin' }
+
+  describe "#is_admin?" do
+    it "return true if user's role is 'admin'" do
+      expect(user.is_admin?).to eq(false)
+      expect(admin.is_admin?).to eq(true)
+    end
+  end
 end

@@ -16,6 +16,7 @@ html
           ul.nav.navbar-nav
             li= link_to "О нас", "#"
             li= link_to "FAQ", "#"
+            li = link_to "Админка", admin_categories_path if current_user && current_user.is_admin?
           .navbar-form.navbar-right
             .authentication-links
               - if current_user
