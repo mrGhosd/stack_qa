@@ -4,6 +4,19 @@ describe Admin::CategoriesController do
   login_admin
   let!(:category){ create :category }
 
+  describe "GET #index" do
+    it "return a list of categoris" do
+      get :index
+      expect(assigns(:categories)).to eq([category])
+    end
+
+    it "render index template" do
+      get :index
+      expect(response).to render_template :index
+    end
+  end
+
+
   describe "GET #new" do
     it "create new empty category" do
       get :new

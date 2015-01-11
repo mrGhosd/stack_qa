@@ -1,0 +1,7 @@
+.category_item.row
+  .image.col-md-2
+    = image_tag category.image.url(:small)
+  .col-md-8
+    .row
+      .title.col-md-4= category.title
+      .timestamp.col-md-4= category.created_at

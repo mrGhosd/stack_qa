@@ -10,10 +10,10 @@ class CategoryUploader < CarrierWave::Uploader::Base
   end
 
   version :small do
-    process :resize_to_fill => [200,200]
+    process :resize_to_fill => [100,100]
   end
 
   version :normal do
-    process :resize_to_fill => [450,450]
+    process :resize_to_fill => [250,250]
   end
 end
