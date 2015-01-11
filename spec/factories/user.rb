@@ -12,5 +12,9 @@ FactoryGirl.define do
     trait :unconfirmed do
       is_confirmed false
     end
+
+    trait :admin do
+      role "admin"
+    end
   end
 end
