@@ -19,5 +19,6 @@
 //= require questions
 //= require answers
 //= require comment
+//= require category
 //= require modal_window
 //= require_tree .

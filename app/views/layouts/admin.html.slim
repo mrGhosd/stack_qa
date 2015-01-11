@@ -11,11 +11,11 @@ html
       .container
         .navbar-header
           .logo
-            = link_to "Админка", root_path
+            = link_to "Админка", admin_categories_path
         .collapse.navbar-collapse
           ul.nav.navbar-nav
-            li= link_to "О нас", "#"
-            li= link_to "FAQ", "#"
+            li= link_to "Категории", admin_categories_path
+            li= link_to "Пользователи", "#"
           = render template: "admin/shared/header"
     .container
       = yield
