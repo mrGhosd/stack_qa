@@ -29,6 +29,18 @@ describe Admin::CategoriesController do
     end
   end
 
+  describe "GET #edit" do
+    it "define a particular category" do
+      get :edit, id: category.id
+      expect(assigns(:category)).to eq(category)
+    end
+
+    it "render edit template" do
+      get :edit, id: category.id
+      expect(response).to render_template :edit
+     end
+  end
+
   describe "POST #create" do
     context "with valid attributes" do
       it "create a new category" do
