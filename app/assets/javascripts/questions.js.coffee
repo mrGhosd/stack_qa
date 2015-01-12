@@ -34,7 +34,6 @@ $(document).delegate(".question_form", "submit", (event)->
       else
         window.location.href = "/"
     error: (error) ->
-      console.log error
       object = error.responseJSON
       $.each(object, (key, value)->
         $(".question_form #question_#{key}").addClass("error").parent().append("<div class='error-text'>#{value[0]}</div>")

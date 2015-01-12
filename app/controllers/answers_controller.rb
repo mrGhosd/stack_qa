@@ -26,7 +26,8 @@ class AnswersController < ApplicationController
   def update
     answer = Answer.find(params[:id])
     if answer.update(answers_params)
-      render json: answer.to_json, status: 200
+      PrivatePub.publish_to "/questions/#{answer.question_id}/answers/edit", answer: answer.to_json
+      render nothing: true
     else
       render json: answer.errors.to_json, status: :forbidden
     end

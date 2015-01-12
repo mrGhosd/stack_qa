@@ -1,4 +1,4 @@
-.answer-item
+.answer-item data={answer: answer.id}
   span.text= answer.text.html_safe
   span.time= answer.created_at.strftime("%H:%M:%S %d.%m.%Y")
   - if current_user && answer.in?(current_user.answers)

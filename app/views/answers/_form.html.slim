@@ -1,5 +1,5 @@
 .row.answer-form
-  = form_for [@question, @answer], html: {class: 'form-horizontal'} do |f|
+  = form_for [@question, @answer], html: {class: "form-horizontal #{"edit_answer" if params[:action] == "edit"}"} do |f|
     = f.hidden_field :question_id, value: params[:question_id]
     = f.hidden_field :user_id, value: current_user.id
     .form-group

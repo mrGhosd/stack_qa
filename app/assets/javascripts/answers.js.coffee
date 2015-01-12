@@ -28,6 +28,7 @@ $ ->
     answer = $(this).data("answer")
     button = $(this)
     item = $(this).closest(".answer-item")
+
     $.get "/questions/#{question}/answers/#{answer}/edit", (html) ->
       $(html).insertAfter($(button).closest(".answer-item"))
       $(item).hide()
@@ -47,6 +48,7 @@ $ ->
       $(".answer-form .remove-edit-form").click ->
         item.show()
         $(".row.answer-form").remove()
+
       $(".edit_answer .submit-answer").click (event)->
         event.preventDefault()
         event.stopPropagation()
@@ -55,9 +57,6 @@ $ ->
           type: "PUT"
           data: $(".edit_answer").serialize()
           success: (data) ->
-            $(".edit_answer").remove()
-            item.remove()
-            $(".answers-list").append JST["templates/answer"](answer: data)
           error: (error)->
             object = JSON.parse(error.responseText)
             $(".edit_answer textarea").addClass("error")
@@ -78,6 +77,18 @@ $ ->
     $(".answers-list").prepend JST["templates/answer"](answer: answer)
     $(".answer-form.row").remove()
 
+  PrivatePub.subscribe "/questions/#{question}/answers/edit", (data, channel) ->
+    answer = $.parseJSON(data['answer'])
+    console.log answer.id
+    $.each($(".answer-item"), (key, value) ->
+      console.log $(value).data("answer")
+      if answer.id == $(value).data("answer")
+        $(".edit_answer").remove()
+        $(value).fadeOut('slow').replaceWith(JST["templates/answer"](answer: answer)).fadeIn('slow')
+    )
+
+
+
 $(document).delegate("#new_answer", "submit", (event)->
   event.preventDefault()
   event.stopPropagation()
@@ -87,8 +98,6 @@ $(document).delegate("#new_answer", "submit", (event)->
     type: "POST"
     data: $("#new_answer").serialize()
     success: (data)->
-#      $(".answers-list").prepend JST["templates/answer"](answer: data)
-#      $(".answer-form.row").remove()
     error: (error) ->
       object = JSON.parse(error.responseText)
       $("#new_answer textarea").addClass("error")

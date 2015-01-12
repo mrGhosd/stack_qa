@@ -15,7 +15,6 @@ $ ->
     $("#myModal .error-text").remove()
     form = $("#myModal .tab-content .tab-pane.active").find("form")
     url = $(form).attr("action")
-    console.log form.serialize()
     $.ajax url,
       type: "POST"
       data: form.serialize()
