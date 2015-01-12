@@ -22,7 +22,9 @@ class Admin::CategoriesController < AdminController
     end
   end
 
-
+  def edit
+    @category = Category.find(params[:id])
+  end
 
   private
   def category_params
