@@ -1,5 +1,5 @@
 = link_to "На список категорий", admin_categories_path, class: 'btn btn-primary'
-= form_for [:admin, @category], html: { class: 'form-horizontal category-form' }, data: {remote: true} do |f|
+= form_for [:admin, @category], html: { class: 'form-horizontal category-form' }, data: {type: :json}, remote: true do |f|
   - if params[:action] == "edit"
     = f.hidden_field :action, value: "edit", data: {category: @category.id}
   .form-group

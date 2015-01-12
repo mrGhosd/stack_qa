@@ -9,12 +9,13 @@ class Admin::CategoriesController < AdminController
   end
 
   def create
-    binding.pry
     category = Category.new(category_params)
-    if category.save
-      render json: {success: true}, status: :ok
-    else
-      render json: category.errors.to_json, status: :forbidden
+    respond_to do |format|
+      if category.save
+        format.json { render json: category, status: :ok }
+      else
+        format.json { render json: category.errors.to_json, status: :forbidden }
+      end
     end
   end
 

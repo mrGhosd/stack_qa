@@ -41,12 +41,7 @@
 #)
 $ ->
   $("form.category-form").bind('ajax:success', (e, data, status, xhr)->
-#    console.log e
-#    console.log data
-#    console.log status
-#    console.log xhr
-#    window.location.reload()
-    alert "1"
+    window.location.href = "/admin/categories"
   ).bind('ajax:error',  (event, data, status, xhr) ->
     $(".category-form input, .category-form input").removeClass("error")
     $(".error-text").remove()

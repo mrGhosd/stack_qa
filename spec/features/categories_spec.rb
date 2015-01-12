@@ -22,7 +22,7 @@ feature "Admin", :js do
         click_button "Сохранить"
       end
       sleep 1
-      expect(page).to have_content("DESCRIPTION")
+      expect(page).to have_content("TITLE")
     end
   end
 
@@ -38,7 +38,7 @@ feature "Admin", :js do
         attach_file "category_image", "#{Rails.root}/app/assets/images/Ruby_on_Rails.png"
         click_button "Сохранить"
       end
-      sleep 10
+      sleep 1
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
