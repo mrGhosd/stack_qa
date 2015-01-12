@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature "Question for signed in user", :js do
   let!(:user) { create :user, :confirmed }
-  let!(:question) { create :question, :unclosed, user_id: user.id }
-
+  let!(:category) { create :category }
+  let!(:question) { create :question, :unclosed, user_id: user.id, category_id: category.id }
 
   before :each do
     sign_in user
@@ -19,6 +19,7 @@ feature "Question for signed in user", :js do
     within "#new_question" do
       fill_in "question_title", with: "TEXT"
       fill_redactor_editor("question_text", "2")
+      select category.title, from: "question_category_id"
       click_button "Сохранить"
     end
     sleep 1
@@ -34,6 +35,7 @@ feature "Question for signed in user", :js do
       within "form" do
         fill_in "question_title", with: "5"
         fill_redactor_editor("question_text", "2")
+        select category.title, from: "question_category_id"
         click_button "Сохранить"
       end
       expect(page).to have_content "5"
