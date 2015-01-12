@@ -24,3 +24,4 @@
     = link_to 'Назад', questions_path, class: 'btn btn-default'
 
 = subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/questions/#{@question.id}/comments"

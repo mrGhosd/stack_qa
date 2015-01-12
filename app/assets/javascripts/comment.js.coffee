@@ -44,8 +44,11 @@ $ ->
       success: ->
         $(item).fadeOut('slow')
 
-
-
+  question = $(".answers-list").data("question")
+  PrivatePub.subscribe "/questions/#{question}/comments", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    $(".comments-list").prepend JST["templates/comment"](comment: comment)
+    $(".comment-form").remove()
 
 $(document).delegate(".comment-form", "submit", (event)->
   event.preventDefault()
@@ -59,8 +62,6 @@ $(document).delegate(".comment-form", "submit", (event)->
     type: "POST"
     data: form.serialize()
     success: (data)->
-      $(".comments-list").prepend JST["templates/comment"](comment: data)
-      $(".comment-form").remove()
     error: (error) ->
       object = JSON.parse(error.responseText)
       $(".comment-form textarea").addClass("error")

@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.new(comment_params)
     if comment.save
-      render json: comment.to_json, status: :ok
+      PrivatePub.publish_to "/questions/#{comment.question_id}/comments", comment: comment.to_json
+      render nothing: true
     else
       render json: comment.errors.to_json, status: :forbidden
     end
