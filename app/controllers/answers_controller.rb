@@ -9,7 +9,9 @@ class AnswersController < ApplicationController
   def create
     answer = Answer.new(answers_params)
     if answer.save
-      render json: answer.to_json, status: 200
+      PrivatePub.publish_to "/questions/#{answer.question_id}/answers", answer: answer.to_json
+      render nothing: true
+      # render json: answer.to_json, status: 200
     else
       render json: answer.errors.to_json, status: :forbidden
     end

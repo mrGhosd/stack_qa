@@ -14,7 +14,7 @@
   .comments-list
     - @question.comments.each do |comment|
       = render partial: 'comments/comment', locals: {comment: comment}
-  .answers-list
+  .answers-list data={question: @question.id}
     - @question.answers.each do |answer|
       = render partial: 'answers/answer', locals: { answer: answer }
 
@@ -22,3 +22,5 @@
     - if current_user && @question.in?(current_user.questions)
       = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
     = link_to 'Назад', questions_path, class: 'btn btn-default'
+
+= subscribe_to "/questions/#{@question.id}/answers"

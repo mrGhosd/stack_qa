@@ -72,6 +72,12 @@ $ ->
       success: ->
         $(item).fadeOut('slow')
 
+  question = $(".answers-list").data("question")
+  PrivatePub.subscribe "/questions/#{question}/answers", (data, channel) ->
+    answer = $.parseJSON(data['answer'])
+    $(".answers-list").prepend JST["templates/answer"](answer: answer)
+    $(".answer-form.row").remove()
+
 $(document).delegate("#new_answer", "submit", (event)->
   event.preventDefault()
   event.stopPropagation()
@@ -81,8 +87,8 @@ $(document).delegate("#new_answer", "submit", (event)->
     type: "POST"
     data: $("#new_answer").serialize()
     success: (data)->
-      $(".answers-list").prepend JST["templates/answer"](answer: data)
-      $(".answer-form.row").remove()
+#      $(".answers-list").prepend JST["templates/answer"](answer: data)
+#      $(".answer-form.row").remove()
     error: (error) ->
       object = JSON.parse(error.responseText)
       $("#new_answer textarea").addClass("error")
