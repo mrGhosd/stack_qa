@@ -33,11 +33,11 @@ describe Admin::CategoriesController do
     context "with valid attributes" do
       it "create a new category" do
         expect{post :create,
-        category: attributes_for(:category)}.to change(Category, :count).by(1)
+        category: attributes_for(:category, title: "new")}.to change(Category, :count).by(1)
       end
 
       it "return 200 status" do
-        post :create, category: attributes_for(:category)
+        post :create, category: attributes_for(:category, title: "new"), format: :json
         expect(response.status).to eq(200)
       end
     end
@@ -50,7 +50,7 @@ describe Admin::CategoriesController do
 
       it "return category errors" do
         post :create,
-        category: attributes_for(:category, title: "")
+        category: attributes_for(:category, title: ""), format: :json
         expect(JSON.parse(response.body)).to have_key('title')
       end
     end
