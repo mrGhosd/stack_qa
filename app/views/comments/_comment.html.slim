@@ -1,4 +1,4 @@
-.comment-item
+.comment-item data={comment: comment.id}
   .comment-text= comment.text
   - if current_user && comment.in?(current_user.comments)
     .comment-actions

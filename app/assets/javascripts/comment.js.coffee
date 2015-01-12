@@ -50,6 +50,14 @@ $ ->
     $(".comments-list").prepend JST["templates/comment"](comment: comment)
     $(".comment-form").remove()
 
+  PrivatePub.subscribe "/questions/#{question}/comments/edit", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    $.each($(".comment-item"), (key, value) ->
+      if comment.id == $(value).data("comment")
+        $(".comment-form").remove()
+        $(value).fadeOut('slow').replaceWith(JST["templates/comment"](comment: comment)).fadeIn('slow')
+    )
+
 $(document).delegate(".comment-form", "submit", (event)->
   event.preventDefault()
   event.stopPropagation()

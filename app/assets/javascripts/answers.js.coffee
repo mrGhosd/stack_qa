@@ -79,7 +79,6 @@ $ ->
 
   PrivatePub.subscribe "/questions/#{question}/answers/edit", (data, channel) ->
     answer = $.parseJSON(data['answer'])
-    console.log answer.id
     $.each($(".answer-item"), (key, value) ->
       console.log $(value).data("answer")
       if answer.id == $(value).data("answer")

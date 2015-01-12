@@ -25,7 +25,8 @@ class CommentsController < ApplicationController
   def update
     comment = Comment.find(params[:id])
     if comment.update(comment_params)
-      render json: comment.to_json, status: :ok
+      PrivatePub.publish_to "/questions/#{comment.question_id}/comments/edit", comment: comment.to_json
+      render nothing: true
     else
       render json: comment.errors.to_json, status: :forbidden
     end
