@@ -68,4 +68,10 @@ feature "Admin", :js do
     end
   end
 
+  scenario "delete category" do
+    find(".row.actions .btn.btn-danger", match: :first).click
+    sleep 1
+    expect(page).to_not have_content(category.title)
+  end
+
 end
