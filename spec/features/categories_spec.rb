@@ -88,4 +88,10 @@ feature "User", :js do
   scenario "see the list of categories" do
     expect(page).to have_content(category.title)
   end
+
+  scenario "show category full info" do
+    find(".title.col-md-4", match: :first).click
+    expect(page).to have_content(category.title)
+    expect(page).to have_content(category.description)
+  end
 end
