@@ -1,10 +1,10 @@
 .category_item.row
   .image.col-md-2
-    = image_tag category.image.url(:small)
+    = image_tag category.image.url(:small) || "empty-check-box-th.png"
   .col-md-8
     .row
       .title.col-md-4= category.title
       .timestamp.col-md-4= category.created_at
     .row.actions
       = link_to "Редактировать", edit_admin_category_path(category), class: 'btn btn-success'
-      = link_to "Удалить", "#", class: 'btn btn-danger', remote: true
+      = link_to "Удалить", "#", class: 'btn btn-danger delete-category', data: { category: category.id }, remote: true

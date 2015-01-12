@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    binding.pry
     question = Question.new(question_params)
     if question.save
       render json: {success: true}, status: :ok
@@ -44,6 +45,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :text, :user_id)
+    params.require(:question).permit(:title, :text, :user_id, :category_id)
   end
 end
