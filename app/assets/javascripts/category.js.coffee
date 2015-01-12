@@ -20,7 +20,9 @@ $ ->
     button = $(this)
     if $(this).hasClass("glyphicon-arrow-up")
       $(".category-desc").slideUp('slow')
+      button.text("Показать")
       button.removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down")
     else
       $(".category-desc").slideDown('slow')
+      button.text("Скрыть")
       button.removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up")

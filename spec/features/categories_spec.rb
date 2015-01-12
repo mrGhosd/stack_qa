@@ -94,4 +94,14 @@ feature "User", :js do
     expect(page).to have_content(category.title)
     expect(page).to have_content(category.description)
   end
+
+  scenario "hide and show category description" do
+    find(".category-title", match: :first).click
+    find(".toggle-description").click
+    sleep 1
+    expect(page).to_not have_content category.description
+    find(".toggle-description").click
+    sleep 1
+    expect(page).to have_content category.description
+  end
 end
