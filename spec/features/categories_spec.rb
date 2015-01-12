@@ -90,7 +90,7 @@ feature "User", :js do
   end
 
   scenario "show category full info" do
-    find(".title.col-md-4", match: :first).click
+    find(".category-title", match: :first).click
     expect(page).to have_content(category.title)
     expect(page).to have_content(category.description)
   end

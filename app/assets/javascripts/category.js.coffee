@@ -15,3 +15,12 @@ $ ->
       type: "DELETE"
       success: ->
         item.fadeOut('slow')
+
+  $(".toggle-description").click (event) ->
+    button = $(this)
+    if $(this).hasClass("glyphicon-arrow-up")
+      $(".category-desc").slideUp('slow')
+      button.removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down")
+    else
+      $(".category-desc").slideDown('slow')
+      button.removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up")
