@@ -96,4 +96,15 @@ describe Admin::CategoriesController do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    it "delete a particular category" do
+      expect{delete :destroy, id: category.id}.to change(Category, :count).by(-1)
+    end
+
+    it "return 200 status" do
+      delete :destroy, id: category.id
+      expect(response.status).to eq(200)
+    end
+  end
 end
