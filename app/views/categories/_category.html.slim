@@ -5,3 +5,6 @@
     .row
       .title.col-md-4= category.title
       .timestamp.col-md-4= category.created_at
+    .row.actions
+      = link_to "Редактировать", edit_admin_category_path(category), class: 'btn btn-success'
+      = link_to "Удалить", "#", class: 'btn btn-danger', remote: true
