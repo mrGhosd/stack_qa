@@ -20,7 +20,7 @@ describe Admin::CategoriesController do
   describe "GET #new" do
     it "create new empty category" do
       get :new
-      expect(assigns(:category)).to eq(Category.new)
+      expect(assigns(:category)).to be_a_new(Category)
     end
 
     it "render 'new' template" do
