@@ -71,20 +71,29 @@ describe Admin::CategoriesController do
   describe "PATCH #update" do
     context "with valid attributes" do
       it "update particular category" do
-        put :update, id: category.id, category: attributes_for(:category, title: "LOL")
+        put :update, id: category.id, category: attributes_for(:category, title: "LOL"), format: :json
         category.reload
         expect(category.title).to eq("LOL")
       end
 
       it "return this category" do
-        put :update, id: category.id, category: attributes_for(:category, title: "LOL")
+        put :update, id: category.id, category: attributes_for(:category, title: "LOL"), format: :json
         category.reload
-        expect(response.body).to eq(category.attributes)
+        expect(response.body).to eq(category.to_json)
       end
     end
 
     context "with invalid attributes" do
+      it "doesn't update particular category" do
+        put :update, id: category.id, category: attributes_for(:category, title: ""), format: :json
+        category.reload
+        expect(category.title).to eq(category.title)
+      end
 
+      it "return erros of category category" do
+        put :update, id: category.id, category: attributes_for(:category, title: ""), format: :json
+        expect(JSON.parse(response.body)).to have_key('title')
+      end
     end
   end
 end
