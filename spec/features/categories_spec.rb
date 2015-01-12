@@ -104,4 +104,9 @@ feature "User", :js do
     sleep 1
     expect(page).to have_content category.description
   end
+
+  scenario "show questions for current category" do
+    find(".category-title", match: :first).click
+    expect(page).to have_content(question.title)
+  end
 end
