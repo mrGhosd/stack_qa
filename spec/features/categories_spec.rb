@@ -24,6 +24,17 @@ feature "Admin", :js do
       sleep 1
       expect(page).to have_content("TITLE")
     end
+
+    scenario "Update existing category" do
+      find(".row.actions .btn.btn-success", match: :first).click
+      within ".category-form" do
+        fill_in "category_title", with: "EDIT_TITLE"
+        attach_file "category_image", "#{Rails.root}/app/assets/images/Ruby_on_Rails.png"
+        click_button "Сохранить"
+      end
+      sleep 1
+      expect(page).to have_content("EDIT_TITLE")
+    end
   end
 
   context "with invalid attributes" do

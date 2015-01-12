@@ -55,4 +55,24 @@ describe Admin::CategoriesController do
       end
     end
   end
+
+  describe "PATCH #update" do
+    context "with valid attributes" do
+      it "update particular category" do
+        put :update, id: category.id, category: attributes_for(:category, title: "LOL")
+        category.reload
+        expect(category.title).to eq("LOL")
+      end
+
+      it "return this category" do
+        put :update, id: category.id, category: attributes_for(:category, title: "LOL")
+        category.reload
+        expect(response.body).to eq(category.attributes)
+      end
+    end
+
+    context "with invalid attributes" do
+
+    end
+  end
 end
