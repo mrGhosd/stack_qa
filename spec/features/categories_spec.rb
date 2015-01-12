@@ -54,6 +54,18 @@ feature "Admin", :js do
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
     end
+
+    scenario "Update existing category" do
+      find(".row.actions .btn.btn-success", match: :first).click
+      within ".category-form" do
+        fill_in "category_title", with: ""
+        click_button "Сохранить"
+      end
+      sleep 1
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
   end
 
 end
