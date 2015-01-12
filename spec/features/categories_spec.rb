@@ -73,5 +73,19 @@ feature "Admin", :js do
     sleep 1
     expect(page).to_not have_content(category.title)
   end
+end
 
+feature "User", :js do
+  let!(:user){ create :user }
+  let!(:category) { create :category }
+  let!(:question) { create :question, user_id: user.id, category_id: category.id }
+
+  before do
+    sign_in user
+    click_link "Категории"
+  end
+
+  scenario "see the list of categories" do
+    expect(page).to have_content(category.title)
+  end
 end

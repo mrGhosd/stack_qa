@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   mount RedactorRails::Engine => '/redactor_rails'
   root "questions#index"
+  resources :categories
   resources :questions do
     resources :comments
     resources :answers
