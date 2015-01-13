@@ -86,6 +86,14 @@ $ ->
         $(value).fadeOut('slow').replaceWith(JST["templates/answer"](answer: answer)).fadeIn('slow')
     )
 
+  PrivatePub.subscribe "/questions/#{question}/answers/destroy", (data, channel) ->
+    answer_id = data.answer_id
+    $.each($(".answer-item"), (key, value) ->
+      if answer_id == $(value).data("answer")
+        if !$(value).is(":visible")
+          $(".edit_answer").remove()
+        $(value).fadeOut('slow')
+    )
 
 
 $(document).delegate("#new_answer", "submit", (event)->

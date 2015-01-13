@@ -36,6 +36,7 @@ class AnswersController < ApplicationController
   def destroy
     answer = Answer.find(params[:id])
     answer.destroy
+    PrivatePub.publish_to "/questions/#{answer.question_id}/answers/destroy", answer_id: params[:id]
     head :ok
   end
 
