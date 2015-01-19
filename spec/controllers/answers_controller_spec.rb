@@ -21,7 +21,6 @@ describe AnswersController do
   describe "GET #edit" do
     it "assigns current answer" do
       get :edit, question_id: question.id, id: answer.id
-      expect(assigns(:question)).to eq(question)
       expect(assigns(:answer)).to eq(answer)
     end
 

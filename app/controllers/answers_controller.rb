@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
-  after_create :publish_create, only: :create
-  after_create :publish_edit, only: :update
-  after_create :publish_destory, only: :destroy
+  after_action :publish_create, only: :create
+  after_action :publish_edit, only: :update
+  after_action :publish_destory, only: :destroy
   before_action :find_answer, only: [:edit, :update, :destory]
   respond_to :html
   respond_to :json
@@ -13,7 +13,8 @@ class AnswersController < ApplicationController
   end
 
   def create
-    respond_with(@answer = Answer.new(answers_params))
+    @question = Question.find(params[:question_id])
+    respond_with(@answer = Answer.create(answers_params))
   end
 
   def edit
