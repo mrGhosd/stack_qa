@@ -69,7 +69,7 @@ $ ->
     $.ajax "/questions/#{question}/answers/#{answer}",
       type: "DELETE"
       success: ->
-        $(item).fadeOut('slow')
+#        $(item).fadeOut('slow')
 
   question = $(".answers-list").data("question")
   PrivatePub.subscribe "/questions/#{question}/answers", (data, channel) ->
@@ -92,6 +92,7 @@ $ ->
       if answer_id == $(value).data("answer")
         if !$(value).is(":visible")
           $(".edit_answer").remove()
+        console.log $(value)
         $(value).fadeOut('slow')
     )
 
