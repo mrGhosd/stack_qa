@@ -1,8 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :define_question, only: [:edit, :show, :update, :destroy]
+  after_action :publish_question, only: :create
 
-  respond_to :json, :html
+  respond_to :html
+  respond_to :json, only: :create
 
   def index
     respond_with(@questions = Question.all)
@@ -39,6 +41,11 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def publish_question
+    PrivatePub.publish_to "/questions", question: question.to_json
+  end
+
   def define_question
     @question = Question.find(params[:id])
   end

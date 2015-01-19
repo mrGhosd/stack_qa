@@ -281,6 +281,7 @@ DEPENDENCIES
   rails (= 4.1.0)
   redactor-rails
   remotipart
+  responders
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
