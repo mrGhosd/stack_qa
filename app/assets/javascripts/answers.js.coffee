@@ -79,22 +79,13 @@ $ ->
 
   PrivatePub.subscribe "/questions/#{question}/answers/edit", (data, channel) ->
     answer = $.parseJSON(data['answer'])
-    $.each($(".answer-item"), (key, value) ->
-      console.log $(value).data("answer")
-      if answer.id == $(value).data("answer")
-        $(".edit_answer").remove()
-        $(value).fadeOut('slow').replaceWith(JST["templates/answer"](answer: answer)).fadeIn('slow')
-    )
+    $(".edit_answer").remove()
+    $("[data-answer=#{answer.id}]").fadeOut('slow').replaceWith(JST["templates/answer"](answer: answer)).fadeIn('slow')
 
   PrivatePub.subscribe "/questions/#{question}/answers/destroy", (data, channel) ->
     answer_id = data.answer_id
-    $.each($(".answer-item"), (key, value) ->
-      if answer_id == $(value).data("answer")
-        if !$(value).is(":visible")
-          $(".edit_answer").remove()
-        console.log $(value)
-        $(value).fadeOut('slow')
-    )
+    console.log answer_id
+    $("[data-answer=#{answer_id}]").fadeOut('slow')
 
 
 $(document).delegate("#new_answer", "submit", (event)->
