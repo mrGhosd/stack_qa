@@ -2,8 +2,10 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :define_question, only: [:edit, :show, :update, :destroy]
 
+  respond_to :json, :html
+
   def index
-    @questions = Question.all
+    respond_with(@questions = Question.all)
   end
 
   def new
@@ -27,15 +29,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)
-      render json: {success: true}, status: :ok
-    else
-      render json: @question.errors.to_json, status: :forbidden
-    end
+    @question.update(question_params)
+    respond_with(@question)
   end
 
   def destroy
-    @question.destroy
+    respond_with(@question.destroy)
     head :ok
   end
 

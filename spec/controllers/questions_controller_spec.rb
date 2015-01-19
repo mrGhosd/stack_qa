@@ -78,7 +78,7 @@ describe QuestionsController do
 
       it "return success json" do
         put :update, id: question, question: attributes_for(:question, user_id: subject.current_user.id)
-        expect(response.body).to eq({success: true}.to_json)
+        expect(response).to redirect_to question_path(question)
       end
     end
     context "with invalid attributes" do
@@ -90,7 +90,7 @@ describe QuestionsController do
 
       it "return questions errors" do
         put :update, id: question, question: attributes_for(:question, title: "", user_id: subject.current_user.id)
-        expect(response.status).to eq(403)
+        expect(response).to render_template :edit
       end
     end
   end
