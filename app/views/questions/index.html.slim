@@ -1,5 +1,7 @@
 - if current_user
   = link_to "Создать вопрос...", new_question_path, class: 'btn btn-info'
+.questions-list
+  - @questions.each do |question|
+    = render partial: 'question', locals: {question: question}
 
-- @questions.each do |question|
-  = render partial: 'question', locals: {question: question}
+= subscribe_to "/questions"

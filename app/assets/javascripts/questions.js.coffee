@@ -7,6 +7,10 @@ $ ->
       success: ->
         link.fadeOut('slow')
 
+  PrivatePub.subscribe "/questions", (data, channel) ->
+    question = $.parseJSON(data['question'])
+    $(".questions-list").prepend JST["templates/question"](question: question)
+
 
 $(document).delegate(".question_form", "submit", (event)->
   event.preventDefault()
@@ -38,4 +42,4 @@ $(document).delegate(".question_form", "submit", (event)->
       $.each(object, (key, value)->
         $(".question_form #question_#{key}").addClass("error").parent().append("<div class='error-text'>#{value[0]}</div>")
       )
-)
+  )
