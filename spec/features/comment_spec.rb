@@ -46,7 +46,6 @@ feature "Signed in user", :js do
         fill_in "comment_text", with: "TEXT"
         click_button "Отправить"
       end
-      sleep 1
       expect(page).to have_content("TEXT")
     end
 
@@ -57,7 +56,6 @@ feature "Signed in user", :js do
         fill_in "comment_text", with: "OLOLO"
         click_button "Отправить"
       end
-      sleep 1
       expect(page).to have_content("OLOLO")
     end
   end
@@ -69,7 +67,6 @@ feature "Signed in user", :js do
       within ".comment-form" do
         click_button "Отправить"
       end
-      sleep 1
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
@@ -82,7 +79,6 @@ feature "Signed in user", :js do
         fill_in "comment_text", with: ""
         click_button "Отправить"
       end
-      sleep 1
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
