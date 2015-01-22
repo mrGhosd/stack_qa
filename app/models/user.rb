@@ -4,6 +4,7 @@ class User <ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
+  has_many :authorizations
   has_many :questions
   has_many :answers
   has_many :comments
@@ -16,11 +17,10 @@ class User <ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      # user.name = auth.info.name   # assuming the user model has a name
-      # user.image = auth.info.image # assuming the user model has an image
-    end
+    authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
+    return authorization.user if authorization
+    email = auth.info.email
+    user = User.find_by email: email
+    user.authorizations.create(provider: auth.provider, uid: auth.uid.to_s) if user
   end
 end

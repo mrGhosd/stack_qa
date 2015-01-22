@@ -33,4 +33,9 @@ $ ->
             $("#myModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
           )
         )
+  $(".social-networks-auth .a").click (event)->
+    event.preventDefault()
+    url = $(this).attr("href")
+    window.location.href = url
+
 
