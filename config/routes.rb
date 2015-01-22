@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations'}
+  devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', omniauths_callbacks: 'omniauths_callbacks'}
 
   mount RedactorRails::Engine => '/redactor_rails'
   root "questions#index"

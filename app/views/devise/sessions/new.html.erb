@@ -16,5 +16,8 @@
 
       </div>
     <% end %>
+  <%- User.omniauth_providers.each do |provider| %>
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(User, provider) %><br />
+  <% end -%>
 
 </div>
