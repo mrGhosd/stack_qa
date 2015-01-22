@@ -14,4 +14,8 @@ class User <ActiveRecord::Base
   def is_admin?
     self.role == 'admin'
   end
+
+  def self.find_for_oauth(param)
+
+  end
 end
