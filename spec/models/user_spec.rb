@@ -20,4 +20,8 @@ describe User do
       expect(admin.is_admin?).to eq(true)
     end
   end
+
+  describe ".from_omniauth(auth)" do
+    
+  end
 end
