@@ -33,9 +33,23 @@ $ ->
             $("#myModal #user_"+key).parent().append("<div class='error-text'>#{value[element]}</div>")
           )
         )
-  $(".social-networks-auth .a").click (event)->
+  $(".social-networks-auth a.facebook").click (event)->
     event.preventDefault()
     url = $(this).attr("href")
     window.location.href = url
 
+  $(".social-networks-auth a.twitter").click (event)->
+    event.preventDefault()
+    url = $(this).attr("href")
+    $("#myModal").modal('hide')
+    form = JST["templates/twitter-email"]
+    $('body').prepend JST["templates/modal"]
+    $("#messageModal .modal-body").prepend form
+    $("#messageModal").modal('show')
+
+    $(".twitter-additional-emal .submit-twitter-email").click (event) ->
+      event.preventDefault()
+      event.stopPropagation()
+      $("#messageModal").remove()
+      window.location.href=url+"?email="+$(".twitter-email").val()
 

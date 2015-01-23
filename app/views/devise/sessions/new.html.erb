@@ -18,7 +18,7 @@
     <% end %>
   <div class="social-networks-auth">
   <%- User.omniauth_providers.each do |provider| %>
-      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(User, provider) %><br />
+      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(User, provider), class: provider %><br />
   <% end -%>
   </div>
 

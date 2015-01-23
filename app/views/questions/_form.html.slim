@@ -14,7 +14,6 @@
     = f.label 'Категория:', class: 'col-md-2 control-label'
     .col-md-4
       = f.select(:category_id, Category.all.map {|p| [ p.title, p.id ]}, {}, class: 'form-control')
-      /= f.hidden_field :category_id, class: 'form-control'
   .col-md-offset-2
     = f.submit 'Сохранить', class: 'btn btn-success'
     = link_to 'Назад', questions_path, class: 'btn btn-default submit-btn'
