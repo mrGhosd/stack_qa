@@ -24,5 +24,7 @@ html
               - else
                 = link_to "Регистрация", "#", class: "btn btn-primary", remote: true, data: {action: "registration"}
                 = link_to "Войти", "#", class: "btn btn-success", remote: true, data: {action: "authorization"}
+    - if flash
+      = render template: "shared/flash_messages"
     .container
       = yield

@@ -41,15 +41,21 @@ $ ->
   $(".social-networks-auth a.twitter").click (event)->
     event.preventDefault()
     url = $(this).attr("href")
-    $("#myModal").modal('hide')
     form = JST["templates/twitter-email"]
-    $('body').prepend JST["templates/modal"]
-    $("#messageModal .modal-body").prepend form
-    $("#messageModal").modal('show')
+    showModalMessage(form)
 
     $(".twitter-additional-emal .submit-twitter-email").click (event) ->
       event.preventDefault()
       event.stopPropagation()
       $("#messageModal").remove()
       window.location.href=url+"?email="+$(".twitter-email").val()
+
+
+@showModalMessage = (message)->
+  $('body').prepend JST["templates/modal"]
+  if $("#myModal")
+    $("#myModal").modal('hide')
+  $("#messageModal .modal-body").prepend message
+  $("#messageModal").modal('show')
+
 
