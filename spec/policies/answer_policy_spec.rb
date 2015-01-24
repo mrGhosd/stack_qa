@@ -74,4 +74,14 @@ describe AnswerPolicy do
       expect(subject).to_not permit(User.new, create(:answer, user: user))
     end
   end
+
+  permissions :index? do
+    it "show the list of questions if user logged in" do
+      expect(subject).to permit(user, Answer)
+    end
+
+    it "grant access if user is admin?" do
+      expect(subject).to permit(User.new(role: 'admin'), Answer)
+    end
+  end
 end
