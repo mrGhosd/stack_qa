@@ -179,6 +179,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    pundit (0.3.0)
+      activesupport (>= 3.0.0)
     rack (1.5.2)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -310,6 +312,7 @@ DEPENDENCIES
   pg
   private_pub
   pry-rails
+  pundit
   rails (= 4.1.0)
   redactor-rails
   remotipart
