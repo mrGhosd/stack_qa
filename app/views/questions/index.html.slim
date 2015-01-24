@@ -1,4 +1,4 @@
-- if current_user
+- if can? :create, Question
   = link_to "Создать вопрос...", new_question_path, class: 'btn btn-info'
 .questions-list
   - @questions.each do |question|
