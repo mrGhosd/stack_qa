@@ -60,4 +60,18 @@ describe AnswerPolicy do
       expect(subject).to_not permit(User.new, create(:answer, user: user))
     end
   end
+
+  permissions :destroy? do
+    it "grant access if user is admin?" do
+      expect(subject).to permit(User.new(role: 'admin'), create(:answer))
+    end
+
+    it "grant access if user is author" do
+      expect(subject).to permit(user, create(:answer, user: user))
+    end
+
+    it "denied access if user is not author" do
+      expect(subject).to_not permit(User.new, create(:answer, user: user))
+    end
+  end
 end
