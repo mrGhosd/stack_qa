@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  skip_authorize_resource
   before_filter :check_admin
   layout 'admin'
 
