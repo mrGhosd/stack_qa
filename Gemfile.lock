@@ -79,6 +79,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    doorkeeper (2.1.0)
+      railties (>= 3.1)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -298,6 +300,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   devise
+  doorkeeper
   eco
   factory_girl_rails
   jbuilder (~> 2.0)
