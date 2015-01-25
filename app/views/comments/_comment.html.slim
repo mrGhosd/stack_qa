@@ -1,6 +1,8 @@
 .comment-item data={comment: comment.id}
   .comment-text= comment.text
-  - if current_user && comment.in?(current_user.comments)
-    .comment-actions
-      = link_to "", "#", class: 'btn btn-success btn-xs edit-comment glyphicon glyphicon-pencil', data: {question: @question.id, comment: comment.id}, remote: true
-      = link_to "", "#", class: 'btn btn-danger btn-xs remove-comment glyphicon glyphicon-remove', data: {question: @question.id, comment: comment.id}, remote: true
+  .comment-right-part
+    .comment-date= comment.created_at.strftime("%H:%M:%S %d.%m.%Y")
+    - if current_user && comment.in?(current_user.comments)
+      .comment-actions
+        = link_to "", "#", class: 'btn btn-success btn-xs edit-comment glyphicon glyphicon-pencil', data: {question: @question.id, comment: comment.id}, remote: true
+        = link_to "", "#", class: 'btn btn-danger btn-xs remove-comment glyphicon glyphicon-remove', data: {question: @question.id, comment: comment.id}, remote: true

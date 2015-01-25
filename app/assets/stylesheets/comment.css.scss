@@ -1,3 +1,24 @@
 .comment-form {
   margin-top: 20px;
 }
+.comment-item{
+  border: 1px solid #BBBBBB;
+  border-radius: 4px;
+  padding: 2px;
+  min-height: 52px;
+  margin-top: 5px;
+  .comment-text{
+    float:left;
+    padding:10px;
+    font-style: italic;
+  }
+  .comment-right-part{
+    float: right;
+    .comment-date{
+      float:left;
+    }
+    .comment-actions{
+      float: right;
+    }
+  }
+}
