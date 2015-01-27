@@ -12,6 +12,8 @@ class User <ActiveRecord::Base
   validates :email, :password, presence: true
   validates :email, uniqueness: true
 
+  mount_uploader :avatar, AvatarUploader
+
   def is_admin?
     self.role == 'admin'
   end

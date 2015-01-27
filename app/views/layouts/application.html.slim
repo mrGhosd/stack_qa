@@ -20,6 +20,9 @@ html
           .navbar-form.navbar-right
             .authentication-links
               - if current_user
+                = link_to user_path(current_user), class: 'user_profile_link' do
+                  = image_tag current_user.avatar.url || "default_user.png", size: "50", class: "img-circle"
+                  span= "#{current_user.surname} #{current_user.name}".blank? ? current_user.email : "#{current_user.surname} #{current_user.name}"
                 = link_to "Выйти", destroy_user_session_path, class: 'btn btn-danger', data: {method: 'delete'}
               - else
                 = link_to "Регистрация", "#", class: "btn btn-primary", remote: true, data: {action: "registration"}
