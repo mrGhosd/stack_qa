@@ -1,0 +1,8 @@
+.profile-pages{
+  &>div{
+    display: none;
+  }
+  &>div.active{
+    display: block;
+  }
+}

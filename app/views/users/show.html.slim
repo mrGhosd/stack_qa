@@ -1,1 +1,16 @@
-= @user.email
+ul.nav.nav-pills.profile-navigation
+  li.active
+    = link_to "Профиль", "#", data: {page: "profile"}, remote: true
+  li
+    = link_to "Вопросы", "#", data: {page: "questions"}, remote: true
+  li
+    = link_to "Ответы", "#", data: {page: "answers"}, remote: true
+  li
+    = link_to "Комментарии", "#", data: {page: "comments"}, remote: true
+
+.profile-pages
+  #profile.active
+    = @user.email
+  #questions
+  #answers
+  #comments
