@@ -6,6 +6,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @questions = @user.questions
+  end
+
+  def paginate_users_questions
+
   end
 
   private

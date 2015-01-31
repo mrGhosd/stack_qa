@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
   root "questions#index"
   resources :categories
-  resources :users, except: [:new, :create]
+  resources :users, except: [:new, :create] do
+    post :paginate_users_questions, on: :member
+  end
   resources :questions do
     resources :comments
     resources :answers

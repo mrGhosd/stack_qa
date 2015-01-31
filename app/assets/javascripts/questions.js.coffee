@@ -19,7 +19,8 @@ $(document).delegate(".question_form", "submit", (event)->
   event.stopImmediatePropagation()
   $(".question_form input, .question_form textarea").removeClass("error")
   $(".error-text").remove()
-  url, type
+  url
+  type
   action = $("#question_action")
 
   if action.length > 0

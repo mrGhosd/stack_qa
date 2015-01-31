@@ -1,4 +1,6 @@
 $ ->
+  view = new ProfilePageView()
+
   $(".profile-navigation a").click (event) ->
     event.preventDefault()
     page = $(this).data("page")
@@ -6,3 +8,6 @@ $ ->
     $(this).tab('show').parent().addClass("active")
     $(".profile-pages>div").removeClass("active")
     $(".profile-pages>##{page}").addClass("active")
+
+
+
