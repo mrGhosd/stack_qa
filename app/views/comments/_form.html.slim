@@ -1,10 +1,12 @@
-- objects = params[:type] == "Question" ? [@question, @comment] : [@question, @answer, @comment]
+- objects = params[:type] == "Question" ? [@entity, @comment] : [@question, @entity, @comment]
+- data_hash = params[:type] == "Question" ? {question: @question.id, type: params[:type]} : {question: @question.id, answer: params[:answer_id], type: params[:type]}
 = form_for objects, html: {class: 'form-horizontal comment-form'} do |f|
-  = f.hidden_field :question_id, value: params[:question_id]
+  = f.hidden_field :commentable_id, value: params[:type] == "Question" ? params[:question_id] : params[:answer_id]
+  = f.hidden_field :commentable_type, value: params[:type]
   = f.hidden_field :user_id, value: current_user.id
   .form-group
     .col-md-5
       = f.text_area :text, class: 'form-control', placeholder: 'Текст'
-  = f.submit "Отправить", class: 'btn btn-success submit-comment', remote: true, data: {question: @question.id}
+  = f.submit "Отправить", class: 'btn btn-success submit-comment', remote: true, data: data_hash
   - if params[:action] == "edit"
     = link_to "Отменить", "#", class: 'btn btn-default remove-edit-form', remote: true

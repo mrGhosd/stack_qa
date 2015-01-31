@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
       @entity = @question
       @comment = Comment.new(user: current_user, commentable_id: @entity, commentable_type: "Question")
     elsif params[:type] == "Answer"
-      # binding.pry
       @entity = Answer.find(params[:answer_id])
       @comment = Comment.new(user: current_user, commentable_id: @entity.id, commentable_type: "Answer")
     end
@@ -14,11 +13,12 @@ class CommentsController < ApplicationController
 
   def create
     comment = Comment.new(comment_params)
+    binding.pry
     if comment.save
       PrivatePub.publish_to "/questions/#{comment.question_id}/comments", comment: comment.to_json
       render nothing: true
     else
-      render json: comment.errors.to_json, status: :forbidden
+      render json: comment.errors.to_json, status: :unprocessible_entity
     end
   end
 
@@ -34,7 +34,7 @@ class CommentsController < ApplicationController
       PrivatePub.publish_to "/questions/#{comment.question_id}/comments/edit", comment: comment.to_json
       render nothing: true
     else
-      render json: comment.errors.to_json, status: :forbidden
+      render json: comment.errors.to_json, status: :unprocessible_entity
     end
   end
 

@@ -19,18 +19,9 @@ $ ->
        data: {type: type}
        success: (html) ->
          if type == "Answer"
-           console.log html
            $(".answer-actions").append(html)
          else if type == "Question"
            $(".question-action").append(html)
-
-#     question = $(this).data("question")
-
-#     $.ajax "/questions/#{question}/comments/new",
-#       type: "GET"
-#       data: {type: "Question"}
-#     $.get "/questions/#{question}/comments/new", (html) ->
-#       $(".question-action").append(html)
 
 #  $(".edit-comment").click ->
 #    question = $(this).data("question")
@@ -82,20 +73,23 @@ $ ->
 #        $(value).fadeOut('slow').replaceWith(JST["templates/comment"](comment: comment)).fadeIn('slow')
 #    )
 #
-#$(document).delegate(".comment-form", "submit", (event)->
-#  event.preventDefault()
-#  event.stopPropagation()
-#  event.stopImmediatePropagation()
-#  $(".comment-form textarea").removeClass("error")
-#  $(".error-text").remove()
+$(document).delegate(".comment-form", "submit", (event)->
+  event.preventDefault()
+  event.stopPropagation()
+  event.stopImmediatePropagation()
+  $(".comment-form textarea").removeClass("error")
+  $(".error-text").remove()
+  type = $(this).data("type")
 #  question = $(".comment-form .submit-comment").data("question")
-#  form = $(".comment-form")
-#  $.ajax "/questions/#{question}/comments",
-#    type: "POST"
-#    data: form.serialize()
-#    success: (data)->
-#    error: (error) ->
-#      object = JSON.parse(error.responseText)
-#      $(".comment-form textarea").addClass("error")
-#      $(".comment-form textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
-#)
+  form = $(".comment-form")
+  url = form.attr("action")
+  console.log form.serialize()
+  $.ajax url,
+    type: "POST"
+    data: form.serialize()
+    success: (data)->
+    error: (error) ->
+      object = JSON.parse(error.responseText)
+      $(".comment-form textarea").addClass("error")
+      $(".comment-form textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
+)
