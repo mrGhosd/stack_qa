@@ -43,6 +43,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'cancancan'
 gem 'doorkeeper'
+gem 'draper'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 # Use ActiveModel has_secure_password

@@ -1,6 +1,4 @@
 $ ->
-  view = new ProfilePageView()
-
   $(".profile-navigation a").click (event) ->
     event.preventDefault()
     page = $(this).data("page")

@@ -1,7 +1,9 @@
+- if user_page
+  = answer.delegate_user
 .answer-item data={answer: answer.id}
   span.text= answer.text.html_safe
   span.time= answer.created_at.strftime("%H:%M:%S %d.%m.%Y")
   - if current_user && answer.in?(current_user.answers)
     .answer-actions
-      = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: @question.id, answer: answer.id}, remote: true
-      = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: @question.id, answer: answer.id}, remote: true
+      = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
+      = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true
