@@ -1,5 +1,5 @@
-- if user_page
-  = answer.delegate_user
+/- if user_page
+/  = answer.delegate_user
 .answer-item data={answer: answer.id}
   span.text= answer.text.html_safe
   span.time= answer.created_at.strftime("%H:%M:%S %d.%m.%Y")

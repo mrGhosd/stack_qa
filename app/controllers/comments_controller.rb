@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   def new
+    binding.pry
     @question = Question.find(params[:question_id])
     @comment = Comment.new(user: current_user, question: @question)
     render template: "comments/new", layout: false
