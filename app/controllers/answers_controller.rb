@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
       render nothing: true
       # render json: answer.to_json, status: 200
     else
-      render json: answer.errors.to_json, status: :forbidden
+      render json: answer.errors.to_json, status: :unprocessible_entity
     end
   end
 
@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
       PrivatePub.publish_to "/questions/#{answer.question_id}/answers/edit", answer: answer.to_json
       render nothing: true
     else
-      render json: answer.errors.to_json, status: :forbidden
+      render json: answer.errors.to_json, status: :unprocessible_entity
     end
   end
 

@@ -29,10 +29,6 @@ feature "Signed in user", :js do
     click_link("#{question.title}")
   end
 
-  scenario "see link for adding an comment" do
-    expect(page).to have_css(".glyphicon.glyphicon-comment")
-  end
-
   scenario "show new comment form" do
     find(:css, ".add-comment").click
     expect(page).to have_css(".comment-form")

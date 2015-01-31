@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def new
     @question = Question.find(params[:question_id])
-    @comment = Comment.new(user_id: current_user.id, question_id: @question.id)
+    @comment = Comment.new(user: current_user, question: @question)
     render template: "comments/new", layout: false
   end
 

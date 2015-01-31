@@ -21,16 +21,18 @@ describe CommentsController do
   describe "POST #create" do
     context "with valid attributes" do
       it "create a new comment" do
-        expect{post :create,
-        question_id: question.id,
-        comment: attributes_for(:comment,
-        user_id: subject.current_user.id,
-        question_id: question.id)}.to change(Comment, :count).by(1)
+        expect{
+          post :create,
+            question_id: question.id,
+            comment: attributes_for(:comment,
+            user_id: subject.current_user.id,
+            question_id: question.id)
+        }.to change(Comment, :count).by(1)
       end
 
       it "return just create comment" do
         post :create,
-        question_id: question.id,
+             question_id: question.id,
         comment: attributes_for(:comment,
         user_id: subject.current_user.id,
         question_id: question.id)
