@@ -1,4 +1,5 @@
-= form_for [@question, @comment], html: {class: 'form-horizontal comment-form'} do |f|
+- objects = params[:type] == "Question" ? [@question, @comment] : [@question, @answer, @comment]
+= form_for objects, html: {class: 'form-horizontal comment-form'} do |f|
   = f.hidden_field :question_id, value: params[:question_id]
   = f.hidden_field :user_id, value: current_user.id
   .form-group

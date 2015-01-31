@@ -1,8 +1,14 @@
 class CommentsController < ApplicationController
   def new
-    binding.pry
     @question = Question.find(params[:question_id])
-    @comment = Comment.new(user: current_user, question: @question)
+    if params[:type] ==  "Question"
+      @entity = @question
+      @comment = Comment.new(user: current_user, commentable_id: @entity, commentable_type: "Question")
+    elsif params[:type] == "Answer"
+      # binding.pry
+      @entity = Answer.find(params[:answer_id])
+      @comment = Comment.new(user: current_user, commentable_id: @entity.id, commentable_type: "Answer")
+    end
     render template: "comments/new", layout: false
   end
 
@@ -39,6 +45,6 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:user_id, :question_id, :text)
+    params.require(:comment).permit(:user_id, :commentable_id, :commentable_type, :text)
   end
 end
