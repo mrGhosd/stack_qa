@@ -1,5 +1,5 @@
-- objects = params[:type] == "Question" ? [@entity, @comment] : [@question, @entity, @comment]
-- data_hash = params[:type] == "Question" ? {question: @question.id, type: params[:type]} : {question: @question.id, answer: params[:answer_id], type: params[:type]}
+/- objects = params[:type] == "Question" ? [@entity, @comment] : [@question, @entity, @comment]
+/- data_hash = params[:type] == "Question" ? {question: @question.id, type: params[:type]} : {question: @question.id, answer: params[:answer_id], type: params[:type]}
 = form_for objects, html: {class: 'form-horizontal comment-form'} do |f|
   = f.hidden_field :commentable_id, value: params[:type] == "Question" ? params[:question_id] : params[:answer_id]
   = f.hidden_field :commentable_type, value: params[:type]

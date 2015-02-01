@@ -1,0 +1,9 @@
+<form class="form-horizontal comment-form">
+  <div class="form-group">
+    <div class="col-md-5">
+      <textarea class="form-control comment-text" name="text" placeholder="Текст"></textarea>
+    </div>
+  </div>
+  <input type="submit" class="btn btn-success submit-comment" data-question="<%= @form.question if @form.question %>"
+         data-answer="<%= @form.answer if @form.answer %>" data-type="<%= @form.type if @form.type %>" data-action="<%= @form.action if @form.action %>"  value="Отправить"/>
+</form>
