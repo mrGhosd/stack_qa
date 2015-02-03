@@ -20,7 +20,12 @@ class CommentsController < ApplicationController
   def update
     comment = Comment.find(params[:id])
     if comment.update(comment_params)
-      PrivatePub.publish_to "/questions/#{comment.question_id}/comments/edit", comment: comment.to_json
+      message = if comment.commentable_type == "Answer"
+                  "/questions/#{Answer.find(comment.commentable_id).question.id}/answers/comments/edit"
+                else
+                  "/questions/#{comment.commentable_id}/comments/edit"
+                end
+      PrivatePub.publish_to message, comment: comment.to_json
       render nothing: true
     else
       render json: comment.errors.to_json, status: :unprocessible_entity

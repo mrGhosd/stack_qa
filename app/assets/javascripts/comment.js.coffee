@@ -25,6 +25,7 @@ class Comment
   editComment: (button)->
     type = $(button).data("type")
     comment = $(button).data("comment")
+    text = $(button).closest(".comment-item").find(".comment-text").text().trim()
     if $(".comment-form").length > 0 || $(".answer-form.row").length > 0
       $(".comment-form").remove()
       $(".answer-form.row").remove()
@@ -34,7 +35,7 @@ class Comment
         answer = $(button).data("answer")
       else if type == "Question"
         question = $(button).data("question")
-      template = JST["templates/comment_form"](form: {comment: comment, request_type: "PUT", cancel: true})
+      template = JST["templates/comment_form"](form: {question: question, answer: answer, action: "Update", type: type, comment: comment, text: text, request_type: "PUT", cancel: true})
       $(button).closest(".comment-item").hide()
       $(button).closest(".comment-item").after template
 
@@ -54,18 +55,22 @@ class Comment
 
   submitForm: (form) ->
     submit_button = $(form).find(".submit-comment")
+    request_type = $(submit_button).data("request-type")
+    comment = $(submit_button).data("comment")
     text_field = $(form).find(".comment-text")
     type = $(submit_button).data("type")
     question = $(submit_button).data("question")
-    console.log type + " " + question
+
     if type == "Answer"
       answer = $(submit_button).data("answer")
       url = "/questions/#{question}/answers/#{answer}/comments"
     else if type == "Question"
       url = "/questions/#{question}/comments"
+    if comment
+      url += "/#{comment}"
 
     $.ajax url,
-      type: "POST"
+      type: request_type
       data: {comment: {text: $(text_field).val()}, type: type}
       success: (response, request) ->
         console.log response
@@ -104,6 +109,16 @@ $ ->
     $(".comments-list").prepend JST["templates/comment"](comment: comment)
     $(".comment-form").remove()
 
+  PrivatePub.subscribe "/questions/#{question}/answers/comments/edit", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    updateComment(comment)
+
+
+  PrivatePub.subscribe "/questions/#{question}/comments/edit", (data, channel) ->
+    comment = $.parseJSON(data['comment'])
+    updateComment(comment)
+
+
   PrivatePub.subscribe "/questions/#{question}/answers/comments/create", (data, channel) ->
     comment = $.parseJSON(data['comment'])
     console.log comment
@@ -112,6 +127,17 @@ $ ->
         $(".comment-form").remove()
         $(value).find(".answer-comments-list").prepend JST["templates/comment"](comment: comment)
     )
+
+
+
+updateComment = (comment)->
+  $.each($(".comment-item"), (key, value) ->
+    if $(value).data("comment") == comment.id
+      template = JST["templates/comment"](comment: comment)
+      $(value).after template
+      $(value).remove()
+      $(".comment-form").remove()
+  )
 #    $(".comments-list").prepend JST["templates/comment"](comment: comment)
 #    $(".comment-form").remove()
 
