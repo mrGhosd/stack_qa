@@ -5,5 +5,12 @@
     </div>
   </div>
   <input type="submit" class="btn btn-success submit-comment" data-question="<%= @form.question if @form.question %>"
-         data-answer="<%= @form.answer if @form.answer %>" data-type="<%= @form.type if @form.type %>" data-action="<%= @form.action if @form.action %>"  value="Отправить"/>
+         data-answer="<%= @form.answer if @form.answer %>"
+         data-comment="<%= @form.comment if @form.comment %>"
+         data-type="<%= @form.type if @form.type %>"
+         data-action="<%= @form.action if @form.action %>"
+         data-request-type="<%= @form.request_type if @form.request_type %>" value="Отправить"/>
+  <% if @form.cancel: %>
+    <a href="#" data-remote="true" class="btn btn-default remove-comment-form">Отмена</a>
+  <% end %>
 </form>

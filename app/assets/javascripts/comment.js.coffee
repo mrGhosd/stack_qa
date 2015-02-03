@@ -15,8 +15,7 @@ class Comment
       else if type == "Question"
         question = $(button).data("question")
 
-
-      template = JST["templates/comment_form"](form: {question: question, answer: answer, type: type, action: "Create"})
+      template = JST["templates/comment_form"](form: {question: question, answer: answer, request_type: "POST", type: type, action: "Create"})
       if type == "Answer"
         $(".answer-actions").append(template)
       else if type == "Question"
@@ -24,8 +23,34 @@ class Comment
 
 
   editComment: (button)->
+    type = $(button).data("type")
+    comment = $(button).data("comment")
+    if $(".comment-form").length > 0 || $(".answer-form.row").length > 0
+      $(".comment-form").remove()
+      $(".answer-form.row").remove()
+    else
+      if type == "Answer"
+        question = $(button).data("question")
+        answer = $(button).data("answer")
+      else if type == "Question"
+        question = $(button).data("question")
+      template = JST["templates/comment_form"](form: {comment: comment, request_type: "PUT", cancel: true})
+      $(button).closest(".comment-item").hide()
+      $(button).closest(".comment-item").after template
+
 
   removeComment: (button) ->
+
+
+  removeCommentForm: (button) ->
+    $(button).closest(".comment-form").hide()
+    comment_id = $(button).prev(".submit-comment").data("comment")
+    console.log comment_id
+    $.each($(".comment-item"), (key, value) ->
+      if $(value).data("comment") == comment_id
+        $(value).show()
+    )
+
 
   submitForm: (form) ->
     submit_button = $(form).find(".submit-comment")
@@ -57,6 +82,16 @@ $ ->
   $(".add-comment").click ->
     comment.addComment($(this))
 
+  $(".edit-comment").click ->
+    comment.editComment($(this))
+
+  $(document).delegate(".remove-comment-form", "click", (event) ->
+    comment.removeCommentForm($(this))
+  )
+
+
+
+
   $(document).delegate(".comment-form", "submit", (event)->
     event.preventDefault()
     event.stopPropagation()
@@ -76,7 +111,6 @@ $ ->
       if comment.commentable_id == $(value).data("answer")
         $(".comment-form").remove()
         $(value).find(".answer-comments-list").prepend JST["templates/comment"](comment: comment)
-#        $(value).fadeOut('slow').replaceWith(JST["templates/comment"](comment: comment)).fadeIn('slow')
     )
 #    $(".comments-list").prepend JST["templates/comment"](comment: comment)
 #    $(".comment-form").remove()
