@@ -7,11 +7,11 @@
         = link_to "", "#", class: 'btn btn-success btn-xs edit-comment glyphicon glyphicon-pencil',
         data: {question: @question.id,
                answer: "#{comment.commentable.id if comment.commentable.class == Answer}",
-               comment: comment.id, type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}"},
-                remote: true
+               comment: comment.id, type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
+                remote: true}
         = link_to "", "#", class: 'btn btn-danger btn-xs remove-comment glyphicon glyphicon-remove',
-                  data: {question: @question.id,
+                  data: { question: @question.id,
                   answer: "#{comment.commentable.id if comment.commentable.class == Answer}",
                   comment: comment.id,
-                  type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}"},
-                  remote: true
+                  type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
+                  remote: true }

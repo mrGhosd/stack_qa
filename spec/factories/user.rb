@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     surname   "Surname"
     name      "Name"
-    email     "vforvad@gmail.com"
+    email     "vforvad@gmailadawdaw.com"
     password  "12345"
 
     trait :confirmed do

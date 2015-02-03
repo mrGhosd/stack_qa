@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "Unsigned user", :js do
   let!(:user){ create :user }
   let!(:question){ create :question, user_id: user.id }
-  let!(:comment) { create :comment, user_id: user.id, question_id: question.id }
+  let!(:comment) { create :comment, user_id: user.id, commentable_id: question.id, commentable_type: "Question" }
 
   before do
     visit root_path
@@ -22,7 +22,7 @@ end
 feature "Signed in user", :js do
   let!(:user){ create :user }
   let!(:question){ create :question, user_id: user.id }
-  let!(:comment) { create :comment, user_id: user.id, question_id: question.id }
+  let!(:comment) { create :comment, user_id: user.id, commentable_id: question.id, commentable_type: "Question" }
 
   before do
     sign_in user
@@ -39,7 +39,7 @@ feature "Signed in user", :js do
       find(:css, ".add-comment").click
       expect(page).to have_css(".comment-form")
       within ".comment-form" do
-        fill_in "comment_text", with: "TEXT"
+        fill_in "text", with: "TEXT"
         click_button "Отправить"
       end
       expect(page).to have_content("TEXT")
@@ -49,7 +49,7 @@ feature "Signed in user", :js do
       find(:css, ".edit-comment").click
       expect(page).to have_css(".comment-form")
       within ".comment-form" do
-        fill_in "comment_text", with: "OLOLO"
+        fill_in "text", with: "OLOLO"
         click_button "Отправить"
       end
       expect(page).to have_content("OLOLO")
@@ -72,7 +72,7 @@ feature "Signed in user", :js do
       find(:css, ".edit-comment").click
       expect(page).to have_css(".comment-form")
       within ".comment-form" do
-        fill_in "comment_text", with: ""
+        fill_in "text", with: ""
         click_button "Отправить"
       end
       expect(page).to have_css(".error")
