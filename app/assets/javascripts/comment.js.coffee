@@ -1,7 +1,5 @@
 class Comment
 
-  initialize: ->
-
   addComment: (button) ->
     type = $(button).data("type")
     if $(".comment-form").length > 0 || $(".answer-form.row").length > 0
@@ -41,12 +39,23 @@ class Comment
 
 
   removeComment: (button) ->
+    type = $(button).data("type")
+    question = $(button).data("question")
+    comment = $(button).data("comment")
+    if type == "Answer"
+      answer = $(button).data("answer")
+      url = "/questions/#{question}/answers/#{answer}/comments/#{comment}"
+    else if type == "Question"
+      url = "/questions/#{question}/comments/#{comment}"
 
+    $.ajax url,
+      type: "DELETE"
+      success: ->
+        $(button).closest(".comment-item").fadeOut('slow')
 
   removeCommentForm: (button) ->
     $(button).closest(".comment-form").hide()
     comment_id = $(button).prev(".submit-comment").data("comment")
-    console.log comment_id
     $.each($(".comment-item"), (key, value) ->
       if $(value).data("comment") == comment_id
         $(value).show()
@@ -73,14 +82,11 @@ class Comment
       type: request_type
       data: {comment: {text: $(text_field).val()}, type: type}
       success: (response, request) ->
-        console.log response
-        console.log request
       error: (error) ->
         object = JSON.parse(error.responseText)
         $(".comment-form textarea").addClass("error")
         $(".comment-form textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
 
-# форму лучше держать в на странице
 $ ->
   comment = new Comment()
 
@@ -94,8 +100,8 @@ $ ->
     comment.removeCommentForm($(this))
   )
 
-
-
+  $(".remove-comment").click ->
+    comment.removeComment($(this))
 
   $(document).delegate(".comment-form", "submit", (event)->
     event.preventDefault()
@@ -128,8 +134,6 @@ $ ->
         $(value).find(".answer-comments-list").prepend JST["templates/comment"](comment: comment)
     )
 
-
-
 updateComment = (comment)->
   $.each($(".comment-item"), (key, value) ->
     if $(value).data("comment") == comment.id
@@ -137,57 +141,3 @@ updateComment = (comment)->
       $(value).after template
       $(value).remove()
       $(".comment-form").remove()
-  )
-#    $(".comments-list").prepend JST["templates/comment"](comment: comment)
-#    $(".comment-form").remove()
-
-
-
-#  $(".edit-comment").click ->
-#    question = $(this).data("question")
-#    comment = $(this).data("comment")
-#    button = $(this)
-#    item = button.closest('.comment-item')
-#    $.get "/questions/#{question}/comments/#{comment}/edit", (html) ->
-#      $(html).insertAfter(item)
-#      $(item).hide()
-#      $(".comment-form .remove-edit-form").click ->
-#        item.show()
-#        $(".comment-form").remove()
-#      $(".comment-form .submit-comment").click (event)->
-#        event.preventDefault()
-#        event.stopPropagation()
-#        event.stopImmediatePropagation()
-#        $.ajax "/questions/#{question}/comments/#{comment}",
-#          type: "PUT"
-#          data: $(".comment-form").serialize()
-#          success: (data) ->
-#            $(".comment-form").remove()
-#            item.remove()
-#            $(".comments-list").prepend JST["templates/comment"](comment: data)
-#          error: (error) ->
-#            object = JSON.parse(error.responseText)
-#            $(".comment-form textarea").addClass("error")
-#            $(".comment-form textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
-#
-#  $(".remove-comment").click ->
-#    question = $(this).data("question")
-#    comment = $(this).data("comment")
-#    item = $(this).closest(".comment-item")
-#    $.ajax "/questions/#{question}/comments/#{comment}",
-#      type: "DELETE"
-#      success: ->
-#        $(item).fadeOut('slow')
-#
-
-#
-#  PrivatePub.subscribe "/questions/#{question}/comments/edit", (data, channel) ->
-#    comment = $.parseJSON(data['comment'])
-#    $.each($(".comment-item"), (key, value) ->
-#      if comment.id == $(value).data("comment")
-#        $(".comment-form").remove()
-#        $(value).fadeOut('slow').replaceWith(JST["templates/comment"](comment: comment)).fadeIn('slow')
-#    )
-
-
-
