@@ -97,7 +97,7 @@ describe QuestionsController do
 
   describe "DELETE #destroy" do
     it "destroy the choosen question" do
-      expect{delete :destroy, id: question.id}.to change(Question, :count).by(-1)
+      expect{ delete :destroy, id: question.id }.to change(Question, :count).by(-1)
     end
 
     it "return 200 status" do

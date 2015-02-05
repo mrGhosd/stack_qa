@@ -14,4 +14,4 @@
       - if current_user && question.in?(current_user.questions)
         .actions-panel
           = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-xs btn-success"
-          = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-xs btn-danger delete-question", data: {question: question.id}
+          = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-xs btn-danger delete-question", data: {question: question.id, remote: true}
