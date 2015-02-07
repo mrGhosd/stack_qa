@@ -62,12 +62,10 @@ describe "Questions API" do
 
         %w(id text created_at updated_at).each do |attr|
           it "contains #{attr}" do
-            expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("questions/0/answers/0/#{attr}")
+            expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("questions/0/comments/0/#{attr}")
           end
         end
       end
     end
-
-
   end
 end
