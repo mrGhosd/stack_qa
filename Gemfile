@@ -61,6 +61,7 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
   gem 'selenium-webdriver'
+  gem 'json_spec'
 end
 
 group :development, :test do

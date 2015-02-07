@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    surname   "Surname"
+    sequence(:surname)  { |n| "Surname#{n}" }
     name      "Name"
-    email     "vforvad@gmailadawdaw.com"
+    sequence(:email)    { |n| "vforvad#{n}@gmail.com" }
     password  "12345"
 
     trait :confirmed do

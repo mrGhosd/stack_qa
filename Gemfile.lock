@@ -139,6 +139,9 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.2)
+    json_spec (1.1.4)
+      multi_json (~> 1.0)
+      rspec (>= 2.0, < 4.0)
     jwt (1.2.1)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -220,6 +223,10 @@ GEM
     request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
     rspec-core (3.2.0)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -318,6 +325,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  json_spec
   launchy
   markitup-rails
   mini_magick
