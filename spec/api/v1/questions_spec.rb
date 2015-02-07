@@ -19,6 +19,7 @@ describe "Questions API" do
       let!(:questions) { create_list(:question, 2) }
       let!(:question) { questions.first }
       let!(:answer) { create(:answer, question: question) }
+      let!(:comment) { create(:comment, commentable_id: question.id, commentable_type: "Question") }
 
       before { get "api/v1/questions", format: :json, access_token: access_token.token }
 
@@ -50,6 +51,18 @@ describe "Questions API" do
         %w(id text created_at updated_at).each do |attr|
           it "contains #{attr}" do
             expect(response.body).to be_json_eql(answer.send(attr.to_sym).to_json).at_path("questions/0/answers/0/#{attr}")
+          end
+        end
+      end
+
+      context 'comments' do
+        it 'included in question object' do
+          expect(response.body).to have_json_size(1).at_path('questions/0/comments')
+        end
+
+        %w(id text created_at updated_at).each do |attr|
+          it "contains #{attr}" do
+            expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("questions/0/answers/0/#{attr}")
           end
         end
       end
