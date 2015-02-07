@@ -19,6 +19,7 @@ class Ability
   def current_user_abilities
     guest_abilities
     can :create, [Question, Answer, Comment]
+    can :destroy, Question, user: user
     can :update, [Question, Answer, Comment], user: user
     cannot [:create, :update, :destroy], Category
   end

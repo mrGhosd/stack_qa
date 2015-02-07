@@ -2,9 +2,9 @@ $ ->
   $(".delete-question").click ->
     link = $(this).closest(".question-item")
     id = $(this).data("question")
-    $.ajax "/questions/#{id}",
-      type: "POST"
-      method: "DELETE"
+    $.ajax
+      url: "/questions/#{id}"
+      type: "DELETE"
       success: ->
         link.fadeOut('slow')
 
