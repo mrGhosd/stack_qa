@@ -1,7 +1,8 @@
 class Api::V1::ProfilesController < Api::ApiController
 
   def index
-    @questions = Question.where.not(id: current_resource_owner.id)
+    users = User.where.not(id: current_resource_owner.id)
+    render json: users.to_json
   end
 
   def me
