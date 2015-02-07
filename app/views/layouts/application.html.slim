@@ -25,9 +25,13 @@ html
                   span= "#{current_user.surname} #{current_user.name}".blank? ? current_user.email : "#{current_user.surname} #{current_user.name}"
                 = link_to "Выйти", destroy_user_session_path, class: 'btn btn-danger', data: {method: 'delete'}
               - else
-                = link_to "Регистрация", "#", class: "btn btn-primary", remote: true, data: {action: "registration"}
-                = link_to "Войти", "#", class: "btn btn-success", remote: true, data: {action: "authorization"}
+                = link_to "Регистрация", "#", class: "btn btn-primary reg", remote: true, data: {action: "registration"}
+                = link_to "Войти", "#", class: "btn btn-success auth", remote: true, data: {action: "authorization"}
     - if flash
       = render template: "shared/flash_messages"
+    - if params[:js] == "dialog_window"
+      javascript:
+        setTimeout("$('.authentication-links a.auth').click()", 500);
+
     .container
       = yield

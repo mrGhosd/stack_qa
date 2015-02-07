@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :question do
-    title   "QuestionTitle"
+    sequence(:title) { |n| "QuestionTitle#{n}" }
     text    "QuestionText"
 
     trait :closed do
