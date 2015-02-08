@@ -40,6 +40,7 @@ class AnswersController < ApplicationController
     head :ok
   end
 
+  private
   def answers_params
     params.require(:answer).permit(:question_id, :user_id, :text)
   end

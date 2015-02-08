@@ -7,9 +7,9 @@ class Api::V1::QuestionsController < Api::ApiController
   def create
     question = Question.new(question_params)
     if question.save
-      render json: question.to_json
+      render json: question.to_json, status: :ok
     else
-      render json: question.errors.to_json
+      render json: question.errors.to_json, status: :uprocessible_entity
     end
   end
 
