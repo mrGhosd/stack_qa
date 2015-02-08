@@ -68,4 +68,44 @@ describe "Questions API" do
       end
     end
   end
+
+  describe "POST #create" do
+    let!(:user) { create :user }
+    let!(:access_token) { create :access_token }
+    let!(:category) { create :category }
+
+    context "with valid attributes" do
+      it "creates a new question" do
+        expect{
+          post "api/v1/questions", format: :json,
+               access_token: access_token.token,
+               question: attributes_for(:question, category: category, user: user)
+        }.to change(Question, :count).by(1)
+      end
+
+      it "return just create question" do
+        post "api/v1/questions", format: :json,
+             access_token: access_token.token,
+             question: attributes_for(:question, category: category, user: user)
+        expect(response.body).to be_json_eql(Question.last.to_json)
+      end
+    end
+
+    context "with invalid attributes" do
+      it "doesn't create an question" do
+        expect { post "api/v1/questions", format: :json,
+                access_token: access_token.token,
+                question: attributes_for(:question,
+                title: "", category: category, user: user) }.to change(Question, :count).by(0)
+      end
+
+      it "return array of json errors" do
+        post "api/v1/questions", format: :json,
+             access_token: access_token.token,
+             question: attributes_for(:question,
+             title: "", category: category, user: user)
+        expect(JSON.parse(response.body)).to have_key("title")
+      end
+    end
+  end
 end
