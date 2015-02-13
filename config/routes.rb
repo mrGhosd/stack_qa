@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', :omniauth_callbacks => "omniauth_callbacks" }
 
   mount RedactorRails::Engine => '/redactor_rails'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   root "questions#index"
 
   concern :commentable do
