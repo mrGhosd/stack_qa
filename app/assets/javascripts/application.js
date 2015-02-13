@@ -24,4 +24,5 @@
 //= require category
 //= require modal_window
 //= require user
+//= require common
 //= require_tree .

@@ -1,3 +1,2 @@
 - @answers.each do |answer|
-  - decorated_answer = answer.decorate
-  = render partial: "answers/answer", locals: {answer: decorated_answer, user_page: true}
+  = render partial: "answers/answer", locals: { answer: answer }
