@@ -1,20 +1,15 @@
-$ ->
-#  $(document).on('ajaxStart', ->
-#    console.log "1"
-#  ).on('ajaxSuccess', ->
-#    console.log "2"
-#  )
-  gif = $("<img src='/assets/ajax-loader.gif' class='js-ajax-load-image'/>")
-#  $("body").after(gif)
-  $(document).ajaxStart ->
+loadCircle = (element, show)->
+  if show
     $("body").css("opacity", 0.5)
-    $(".add-answer").after(gif)
-  $(document).ajaxComplete ->
+    $(".add-answer").after(element)
+  else
     $("body").css("opacity", 1)
-    gif.remove()
-    console.log "2"
-#  $('#loading-image').bind('ajaxStart', function(){
-#  $(this).show();
-#}).bind('ajaxStop', function(){
-#$(this).hide();
-#});
+    element.remove()
+
+
+$ ->
+  gif = $("<img src='/assets/ajax-loader.gif' class='js-ajax-load-image'/>")
+  $(document).ajaxStart ->
+    loadCircle(gif, true)
+  $(document).ajaxComplete ->
+    loadCircle(gif, false)
