@@ -46,7 +46,7 @@ gem 'doorkeeper'
 gem 'oj'
 gem 'oj_mimic_json'
 gem 'active_model_serializers'
-gem 'delayed_job_active_record'
+# gem 'delayed_job_active_record'
 gem "letter_opener"
 gem 'letter_opener_web'
 gem 'whenever'
