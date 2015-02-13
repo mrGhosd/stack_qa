@@ -35,6 +35,17 @@ body>.alert{
     text-align: center;
     font-weight: bolder;
     font-size: 20px;
+    .left-arrow{
+      cursor: pointer;
+      float:left;
+      margin-top: 4px;
+    }
+    .right-arrow{
+      cursor: pointer;
+      float: right;
+      margin-top: 4px;
+    }
+    .title-text{}
   }
   .widget-item{
     padding: 5px;

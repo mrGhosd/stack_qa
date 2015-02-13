@@ -1,5 +1,9 @@
 .widget
-  .title= "Последние созданные:"
+  .title
+    .glyphicon.glyphicon-chevron-left.left-arrow
+    .glyphicon.glyphicon-chevron-right.right-arrow
+    .title-text= "Последние созданные:"
+
   .content
   - widget.each do |data|
     = render partial: "shared/widget_item", locals: {data: data}
