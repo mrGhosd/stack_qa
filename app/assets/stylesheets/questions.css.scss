@@ -31,3 +31,9 @@
     margin-left: 70px;
   }
 }
+
+.questions-page{
+  &>div{
+    display: inline-block;
+  }
+}

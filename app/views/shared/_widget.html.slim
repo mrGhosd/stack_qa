@@ -1,0 +1,5 @@
+.widget
+  .title= "Последние созданные:"
+  .content
+  - widget.each do |data|
+    = render partial: "shared/widget_item", locals: {data: data}

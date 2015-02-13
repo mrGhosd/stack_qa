@@ -24,3 +24,25 @@ body>.alert{
   left: 50%;
   top: 35%;
 }
+.widget{
+  border: 2px solid #2E2F30;
+  border-radius: 8px;
+  padding: 10px;
+  float: left;
+  margin-top: 10px;
+  margin-right: 100px;
+  .title{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+  .widget-item{
+    padding: 5px;
+    &>div{
+      display: inline-block;
+    }
+    .title{
+      font-size: 15px;
+    }
+  }
+}

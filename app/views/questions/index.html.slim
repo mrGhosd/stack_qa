@@ -1,7 +1,7 @@
 - if can? :create, Question
   = link_to "Создать вопрос...", new_question_path, class: 'btn btn-info'
-.questions-list
-  - @questions.each do |question|
-    = render partial: 'question', locals: {question: question}
+.questions-page
+  = render partial: "shared/widget", locals: {widget: @widget}
+  = render partial: "collection", locals: {questions: @questions}
 
 = subscribe_to "/questions"

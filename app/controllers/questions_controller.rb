@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :define_question, only: [:edit, :show, :update, :destroy]
+  before_action :widget_data, only: :index
 
   def index
     @questions = Question.all
@@ -43,6 +44,10 @@ class QuestionsController < ApplicationController
 
   def define_question
     @question = Question.find(params[:id])
+  end
+
+  def widget_data
+    @widget = Question.order("created_at DESC").first(5)
   end
 
   def question_params
