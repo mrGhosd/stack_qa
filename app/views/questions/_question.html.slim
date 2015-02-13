@@ -1,17 +1,10 @@
 .question-item
-  .row
-    .col-md-6
-      .title
-        = link_to question.title, question_path(question)
-  .row
-    .col-md-9
-      .question-text
-        = question.text.html_safe.first(20)<<"..."
-    .col-md-2
-      .question-time
-        = question.created_at
-    .col-md-2
-      - if current_user && question.in?(current_user.questions)
-        .actions-panel
-          = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-xs btn-success"
-          = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-xs btn-danger delete-question", data: {question: question.id, remote: true}
+  .main-info
+    .title
+      = link_to question.title, question_path(question)
+    .timestamp
+      = question.created_at.strftime("Создан в %H:%m, %m.%d.%Y ")
+    - if current_user && question.in?(current_user.questions)
+      .actions-panel
+        = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-xs btn-success"
+        = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-xs btn-danger delete-question", data: {question: question.id, remote: true}

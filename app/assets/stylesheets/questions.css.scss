@@ -2,11 +2,13 @@
   border: 2px solid #dddddd;
   border-radius: 8px;
   margin: 10px 0px 10px 0px;
-  .title{
-    padding: 10px;
-  }
-  .question-text{
-    padding:10px;
+  .main-info {
+    div{
+      display: inline-block;
+    }
+    .title {
+      padding: 10px;
+    }
   }
   .actions-panel{
     a{
