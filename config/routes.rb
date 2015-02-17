@@ -1,3 +1,4 @@
+Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
 Rails.application.routes.draw do
   use_doorkeeper
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', :omniauth_callbacks => "omniauth_callbacks" }

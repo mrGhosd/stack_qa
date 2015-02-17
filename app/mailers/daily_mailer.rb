@@ -7,7 +7,8 @@ class DailyMailer < ActionMailer::Base
   #   en.daily_mailer.digest.subject
   #
   def digest(user)
-    @greeting = "Hi"
+    @questions = Question.created_today
+    @user = user
 
     mail to: user.email
   end
