@@ -1,0 +1,4 @@
+h1="На ваш вопрос ответили"
+.item-description
+  p= "Пользователь #{link_to @user.try(:email), user_url(@user), target: '_blank' } ответил на ваш вопрос #{link_to @question.try(:title), question_url(@question), target: '_blank'}:".html_safe
+  .item-answer-text= @answer.try(:text).html_safe
