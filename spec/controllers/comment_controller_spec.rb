@@ -19,44 +19,35 @@ describe CommentsController do
 
       it "return just create comment" do
         post :create,
-        commentable_id: question.id, commentable_type: "Question",
+        question_id: question.id,
+        commentable_id: question.id,
+        type: "Question",
         comment: attributes_for(:comment,
-        user_id: subject.current_user.id,
-        commentable_id_id: question.id)
-        expect(response.body).to eq(Comment.first.to_json)
+        user_id: subject.current_user.id)
+        allow(PrivatePub).to receive("publish_to").and_return(Comment.first.to_json)
+        expect(PrivatePub.publish_to).to eq(Comment.first.to_json)
       end
     end
 
     context "with invalid attributes" do
       it "doesn't create a new comment" do
-        expect{post :create,
-        commentable_id: question.id, commentable_type: "Question",
-        comment: attributes_for(:comment,
-        user_id: subject.current_user.id,
-        commentable_id: question.id, text: "")}.to change(Comment, :count).by(0)
+        expect{
+          post :create,
+          question_id: question.id, type: "Question",
+          comment: attributes_for(:comment,
+          user_id: subject.current_user.id,
+          commentable_id: question.id, text: "")
+        }.to change(Comment, :count).by(0)
       end
 
       it "return comment errors" do
         post :create,
-        question_id: question.id,
+        question_id: question.id, type: "Question",
         comment: attributes_for(:comment,
         user_id: subject.current_user.id,
-        question_id: question.id, text: "")
+        commentable_id: question.id, text: "")
         expect(JSON.parse(response.body)).to have_key('text')
       end
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns comment and question" do
-      get :edit, question_id: question.id, id: comment.id
-      expect(assigns(:question)).to eq(question)
-      expect(assigns(:comment)).to eq(comment)
-    end
-
-    it "rendere edit partial" do
-      get :edit, question_id: question.id, id: comment.id
-      expect(response).to render_template :edit
     end
   end
 
@@ -69,14 +60,9 @@ describe CommentsController do
       end
 
       it "return updated comment" do
+        allow(PrivatePub).to receive("publish_to").and_return(comment)
         put :update, question_id: question.id, id: comment.id, comment: attributes_for(:comment, text: "1")
-        json = JSON.parse(response.body)
-        json['created_at'] = json['created_at'].to_datetime
-        json['updated_at'] = json['updated_at'].to_datetime
-        comment.created_at = answer.created_at.to_datetime.utc
-        comment.updated_at = answer.updated_at.to_datetime.utc
-        comment.save
-        expect(json).to eq(comment.attributes)
+        expect(PrivatePub.publish_to).to eq(comment)
       end
     end
 
