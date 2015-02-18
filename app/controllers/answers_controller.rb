@@ -12,7 +12,6 @@ class AnswersController < ApplicationController
       PrivatePub.publish_to "/questions/#{answer.question_id}/answers", answer: answer.to_json
       Answer.delay.send_notification_to_author(answer)
       render nothing: true
-      # render json: answer.to_json, status: 200
     else
       render json: answer.errors.to_json, status: :unprocessible_entity
     end

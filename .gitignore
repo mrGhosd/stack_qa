@@ -15,3 +15,5 @@ config/database.yml
 /public/public
 /public/system
 /public/uploads
+dump.rdb
+
