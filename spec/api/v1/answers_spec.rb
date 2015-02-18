@@ -6,8 +6,6 @@ describe "Answers API" do
   let!(:question) { create :question }
   let!(:answers) { create_list(:answer, 3, question: question) }
   let!(:answer) { answers.last }
-  let!(:show_answer) { create :answer, question_id: question.id }
-  let!(:comment) { create :comment, commentable_id: show_answer.id, commentable_type: "Answer" }
 
   describe "GET #index" do
     let!(:api_path) { "/api/v1/questions/#{question.id}/answers" }
@@ -29,11 +27,13 @@ describe "Answers API" do
   end
 
   describe "GET #show" do
+    let!(:show_answer) { create :answer, question_id: question.id }
+    let!(:comment) { create :comment, commentable_id: show_answer.id, commentable_type: "Answer" }
 
     before { get "/api/v1/questions/#{question.id}/answers/#{show_answer.id}", access_token: access_token.token }
 
     it "return an particular answer" do
-      expect(response.body).to be_json_eql(show_answer.to_json)
+      expect(response.body).to be_json_eql(show_answer.id.to_json).at_path("answer/id")
     end
 
     it "include comments" do

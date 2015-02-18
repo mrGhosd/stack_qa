@@ -8,6 +8,7 @@ class User <ActiveRecord::Base
   has_many :questions
   has_many :answers
   has_many :comments
+  has_many :question_users
 
   validates :email, :password, presence: true
   validates :email, uniqueness: true
@@ -35,5 +36,11 @@ class User <ActiveRecord::Base
 
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
+  end
+
+  def self.send_daily_digest
+    all.each do |user|
+      DailyMailer.digest(user).deliver
+    end
   end
 end

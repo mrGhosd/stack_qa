@@ -26,3 +26,7 @@
 //= require user
 //= require common
 //= require_tree .
+
+$(document).on("hidden.bs.modal", function(){
+    $("#messageModal").remove();
+});

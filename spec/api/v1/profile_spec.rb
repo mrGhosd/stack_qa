@@ -29,7 +29,7 @@ describe "Profile API" do
         expect(response.body).to_not have_json_path('password')
       end
 
-      it "does not containe encrypted passwrd" do
+      it "does not containe encrypted password" do
         expect(response.body).to_not have_json_path('encrypted_password')
       end
     end

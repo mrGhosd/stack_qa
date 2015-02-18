@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+
+  body
+    h3= "Ежедневный дайджест вопросов StackQ&A"
+    .digest-title= "Здравствуйте, #{@user.email}. Предлагаем вашему вниманию список вопросов,
+    созданных сегодня, #{Time.zone.now.strftime("%d.%m.%Y")}:"
+    .digest-list
+      - @questions.each do |question|
+        .question-item
+          = link_to question.title, question_url(question), target: '_blank'
+

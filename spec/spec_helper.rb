@@ -7,6 +7,9 @@ require 'support/user_helper'
 require 'support/features_helper'
 require 'cancan/matchers'
 require 'support/shared/api_authorization'
+require 'sidekiq/testing'
+
+Sidekiq::Testing.inline!
 
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller

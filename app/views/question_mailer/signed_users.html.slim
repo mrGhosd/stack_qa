@@ -1,0 +1,6 @@
+h2="Вопрос, на который вы подписались,был изменен"
+
+.main-description
+  p="Здравствуйте, #{@user.email}"
+  p="Вопрос #{link_to @question.title, question_url(@question), target: '_blank'} был изменен".html_safe
+

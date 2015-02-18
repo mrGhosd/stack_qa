@@ -1,8 +1,14 @@
+Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
 Rails.application.routes.draw do
   use_doorkeeper
   devise_for :users, controllers: {sessions: 'sessions', registrations: 'registrations', :omniauth_callbacks => "omniauth_callbacks" }
 
   mount RedactorRails::Engine => '/redactor_rails'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   root "questions#index"
 
   concern :commentable do
@@ -14,6 +20,7 @@ Rails.application.routes.draw do
     post :paginate_users_questions, on: :member
   end
   resources :questions, concerns: :commentable do
+    post :sign_in_question, on: :member
     resources :answers, concerns: :commentable
   end
 
