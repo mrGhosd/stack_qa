@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post :paginate_users_questions, on: :member
   end
   resources :questions, concerns: :commentable do
+    post :sign_in_question, on: :member
     resources :answers, concerns: :commentable
   end
 

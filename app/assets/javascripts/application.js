@@ -25,3 +25,7 @@
 //= require modal_window
 //= require user
 //= require_tree .
+
+$(document).on("hidden.bs.modal", function(){
+    $("#messageModal").remove();
+});

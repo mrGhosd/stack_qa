@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :define_question, only: [:edit, :show, :update, :destroy]
+  before_action :define_question, only: [:edit, :show, :update, :destroy, :sign_in_question]
 
   def index
     @questions = Question.all
@@ -33,6 +33,19 @@ class QuestionsController < ApplicationController
       render json: @question.errors.to_json, status: :forbidden
     end
   end
+
+  def sign_in_question
+    if QuestionUser.find_by(user_id: current_user.id, question_id: @question.id)
+      render json: {message: "Вы уже подписаны на данное обновление"} and return
+    end
+
+    if QuestionUser.create(user_id: current_user.id, question_id: @question.id)
+      render json: {message: "Вы подписались на данный вопрос"}, status: :ok
+    else
+      render json: {error: "К сожалению,подписка не может быть оформлена"}, status: :unprocessible_entity
+    end
+  end
+
 
   def destroy
     @question.destroy

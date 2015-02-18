@@ -13,6 +13,8 @@ $ ->
     question = $.parseJSON(data['question'])
     $(".questions-list").prepend JST["templates/question"](question: question)
 
+  $(".sign-in-question").click ->
+    signInQuestion($(this))
 
 $(document).delegate(".question_form", "submit", (event)->
   event.preventDefault()
@@ -46,3 +48,20 @@ $(document).delegate(".question_form", "submit", (event)->
         $(".question_form #question_#{key}").addClass("error").parent().append("<div class='error-text'>#{value[0]}</div>")
       )
   )
+
+
+signInQuestion = (button)->
+  question = button.data("question")
+  $.ajax "/questions/#{question}/sign_in_question",
+    type: "POST"
+    success: (response, request) ->
+      showMessage(response.message)
+    error: (response, request)->
+      showMessage(response.error)
+
+
+
+showMessage = (text) ->
+  $("body").prepend JST["templates/modal"]
+  $("#messageModal .modal-body").html(text)
+  $("#messageModal").modal('show')
