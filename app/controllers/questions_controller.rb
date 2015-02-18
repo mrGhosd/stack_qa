@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
+      Question.delay.signed_users(@question)
       render json: {success: true}, status: :ok
     else
       render json: @question.errors.to_json, status: :forbidden

@@ -8,4 +8,11 @@ class Question < ActiveRecord::Base
   validates :title, uniqueness: true
 
   scope :created_today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) }
+
+  def self.signed_users(question)
+    question.question_users.each do |signin|
+      user = User.find(signin.user_id)
+      QuestionMailer.signed_users(user, question).deliver
+    end
+  end
 end
