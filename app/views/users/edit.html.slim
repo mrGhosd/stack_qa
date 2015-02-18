@@ -25,8 +25,8 @@
 
       .col-md-2
         .user-avatar
-          = image_tag @user.avatar.url || "default_user.png", size: "250", class: "img-thumbnail user-avatar"
-          = f.file_field :avatar
+          = image_tag @user.avatar.url || "default_user.png", size: "250", class: "img-thumbnail avatar"
+        = f.file_field :avatar, class: "user-image"
 
     .col-md-offset-1
       = f.submit "Сохранить", class: "btn btn-success"
