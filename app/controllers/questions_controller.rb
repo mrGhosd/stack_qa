@@ -61,7 +61,7 @@ class QuestionsController < ApplicationController
   end
 
   def widget_data
-    @widget = Question.order("created_at DESC").first(5)
+    @widget = Widget.last_created
   end
 
   def question_params

@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: exception.message
   end
   authorize_resource
+
+  def widget_data
+    Widget.switch_view(params[:current_filter], params[:direction])
+  end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   root "questions#index"
+  post "/widget", controller: :application, action: :widget_data
 
   concern :commentable do
     resources :comments
