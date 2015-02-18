@@ -54,8 +54,10 @@ describe AnswersController do
         expect(answer.text).to eq("1")
       end
 
-      it "return updated answer" do
+      it "return private_pub message, that contains the answer" do
+        allow(PrivatePub).to receive("publish_to").and_return(answer)
         put :update, question_id: question.id, id: answer.id, answer: attributes_for(:answer, text: "1")
+        binding.pry
         json = JSON.parse(response.body)
         json['created_at'] = json['created_at'].to_datetime
         json['updated_at'] = json['updated_at'].to_datetime
