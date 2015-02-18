@@ -2,7 +2,8 @@
   fieldset
     legend
       span= "Основная информация"
-      = link_to "", "#", remote: true, class: "btn btn-success glyphicon glyphicon-pencil btn-sm edit-user"
+      - if @user == current_user
+        = link_to "", "#", remote: true, class: "btn btn-success glyphicon glyphicon-pencil btn-sm edit-user", data: {user: @user.id}
     .col-md-10
       form.form-horizontal
         .form-group

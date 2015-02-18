@@ -1,0 +1,32 @@
+.user-edit-form
+  = form_for @user, html: {class: "form-horizontal"} do |f|
+    .row
+      .col-md-8
+        .form-group
+          label.col-md-4.control-label="Фамилия:"
+          .col-md-7
+            = f.text_field :surname, class: "form-control"
+        .form-group
+          label.col-md-4.control-label="Имя:"
+          .col-md-7
+            = f.text_field :name, class: "form-control"
+        .form-group
+          label.col-md-4.control-label="Email:"
+          .col-md-7
+            = f.text_field :email, class: "form-control"
+        .form-group
+          label.col-md-4.control-label="Дата рождения:"
+          .col-md-7
+            = f.text_field :date_of_birth, class: "form-control datepicker"
+        .form-group
+          label.col-md-4.control-label="Место рождения:"
+          .col-md-7
+            = f.text_field :place_of_birth, class: "form-control"
+
+      .col-md-2
+        .user-avatar
+          = image_tag @user.avatar.url || "default_user.png", size: "250", class: "img-thumbnail user-avatar"
+          = f.file_field :avatar
+
+    .col-md-offset-1
+      = f.submit "Сохранить", class: "btn btn-success"

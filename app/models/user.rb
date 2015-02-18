@@ -10,7 +10,8 @@ class User <ActiveRecord::Base
   has_many :comments
   has_many :question_users
 
-  validates :email, :password, presence: true
+  validates :email, presence: true
+  validates :password, presence: true, on: :create
   validates :email, uniqueness: true
 
   mount_uploader :avatar, AvatarUploader
