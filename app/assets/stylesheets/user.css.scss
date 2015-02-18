@@ -10,3 +10,15 @@
     font-style: italic;
   }
 }
+#profile{
+  fieldset{
+    legend {
+      *{
+        display: inline-block;
+      }
+      .edit-user {
+        float:right;
+      }
+    }
+  }
+}

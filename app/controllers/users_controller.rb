@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @questions = @user.questions
     @answers = @user.answers
+    @comments = @user.comments
   end
 
   def paginate_users_questions

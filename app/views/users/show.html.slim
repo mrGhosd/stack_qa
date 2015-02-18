@@ -10,9 +10,10 @@ ul.nav.nav-pills.profile-navigation
 
 .profile-pages
   #profile.active
-    = @user.email
+    = render "profile"
   #questions
     = render "user_questions"
   #answers
     = render "user_answers"
   #comments
+    = render "user_comments"

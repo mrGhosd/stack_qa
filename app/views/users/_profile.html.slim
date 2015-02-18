@@ -1,2 +1,30 @@
-fieldset
-  legend
+.row
+  fieldset
+    legend
+      span= "Основная информация"
+      = link_to "", "#", remote: true, class: "btn btn-success glyphicon glyphicon-pencil btn-sm edit-user"
+    .col-md-10
+      form.form-horizontal
+        .form-group
+          label.col-md-2.control-label= "Фамилия:"
+          .col-md-4
+            p= @user.surname || "-"
+        .form-group
+          label.col-md-2.control-label= "Имя:"
+          .col-md-4
+            p= @user.name || "-"
+        .form-group
+          label.col-md-2.control-label= "Email:"
+          .col-md-4
+            p= @user.email
+        .form-group
+          label.col-md-2.control-label= "Дата рождения:"
+          .col-md-4
+            p= @user.date_of_birth || "-"
+        .form-group
+          label.col-md-2.control-label= "Место рождения:"
+          .col-md-4
+            p= @user.place_of_birth || "-"
+    .col-md-2
+      .user-avatar
+        = image_tag @user.avatar.url || "default_user.png", size: "250", class: "img-thumbnail"

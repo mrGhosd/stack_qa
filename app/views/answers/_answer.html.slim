@@ -7,7 +7,6 @@
     - if current_user && answer.in?(current_user.answers)
         = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
         = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true
-
   .answer-comments-list
     - answer.comments.each do |comment|
       = render partial: "comments/comment", locals: { comment: comment }

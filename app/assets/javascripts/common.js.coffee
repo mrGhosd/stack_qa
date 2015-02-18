@@ -1,7 +1,7 @@
 loadCircle = (element, show)->
   if show
     $("body").css("opacity", 0.5)
-    $(".add-answer").after(element)
+    $("body").after(element)
   else
     $("body").css("opacity", 1)
     element.remove()
