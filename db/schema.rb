@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218182340) do
+ActiveRecord::Schema.define(version: 20150219002701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,11 +125,15 @@ ActiveRecord::Schema.define(version: 20150218182340) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "category_id"
+    t.integer  "rate",        default: 0,     null: false
+    t.integer  "views",       default: 0,     null: false
   end
 
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["is_closed"], name: "index_questions_on_is_closed", using: :btree
+  add_index "questions", ["rate"], name: "index_questions_on_rate", using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+  add_index "questions", ["views"], name: "index_questions_on_views", using: :btree
 
   create_table "redactor_assets", force: true do |t|
     t.string   "data_file_name",               null: false
