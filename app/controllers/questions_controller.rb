@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :widget_data, only: :index
 
   def index
-    @questions = Question.all
+    @questions = Question.top
   end
 
   def new
