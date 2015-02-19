@@ -7,6 +7,13 @@
         = link_to name, user_path(@question.user)
       span.question-time= @question.created_at.strftime("%H:%M:%I %d.%m.%Y")
     .row
+      .col-md-1
+        .rate-block
+          = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-up btn rate-move plus"
+          .rate-value
+            span= @question.rate
+          = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-down btn rate-move minus"
+
       .col-md-8
         .question-text
           = @question.text.html_safe
