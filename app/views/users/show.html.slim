@@ -1,19 +1,21 @@
 ul.nav.nav-pills.profile-navigation
   li.active
     = link_to "Профиль", "#", data: {page: "profile"}, remote: true
-  li
-    = link_to "Вопросы", "#", data: {page: "questions"}, remote: true
-  li
-    = link_to "Ответы", "#", data: {page: "answers"}, remote: true
-  li
-    = link_to "Комментарии", "#", data: {page: "comments"}, remote: true
+  - if @user == current_user
+    li
+      = link_to "Вопросы", "#", data: {page: "questions"}, remote: true
+    li
+      = link_to "Ответы", "#", data: {page: "answers"}, remote: true
+    li
+      = link_to "Комментарии", "#", data: {page: "comments"}, remote: true
 
 .profile-pages
   #profile.active
     = render "profile"
-  #questions
-    = render "user_questions"
-  #answers
-    = render "user_answers"
-  #comments
-    = render "user_comments"
+  - if @user == current_user
+    #questions
+      = render "user_questions"
+    #answers
+      = render "user_answers"
+    #comments
+      = render "user_comments"

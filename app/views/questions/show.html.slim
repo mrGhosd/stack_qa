@@ -2,7 +2,10 @@
   fieldset
     legend
       = @question.title
-      span.question-time= @question.created_at
+      span.question-author
+        - name = @question.user.surname.blank? ? @question.user.email : "#{@question.user.surname} #{@question.user.try(:name)}"
+        = link_to name, user_path(@question.user)
+      span.question-time= @question.created_at.strftime("%H:%M:%I %d.%m.%Y")
     .row
       .col-md-8
         .question-text
