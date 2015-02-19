@@ -15,8 +15,13 @@ class Question < ActiveRecord::Base
 
   end
 
-  def update_rating(rate)
-
+  def update_rating(user, rate)
+    if user.voted?(self, rate_value(rate))
+      errors[:was_voted] << true
+      false
+    else
+      self.update(rate: calc_rate(self, rate))
+    end
   end
 
   def self.signed_users(question)
@@ -27,4 +32,16 @@ class Question < ActiveRecord::Base
   end
 
   private
+
+  def rate_value(rate)
+    rate.eql?("plus") ? 1 : -1
+  end
+
+  def calc_rate(question, rate)
+    if rate.eql? "plus"
+      final_rate = question.rate += 1
+    else
+      final_rate = question.rate -= 1
+    end
+  end
 end

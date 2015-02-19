@@ -9,6 +9,7 @@ class User <ActiveRecord::Base
   has_many :answers
   has_many :comments
   has_many :question_users
+  has_many :votes
 
   validates :email, presence: true
   validates :password, presence: true, on: :create
@@ -33,6 +34,22 @@ class User <ActiveRecord::Base
       user.create_authorization(auth)
     end
     user
+  end
+
+  def voted?(question, value)
+    vote = self.votes.select{ |element| element.vote_id == question.id }[0]
+
+    if vote && vote.rate + value == 0
+      vote.destroy
+      return false
+    end
+
+    if vote
+      true
+    else
+      Vote.create(user_id: self.id, vote_id: question.id, vote_type: "Question", rate: value)
+      false
+    end
   end
 
   def create_authorization(auth)

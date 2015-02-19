@@ -15,10 +15,10 @@ class QuestionsController < ApplicationController
   end
 
   def rating
-    if @question.update(rate: calc_rate(@question, params[:rate]))
+    if @question.update_rating(current_user, params[:rate])
       render json: {rate: @question.rate}, status: :ok
     else
-      render json: @question.errors.to_json, status: :unprocessible_entity
+      render json: @question.errors.to_json, status: :forbidden
     end
   end
 
@@ -76,11 +76,4 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:title, :text, :user_id, :category_id)
   end
 
-  def calc_rate(question, rate)
-    if rate.eql? "plus"
-      final_rate = question.rate += 1
-    else
-      final_rate = question.rate -= 1
-    end
-  end
 end
