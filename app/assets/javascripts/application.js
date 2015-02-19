@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery.turbolinks
+//= require jquery-ui
 //= require jquery_ujs
 //= require jquery.remotipart
 //= require private_pub
