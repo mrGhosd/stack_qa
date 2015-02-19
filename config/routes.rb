@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
   resources :questions, concerns: :commentable do
     post :sign_in_question, on: :member
+    post :rating, on: :member
     resources :answers, concerns: :commentable
   end
 

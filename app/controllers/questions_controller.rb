@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :define_question, only: [:edit, :show, :update, :destroy, :sign_in_question]
+  before_action :define_question, only: [:edit, :show, :update, :destroy, :sign_in_question, :rating]
   before_action :widget_data, only: :index
 
   def index
@@ -12,6 +12,14 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+  end
+
+  def rating
+    if @question.update(rate: calc_rate(@question, params[:rate]))
+      render json: {rate: @question.rate}, status: :ok
+    else
+      render json: @question.errors.to_json, status: :unprocessible_entity
+    end
   end
 
   def show
@@ -66,5 +74,13 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :user_id, :category_id)
+  end
+
+  def calc_rate(question, rate)
+    if rate.eql? "plus"
+      final_rate = question.rate += 1
+    else
+      final_rate = question.rate -= 1
+    end
   end
 end

@@ -8,11 +8,11 @@
       span.question-time= @question.created_at.strftime("%H:%M:%I %d.%m.%Y")
     .row
       .col-md-1
-        .rate-block
-          = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-up btn rate-move plus"
+        .rate-block data-question="#{@question.id}"
+          = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-up btn rate-move", data: {rate: "plus"}
           .rate-value
             span= @question.rate
-          = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-down btn rate-move minus"
+          = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-down btn rate-move", data: {rate: "minus"}
 
       .col-md-8
         .question-text

@@ -8,6 +8,8 @@ $ ->
       success: ->
         link.fadeOut('slow')
 
+  $(".rate-move").click ->
+    questionRate($(this))
 
   PrivatePub.subscribe "/questions", (data, channel) ->
     question = $.parseJSON(data['question'])
@@ -60,7 +62,17 @@ signInQuestion = (button)->
       showMessage(response.error)
 
 
-
+questionRate = (button) ->
+  question = $(button).closest(".rate-block").data("question")
+  rate = $(button).data("rate")
+  $.ajax "/questions/#{question}/rating",
+    type: "POST"
+    data: { rate: rate }
+    success: (response, request) ->
+      $(".rate-value span").html(response.rate)
+    error: (response, request) ->
+      console.log response
+      console.log request
 showMessage = (text) ->
   $("body").prepend JST["templates/modal"]
   $("#messageModal .modal-body").html(text)
