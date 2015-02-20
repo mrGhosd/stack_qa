@@ -6,7 +6,8 @@ $ ->
       type: "GET"
       data: {query: query}
       success: (request, response)->
-        $(".search-list").append(request)
+        if request.length > 0
+          $(".search-list").show().append(request)
         console.log request
         console.log response
       error: (request, response) ->
@@ -15,5 +16,6 @@ $ ->
 
 
   $("*").click ->
-   $(".search-item").remove()
+    $(".search-list").hide()
+    $(".search-item").remove()
 
