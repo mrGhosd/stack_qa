@@ -7,6 +7,12 @@ module QuestionsHelper
     case classname.to_s
       when "Question"
         "Вопрос"
+      when "Answer"
+        "Ответ"
+      when "Comment"
+        "Комментарий"
+      when "User"
+        "Пользователь"
     end
   end
 

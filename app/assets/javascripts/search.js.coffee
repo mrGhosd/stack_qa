@@ -1,10 +1,11 @@
 $ ->
   $(".search-control .search-link").click ->
     $(".search-item").remove()
+    filter = $("#search_filter").val()
     query = $("#search").val()
     $.ajax "/search",
       type: "GET"
-      data: {query: query}
+      data: {query: query, filter: filter}
       success: (request, response)->
         if request.length > 0
           $(".search-list").show().append(request)

@@ -20,7 +20,7 @@ html
             .search-control
               = select_tag "search_filter", options_for_select([["Без фильтра",""],
                                                                  ["Вопросы", "Question"], ["Комментарии", "Comment"],
-                                                               ["Ответы", "Answer"], ["Пользователи", "User"]])
+                                                               ["Ответы", "Answer"], ["Пользователи", "User"]]), class: "form-control"
               = search_field_tag 'search', nil, class: 'form-control'
               = link_to "Поиск", "#", remote: true, class: 'btn btn-default search-link'
               .search-list

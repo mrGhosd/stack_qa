@@ -1,4 +1,19 @@
 .search-item
-  .type= search_label(result.class)
-  .title
-    = link_to result.title, question_path(result)
+  - if result.class == Question
+    .type= search_label(result.class)
+    .title
+      = link_to result.title, question_path(result)
+  - if result.class == Answer
+    .type= search_label(result.class)
+    .text
+      = link_to result.text.first(10), question_path(result.question_id)
+  - if result.class == Comment
+    .type= search_label(result.class)
+    .text
+      - path = result.commentable_type == "Question" ? Question.find(result.commentable_id) : Answer.find(result.commentable_id).question
+      = link_to result.text.first(10), question_path(path)
+  - if result.class == User
+    .type= search_label(result.class)
+    .email
+      = link_to result.email, user_path(result)
+
