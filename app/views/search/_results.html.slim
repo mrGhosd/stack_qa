@@ -10,6 +10,7 @@
   - if result.class == Comment
     .type= search_label(result.class)
     .text
+      = binding.pry
       - path = result.commentable_type == "Question" ? Question.find(result.commentable_id) : Answer.find(result.commentable_id).question
       = link_to result.text.first(10), question_path(path)
   - if result.class == User
