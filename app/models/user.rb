@@ -36,22 +36,6 @@ class User <ActiveRecord::Base
     user
   end
 
-  def voted?(question, value)
-    vote = self.votes.select{ |element| element.vote_id == question.id }[0]
-
-    if vote && vote.rate + value == 0
-      vote.destroy
-      return false
-    end
-
-    if vote
-      true
-    else
-      Vote.create(user_id: self.id, vote_id: question.id, vote_type: "Question", rate: value)
-      false
-    end
-  end
-
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
   end
