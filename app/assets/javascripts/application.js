@@ -26,6 +26,7 @@
 //= require modal_window
 //= require user
 //= require common
+//= require rate
 //= require_tree .
 
 $(document).on("hidden.bs.modal", function(){

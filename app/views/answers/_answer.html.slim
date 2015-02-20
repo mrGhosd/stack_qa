@@ -1,12 +1,20 @@
-.answer-item data={answer: answer.id}
-  span.text= answer.text.html_safe
-  span.time= answer.created_at.strftime("%H:%M:%S %d.%m.%Y")
-  .answer-actions
-    - if current_user
-      = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: answer.question_id, answer: answer.id, type: "Answer"}, remote: true
-    - if current_user && answer.in?(current_user.answers)
-        = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
-        = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true
-  .answer-comments-list
-    - answer.comments.each do |comment|
-      = render partial: "comments/comment", locals: { comment: comment }
+.row
+  .col-md-1
+    .rate-block data-question="#{@question.id}" data-answer="#{answer.id}"
+      = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-up btn rate-move", data: {rate: "plus"}
+      .rate-value
+        span= answer.rate
+      = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-down btn rate-move", data: {rate: "minus"}
+  .col-md-10
+    .answer-item data={answer: answer.id}
+      span.text= answer.text.html_safe
+      span.time= answer.created_at.strftime("%H:%M:%S %d.%m.%Y")
+      .answer-actions
+        - if current_user
+          = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: answer.question_id, answer: answer.id, type: "Answer"}, remote: true
+        - if current_user && answer.in?(current_user.answers)
+            = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
+            = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true
+      .answer-comments-list
+        - answer.comments.each do |comment|
+          = render partial: "comments/comment", locals: { comment: comment }

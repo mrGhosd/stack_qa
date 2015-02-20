@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  include Rating
 
   def new
     @question = Question.find(params[:question_id])
