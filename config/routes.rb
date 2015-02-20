@@ -17,14 +17,18 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  concern :rating do
+    post :rate
+  end
+
   resources :categories
   resources :users, except: [:new, :create] do
     post :paginate_users_questions, on: :member
   end
-  resources :questions, concerns: :commentable do
+  resources :questions, concerns: [:commentable, :rating] do
     post :sign_in_question, on: :member
     post :rating, on: :member
-    resources :answers, concerns: :commentable
+    resources :answers, concerns: [:commentable, :rating]
   end
 
   namespace :admin do

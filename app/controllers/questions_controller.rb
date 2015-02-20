@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :define_question, only: [:edit, :show, :update, :destroy, :sign_in_question, :rating]
   before_action :widget_data, only: :index
+  include Rating
 
   def index
     @questions = Question.top

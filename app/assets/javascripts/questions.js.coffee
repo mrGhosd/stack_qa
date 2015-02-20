@@ -65,7 +65,7 @@ signInQuestion = (button)->
 questionRate = (button) ->
   question = $(button).closest(".rate-block").data("question")
   rate = $(button).data("rate")
-  $.ajax "/questions/#{question}/rating",
+  $.ajax "/questions/#{question}/rate",
     type: "POST"
     data: { rate: rate }
     success: (response, request) ->
