@@ -1,0 +1,13 @@
+.search-control{
+  position: relative;
+}
+.search-list{
+  position: absolute;
+  padding: 5px;
+  .search-item {
+    margin-top: 10px;
+    background-color: #dddddd;
+    border-radius: 4px;
+  }
+
+}

@@ -11,7 +11,4 @@ class ApplicationController < ActionController::Base
     Widget.switch_view(params[:current_filter], params[:direction])
   end
 
-  def search
-
-  end
 end

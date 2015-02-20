@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   root "questions#index"
   post "/widget", controller: :application, action: :widget_data
-  get "/search", controller: :application, action: :search
+  get "/search", to: "search#index"
 
   concern :commentable do
     resources :comments

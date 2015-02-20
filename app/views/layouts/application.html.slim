@@ -15,9 +15,12 @@ html
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             li= link_to "Категории", categories_path
-            li= link_to "FAQ", "#"
             li = link_to "Админка", admin_categories_path if current_user && current_user.is_admin?
-          .navbar-form.navbar-right
+          .navbar-form.navbar-right.content-actions
+            .search-control
+              = search_field_tag 'search', nil, class: 'form-control'
+              = link_to "Поиск", "#", remote: true, class: 'btn btn-default search-link'
+              .search-list
             .authentication-links
               - if current_user
                 = link_to user_path(current_user), class: 'user_profile_link' do

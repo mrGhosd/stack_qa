@@ -57,3 +57,11 @@ body>.alert{
     }
   }
 }
+.content-actions{
+  &>div{
+    display: inline-block;
+  }
+  .authentication-links{
+    margin-left:300px;
+  }
+}
