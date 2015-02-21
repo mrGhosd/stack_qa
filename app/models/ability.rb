@@ -22,9 +22,11 @@ class Ability
                   RedactorRailsPictureUploader,
                   RedactorRails::Document,
                   RedactorRails::Picture, RedactorRails::Asset]
-    can [:sign_in_question, :rating], Question
+    can [:sign_in_question, :rate], Question
     can [:create, :update, :destroy], [Question, Answer, Comment], user: user
     cannot [:create, :update, :destroy], Category
+    can [:edit, :update], User, user: user
+    can :read, User
   end
 
   def admin_abilities
