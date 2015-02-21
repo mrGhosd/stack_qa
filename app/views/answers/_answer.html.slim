@@ -1,6 +1,6 @@
 .row
   .col-md-1
-    .rate-block data-question="#{@question.id}" data-answer="#{answer.id}"
+    .rate-block data-question="#{answer.question.id}" data-answer="#{answer.id}"
       = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-up btn rate-move", data: {rate: "plus"}
       .rate-value
         span= answer.rate

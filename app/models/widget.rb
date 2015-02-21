@@ -1,7 +1,6 @@
 class Widget
 
   def self.switch_view(current_filter, direction)
-    binding.pry
     hash = Hash[hash_values.map.with_index.to_a]
   end
 
