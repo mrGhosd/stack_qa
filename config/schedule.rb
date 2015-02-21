@@ -13,8 +13,8 @@
 #   rake "some:great:rake:task"
 # end
 #
-every 1.minute do
-  runner "User.send_daily_email"
+every 60.minutes do
+  rake "ts:index"
 end
 
 # Learn more: http://github.com/javan/whenever
