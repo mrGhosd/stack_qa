@@ -18,6 +18,10 @@ class Ability
 
   def current_user_abilities
     guest_abilities
+    can :manage, [RedactorRailsDocumentUploader,
+                  RedactorRailsPictureUploader,
+                  RedactorRails::Document,
+                  RedactorRails::Picture, RedactorRails::Asset]
     can [:sign_in_question, :rating], Question
     can [:create, :update, :destroy], [Question, Answer, Comment], user: user
     cannot [:create, :update, :destroy], Category
