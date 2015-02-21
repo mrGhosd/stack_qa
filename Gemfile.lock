@@ -104,6 +104,9 @@ GEM
     diff-lcs (1.2.5)
     doorkeeper (2.1.0)
       railties (>= 3.1)
+    dotenv (1.0.2)
+    dotenv-deployment (0.2.0)
+      dotenv (~> 1.0)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -170,6 +173,7 @@ GEM
     letter_opener_web (1.2.3)
       letter_opener (~> 1.0)
       rails (>= 3.2)
+    libv8 (3.16.14.7)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -254,6 +258,7 @@ GEM
     redis (3.2.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
+    ref (1.0.5)
     remotipart (1.2.1)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
@@ -329,6 +334,9 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.7.5)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
@@ -381,6 +389,8 @@ DEPENDENCIES
   database_cleaner
   devise
   doorkeeper
+  dotenv
+  dotenv-deployment
   eco
   factory_girl_rails
   jbuilder (~> 2.0)
@@ -414,6 +424,7 @@ DEPENDENCIES
   sidetiq
   slim-rails
   spring
+  therubyracer
   thin
   thinking-sphinx
   turbolinks
