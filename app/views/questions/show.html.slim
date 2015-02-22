@@ -25,10 +25,12 @@
         = link_to "Подписаться на обновления", "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
     .comments-list
       - @question.comments.each do |comment|
-        = render partial: 'comments/comment', locals: {comment: comment}
+        - cache comment do
+          = render partial: 'comments/comment', locals: {comment: comment}
     .answers-list data={question: @question.id}
       - @question.answers.each do |answer|
-        = render partial: 'answers/answer', locals: { answer: answer }
+        - cache answer do
+          = render partial: 'answers/answer', locals: { answer: answer }
 
     .actions-panel
       - if current_user && @question.in?(current_user.questions)
