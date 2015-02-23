@@ -21,6 +21,14 @@ class User <ActiveRecord::Base
     self.role == 'admin'
   end
 
+  def correct_naming
+    if self.surname && self.name
+      "#{self.surname} #{self.name}"
+    else
+      "#{self.email}"
+    end
+  end
+
   def self.from_omniauth(auth)
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization

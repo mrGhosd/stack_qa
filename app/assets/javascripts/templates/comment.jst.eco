@@ -1,3 +1,7 @@
-<div class="comment-item">
-  <div class="comment-text"><%- @comment.text %></div>
+<div class="comment-item" data-comment="<%= @comment.id %>">
+  <div class="comment-text-body">
+    <span class="text"><%- @comment.text %></span>
+    <span class="comment-author"> &mdash; <a href="/users/<%= @comment.user_id %>"><%= @comment.author %></a></span>
+    <span class="comment-date"> в <%= @comment.humanized_date %></span>
+  </div>
 </div>

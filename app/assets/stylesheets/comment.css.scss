@@ -2,14 +2,16 @@
   margin-top: 20px;
 }
 .comment-item{
-  border: 1px solid #BBBBBB;
-  border-radius: 4px;
-  padding: 2px;
-  min-height: 52px;
+  &>div{
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 13px;
+  }
+  min-height: 30px;
   margin-top: 5px;
-  .comment-text{
+  .comment-text-body{
     float:left;
-    padding:10px;
+    margin-top: 2px;
     font-style: italic;
   }
   .comment-right-part{

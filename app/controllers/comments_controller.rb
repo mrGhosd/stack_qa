@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     end
 
     if comment.save
-      PrivatePub.publish_to message, comment: comment.to_json
+      PrivatePub.publish_to message, comment: comment.as_json(methods: [:author, :humanized_date])
       render nothing: true
     else
       render json: comment.errors.to_json, status: :unprocessible_entity
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
                 else
                   "/questions/#{comment.commentable_id}/comments/edit"
                 end
-      PrivatePub.publish_to message, comment: comment.to_json
+      PrivatePub.publish_to message, comment: comment.as_json(methods: [:author, :humanized_date])
       render nothing: true
     else
       render json: comment.errors.to_json, status: :unprocessible_entity
@@ -38,6 +38,7 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def comment_params
     params.require(:comment).permit(:user_id, :text)
   end

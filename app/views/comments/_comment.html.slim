@@ -1,7 +1,9 @@
 .comment-item data={comment: comment.id}
-  .comment-text= comment.text
+  .comment-text-body
+    span.text= comment.text
+    span.comment-author= " &mdash; #{link_to username_for_comment(comment.user), user_path(comment.user)}".html_safe
+    span.comment-date= " в #{comment.created_at.strftime("%H:%M:%S %d.%m.%Y")}"
   .comment-right-part
-    .comment-date= comment.created_at.strftime("%H:%M:%S %d.%m.%Y")
     - if current_user && comment.in?(current_user.comments)
       .comment-actions
         = link_to "", "#", class: 'btn btn-success btn-xs edit-comment glyphicon glyphicon-pencil',

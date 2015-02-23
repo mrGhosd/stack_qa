@@ -37,13 +37,14 @@ $ ->
 
 
   PrivatePub.subscribe "/questions/#{question}/answers/comments/create", (data, channel) ->
-    comment = $.parseJSON(data['comment'])
-    console.log comment
-    $.each($(".answer-item"), (key, value) ->
-      if comment.commentable_id == $(value).data("answer")
-        $(".comment-form").remove()
-        $(value).find(".answer-comments-list").prepend JST["templates/comment"](comment: comment)
-    )
+    comment = data.comment
+    $(".comment-form").remove()
+    $(".answer-comments-list").prepend JST["templates/comment"](comment: comment)
+#    $.each($(".answer-item"), (key, value) ->
+#      console.log key + " " + value
+#      if comment.commentable_id == $(value).data("answer")
+
+#    )
 
 updateComment = (comment)->
   $.each($(".comment-item"), (key, value) ->
