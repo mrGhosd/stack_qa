@@ -24,6 +24,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question.update(views: @question.views += 1)
   end
 
   def create
