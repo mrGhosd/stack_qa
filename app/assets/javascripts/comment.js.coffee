@@ -22,29 +22,25 @@ $ ->
 
   question = $(".answers-list").data("question")
   PrivatePub.subscribe "/questions/#{question}/comments", (data, channel) ->
-    comment = $.parseJSON(data['comment'])
-    $(".comments-list").prepend JST["templates/comment"](comment: comment)
+    comment = data.comment
+    template = JST["templates/comment"](comment: comment)
+    $(".comments-list").prepend($(template).effect("highlight", {}, 1500))
     $(".comment-form").remove()
 
   PrivatePub.subscribe "/questions/#{question}/answers/comments/edit", (data, channel) ->
-    comment = $.parseJSON(data['comment'])
+    comment = data.comment
     updateComment(comment)
 
 
   PrivatePub.subscribe "/questions/#{question}/comments/edit", (data, channel) ->
-    comment = $.parseJSON(data['comment'])
+    comment = data.comment
     updateComment(comment)
 
 
   PrivatePub.subscribe "/questions/#{question}/answers/comments/create", (data, channel) ->
     comment = data.comment
     $(".comment-form").remove()
-    $(".answer-comments-list").prepend JST["templates/comment"](comment: comment)
-#    $.each($(".answer-item"), (key, value) ->
-#      console.log key + " " + value
-#      if comment.commentable_id == $(value).data("answer")
-
-#    )
+    $(".answer-comments-list").prepend(JST["templates/comment"](comment: comment)).effect("highlight", {}, 1500);
 
 updateComment = (comment)->
   $.each($(".comment-item"), (key, value) ->
@@ -132,7 +128,7 @@ removeComment = (button) ->
 editComment = (button)->
   type = $(button).data("type")
   comment = $(button).data("comment")
-  text = $(button).closest(".comment-item").find(".comment-text").text().trim()
+  text = $(button).closest(".comment-item").find(".comment-text-body span.text").text().trim()
   if $(".comment-form").length > 0 || $(".answer-form.row").length > 0
     $(".comment-form").remove()
     $(".answer-form.row").remove()
