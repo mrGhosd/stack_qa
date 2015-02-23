@@ -18,4 +18,10 @@ class Question < ActiveRecord::Base
       QuestionMailer.signed_users(user, question).deliver
     end
   end
+
+  def comments_sum
+    comments = self.comments.count
+    comments += self.answers.map{|c| c.comments.count }.inject{|sum, x| sum += x} unless self.answers.blank?
+    comments
+  end
 end
