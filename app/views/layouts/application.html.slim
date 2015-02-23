@@ -7,7 +7,7 @@ html
     = csrf_meta_tags
   body
     = render template: "shared/modal_window"
-    .navbar.navbar-inverse.navbar-fixed-top
+    .navbar.navbar-inverse.navbar-fixed-top role="navigation"
       .container
         .navbar-header
           .logo
@@ -40,4 +40,5 @@ html
         setTimeout("$('.authentication-links a.auth').click()", 500);
 
     .container
-      = yield
+      .starter-template
+        = yield

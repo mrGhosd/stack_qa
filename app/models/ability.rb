@@ -24,6 +24,9 @@ class Ability
                   RedactorRails::Picture, RedactorRails::Asset]
     can [:sign_in_question, :rate], Question
     can :create, [Question, Answer, Comment]
+    can :helpfull, Question do |resource|
+      resource.answer.user_id == user.id
+    end
     can [:edit, :update, :destroy], [Question, Answer, Comment], user: user
     cannot [:create, :update, :destroy], Category
     can [:edit, :update], User, user: user

@@ -34,6 +34,14 @@ class AnswersController < ApplicationController
     end
   end
 
+  def helpfull
+    answer = Answer.find(params[:id])
+    question = answer.question
+    answer.update(is_helpfull: true)
+    question.update(is_closed: true)
+    head :ok
+  end
+
   def destroy
     answer = Answer.find(params[:id])
     PrivatePub.publish_to "/questions/#{answer.question_id}/answers/destroy", answer_id: params[:id]

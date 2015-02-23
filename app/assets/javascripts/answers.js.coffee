@@ -69,7 +69,10 @@ $ ->
     $.ajax "/questions/#{question}/answers/#{answer}",
       type: "DELETE"
       success: ->
-#        $(item).fadeOut('slow')
+        $(item).fadeOut('slow')
+
+  $(".answer-is-helpfull").click ->
+    markAnswerAsHelpful($(this))
 
   question = $(".answers-list").data("question")
   PrivatePub.subscribe "/questions/#{question}/answers", (data, channel) ->
@@ -80,7 +83,7 @@ $ ->
   PrivatePub.subscribe "/questions/#{question}/answers/edit", (data, channel) ->
     answer = $.parseJSON(data['answer'])
     $(".edit_answer").remove()
-    $("[data-answer=#{answer.id}]").fadeOut('slow').replaceWith(JST["templates/answer"](answer: answer)).fadeIn('slow')
+    $("[data-answer=#{answer.id}]").closest('.row.main-answer-item').fadeOut('slow').replaceWith(JST["templates/answer"](answer: answer)).fadeIn('slow')
 
   PrivatePub.subscribe "/questions/#{question}/answers/destroy", (data, channel) ->
     answer_id = data.answer_id
@@ -102,3 +105,15 @@ $(document).delegate("#new_answer", "submit", (event)->
       $("#new_answer textarea").addClass("error")
       $("#new_answer textarea").parent().append("<div class='error-text'>#{object.text[0]}</div>")
 )
+markAnswerAsHelpful = (button) ->
+  question = $(button).data("question")
+  answer = $(button).data("answer")
+  $.ajax "/questions/#{question}/answers/#{answer}/helpfull",
+    type: "POST"
+    success: (response, request) ->
+      mark = $("<div class='correct-answer-icon'></div>")
+      $(button).closest(".row").find(".rate-block").after(mark);
+      $(".answer-is-helpfull").fadeOut()
+    error: (response, request)->
+      console.log response
+      console.log request

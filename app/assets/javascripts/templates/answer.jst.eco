@@ -1,8 +1,21 @@
-<div class="answer-item">
-  <span class="text"><%- @answer.text %></span>
-  <span class="time"><%= @answer.created_at %></span>
-  <div class="answers-actions">
-    <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-info edit-answer glyphicon glyphicon-pencil"></a>
-    <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-danger remove-answer glyphicon glyphicon-remove"></a>
-  </div>
+<div class="row main-answer-item">
+    <div class="col-md-1">
+      <div class="rate-block" data-question="<%= @answer.question_id %>" data-answer="<%= @answer.id %>">
+        <a href="#" data-remote="true" class="glyphicon glyphicon-chevron-up btn rate-move" data-rate="plus"></a>
+        <div class="rate-value">
+          <span><%= @answer.rate %></span>
+        </div>
+        <a href="#" data-remote="true" class="glyphicon glyphicon-chevron-down btn rate-move" data-rate="minus"></a>
+      </div>
+    </div>
+    <div class="col-md-10">
+        <div class="answer-item" data-answer="<%= @answer.id %>">
+          <span class="text"><%- @answer.text %></span>
+          <span class="time"><%= @answer.created_at %></span>
+          <div class="answers-actions">
+            <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-info edit-answer glyphicon glyphicon-pencil"></a>
+            <a href="#" data-remote="true" data-answer="<%= @answer.id %>" data-question="<%= @answer.question_id %>" class="btn btn-danger remove-answer glyphicon glyphicon-remove"></a>
+          </div>
+        </div>
+    </div>
 </div>

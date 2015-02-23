@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   resources :questions, concerns: [:commentable, :rating] do
     post :sign_in_question, on: :member
     post :rating, on: :member
-    resources :answers, concerns: [:commentable, :rating]
+    resources :answers, concerns: [:commentable, :rating] do
+      post :helpfull, on: :member
+    end
   end
 
   namespace :admin do
