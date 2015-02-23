@@ -12,6 +12,7 @@
       .answer-actions
         - if current_user
           = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: answer.question_id, answer: answer.id, type: "Answer"}, remote: true
+          = link_to "", "#", class: "glyphicon glyphicon-ok btn btn-success answer-is-helpfull", data: {answer: answer.id}, remote: true
         - if current_user && answer.in?(current_user.answers)
             = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
             = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true

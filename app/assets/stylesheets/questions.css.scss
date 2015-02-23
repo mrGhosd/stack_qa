@@ -19,6 +19,12 @@
 .question-show{
   legend{
     position: relative;
+    span.title {
+      word-break: break-all;
+    }
+    span.question-author{
+      font-size: 15px;
+    }
   }
   .question-time{
     font-size: 13px;
@@ -38,4 +44,9 @@
   }
 }
 .question-show{
+}
+.question-action{
+  a{
+    margin-right: 10px;
+  }
 }
