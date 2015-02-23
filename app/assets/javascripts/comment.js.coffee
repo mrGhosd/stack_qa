@@ -46,7 +46,7 @@ updateComment = (comment)->
   $.each($(".comment-item"), (key, value) ->
     if $(value).data("comment") == comment.id
       template = JST["templates/comment"](comment: comment)
-      $(value).after template
+      $(value).after($(template).effect("highlight", {}, 1500))
       $(value).remove()
       $(".comment-form").remove()
   )
