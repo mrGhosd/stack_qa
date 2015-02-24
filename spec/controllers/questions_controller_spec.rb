@@ -169,4 +169,23 @@ describe QuestionsController do
       end
     end
   end
+
+  describe "POST #sign_in_question" do
+    context "user has signed up on question" do
+      let!(:question_user) { create :question_user, user_id: subject.current_user.id, question_id: question.id }
+      it "return json with message, that you alerady signed up on question update" do
+        post :sign_in_question, id: question.id
+        expect(response.body).to eq({message: "Вы уже подписаны на данное обновление"}.to_json)
+      end
+    end
+
+    context "user hasn't signed up on question" do
+      context "question_user was created" do
+        it "return json with message, that you have been signed up to question's updates" do
+          post :sign_in_question, id: question.id
+          expect(response.body).to eq({message: "Вы подписались на данный вопрос"}.to_json)
+        end
+      end
+    end
+  end
 end
