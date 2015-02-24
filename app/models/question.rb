@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
   has_many :question_users
   validates :title, :text, presence: true
   validates :title, uniqueness: true
-
+  include ModelRate
   include QuestionsHelper
 
   scope :created_today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) }
