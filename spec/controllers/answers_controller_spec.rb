@@ -107,4 +107,69 @@ describe AnswersController do
       expect(response.status).to eq(200)
     end
   end
+
+  describe "POST #rate" do
+    context "positive rate" do
+      context "user doesn't voted on this answer" do
+        it "increase answer's rate" do
+          binding.pry
+          post :rate, question_id: question.id, answer_id: answer.id, rate: "plus"
+          answer.reload
+          expect(answer.rate).to eq 1
+        end
+      end
+
+      context "user voted on this question, but negative" do
+        let!(:vote) { create :vote, user_id: subject.current_user.id, vote_id: question.id, vote_type: "Question", rate: -1 }
+        before { question.update(rate: vote.rate) }
+        it "increase question's rate" do
+          post :rate, question_id: question.id, rate: "plus"
+          question.reload
+          expect(question.rate).to eq 0
+        end
+      end
+
+      context "user voted this question positive" do
+        let!(:vote) { create :vote, user_id: subject.current_user.id, vote_id: question.id, vote_type: "Question", rate: 1 }
+        before { question.update(rate: vote.rate) }
+        it "doesn't increase a question's rate" do
+          post :rate, question_id: question.id, rate: "plus"
+          question.reload
+          expect(question.rate).to eq 1
+        end
+      end
+    end
+
+    context "negative rate" do
+      context "user doesn't voted on this answer" do
+        it "decrease answer's rate" do
+          post :rate, question_id: question.id, rate: "minus"
+          question.reload
+          expect(question.rate).to eq -1
+        end
+      end
+
+      context "user voted on this question positive" do
+        let!(:vote) { create :vote, user_id: subject.current_user.id, vote_id: question.id, vote_type: "Question", rate: 1 }
+        before { question.update(rate: vote.rate) }
+
+        it "decrease question's rate" do
+          post :rate, question_id: question.id, rate: "minus"
+          question.reload
+          expect(question.rate).to eq 0
+        end
+      end
+
+      context "user vote on this question negative" do
+        let!(:vote) { create :vote, user_id: subject.current_user.id, vote_id: question.id, vote_type: "Question", rate: -1 }
+        before { question.update(rate: vote.rate) }
+
+        it "decrease question's rate" do
+          post :rate, question_id: question.id, rate: "minus"
+          question.reload
+          expect(question.rate).to eq question.rate
+        end
+      end
+    end
+  end
 end
