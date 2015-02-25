@@ -53,4 +53,21 @@ class User <ActiveRecord::Base
       DailyMailer.digest(user).deliver
     end
   end
+
+  def has_voted?(object)
+    vote = self.votes.find_by(vote_id: object.id, vote_type: object.class.to_s)
+    vote ? true : false
+    # if vote && vote.rate + value == 0
+    #   vote.destroy
+    #   return false
+    # end
+
+    # if vote
+    #   true
+    # else
+      # Vote.create(user_id: self.id, vote_id: object.id, vote_type: object.class.to_s, rate: value)
+    #   false
+    # end
+  end
+
 end
