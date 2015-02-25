@@ -4,7 +4,6 @@ module ModelRate
       self.errors[:was_voted] << true
       false
     else
-      binding.pry
       vote_exists?(user) ? update_vote(user, rate) : create_vote(user, calc_rate(rate))
       self.update(rate: calc_rate(rate))
     end
