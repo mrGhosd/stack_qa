@@ -10,10 +10,13 @@ class User <ActiveRecord::Base
   has_many :comments
   has_many :question_users
   has_many :votes
+  has_one :statistic
 
   validates :email, presence: true
   validates :password, presence: true, on: :create
   validates :email, uniqueness: true
+
+  after_create :create_statistic
 
   mount_uploader :avatar, AvatarUploader
 
@@ -57,5 +60,11 @@ class User <ActiveRecord::Base
   def has_voted?(object)
     vote = self.votes.find_by(vote_id: object.id, vote_type: object.class.to_s)
     vote ? true : false
+  end
+
+  private
+
+  def create_statistic
+    Statistic.create!(user_id: self.id)
   end
 end

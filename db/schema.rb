@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221160651) do
+ActiveRecord::Schema.define(version: 20150226222124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,22 @@ ActiveRecord::Schema.define(version: 20150221160651) do
 
   add_index "redactor_assets", ["assetable_type", "assetable_id"], name: "idx_redactor_assetable", using: :btree
   add_index "redactor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_redactor_assetable_type", using: :btree
+
+  create_table "statistics", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "rate",                          default: 0
+    t.integer  "answers_count",                 default: 0
+    t.integer  "questions_positive_rate_count", default: 0
+    t.integer  "questions_negative_rate_count", default: 0
+    t.integer  "answers_positive_rate_count",   default: 0
+    t.integer  "answers_negative_rate_count",   default: 0
+    t.integer  "helpfull_answers_count",        default: 0
+    t.integer  "first_answers_count",           default: 0
+    t.integer  "first_self_answers_count",      default: 0
+    t.integer  "self_answers_count",            default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "surname"
