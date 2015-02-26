@@ -22,7 +22,8 @@ class Ability
                   RedactorRailsPictureUploader,
                   RedactorRails::Document,
                   RedactorRails::Picture, RedactorRails::Asset]
-    can [:sign_in_question, :rate], Question
+    can [:sign_in_question], Question
+    can :rate, [Question, Answer]
     can :create, [Question, Answer, Comment]
     can :helpfull, Question do |resource|
       resource.answer.user_id == user.id
