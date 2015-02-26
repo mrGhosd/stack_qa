@@ -2,7 +2,6 @@ $ ->
   $(".rate-move").click ->
     changeRate($(this))
 
-
 changeRate = (button) ->
   question = $(button).closest(".rate-block").data("question")
   answer = $(button).closest(".rate-block").data("answer")

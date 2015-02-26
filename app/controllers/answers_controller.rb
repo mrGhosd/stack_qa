@@ -37,9 +37,13 @@ class AnswersController < ApplicationController
   def helpfull
     answer = Answer.find(params[:id])
     question = answer.question
-    answer.update(is_helpfull: true)
-    question.update(is_closed: true)
-    head :ok
+    if answer.is_helpfull || question.is_closed
+      head :unprocessible_entity
+    else
+      answer.update(is_helpfull: true)
+      question.update(is_closed: true)
+      head :ok
+    end
   end
 
   def destroy
