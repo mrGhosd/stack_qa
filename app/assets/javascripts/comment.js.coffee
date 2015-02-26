@@ -39,8 +39,10 @@ $ ->
 
   PrivatePub.subscribe "/questions/#{question}/answers/comments/create", (data, channel) ->
     comment = data.comment
+    console.log comment.commentable_id
     $(".comment-form").remove()
-    $(".answer-comments-list").prepend(JST["templates/comment"](comment: comment)).effect("highlight", {}, 1500);
+    template = JST["templates/comment"](comment: comment)
+    $(".answer-item[data-answer=#{comment.commentable_id}]").parent().find(".answer-comments-list").prepend($(template).effect("highlight", {}, 1500))
 
 updateComment = (comment)->
   $.each($(".comment-item"), (key, value) ->
@@ -115,8 +117,6 @@ removeComment = (button) ->
     url = "/questions/#{question}/answers/#{answer}/comments/#{comment}"
   else if type == "Question"
     url = "/questions/#{question}/comments/#{comment}"
-
-  console.log url
 
   $.ajax url,
     type: "DELETE"

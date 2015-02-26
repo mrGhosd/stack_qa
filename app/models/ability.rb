@@ -25,8 +25,8 @@ class Ability
     can [:sign_in_question], Question
     can :rate, [Question, Answer]
     can :create, [Question, Answer, Comment]
-    can :helpfull, Question do |resource|
-      resource.answer.user_id == user.id
+    can :helpfull, Answer do |resource|
+      resource.question.user_id == user.id
     end
     can [:edit, :update, :destroy], [Question, Answer, Comment], user: user
     cannot [:create, :update, :destroy], Category

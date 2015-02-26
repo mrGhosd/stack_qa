@@ -113,4 +113,19 @@ describe AnswersController do
     let!(:params) { ActionController::Parameters.new({question_id: question.id, answer_id: answer.id}) }
     it_behaves_like "rate"
   end
+
+  describe "POST #helpfull" do
+    it "update question' attribute 'is_closed' and answers attribute 'is_helpfull'" do
+      post :helpfull, question_id: question.id, id: answer.id
+      question.reload
+      answer.reload
+      expect(question.is_closed).to eq true
+      expect(answer.is_helpfull).to eq true
+    end
+
+    it "return status #200" do
+      post :helpfull, question_id: question.id, id: answer.id
+      expect(response.status).to eq(200)
+    end
+  end
 end
