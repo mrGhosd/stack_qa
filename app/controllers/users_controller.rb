@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     @questions = @user.questions
     @answers = @user.answers
     @comments = @user.comments
+    @statistic = @user.statistic
   end
 
   def update

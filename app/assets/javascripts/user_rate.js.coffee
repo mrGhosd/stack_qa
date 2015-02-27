@@ -8,5 +8,5 @@ $ ->
     if stat.rate > 0 && parseInt($(".rating span.rate").text(), 10) < 0
       $(".user-rate").removeClass(".glyphicon-thumbs-down").addClass(".glyphicon-thumbs-up")
 
-    
+
 
