@@ -1,5 +1,8 @@
 class AnswersController < ApplicationController
   include Rating
+  include UserStatistic
+
+  after_action :answer_to_question, only: :create
 
   def new
     @question = Question.find(params[:question_id])
@@ -8,13 +11,13 @@ class AnswersController < ApplicationController
   end
 
   def create
-    answer = Answer.new(answers_params)
-    if answer.save
-      PrivatePub.publish_to "/questions/#{answer.question_id}/answers", answer: answer.to_json
-      Answer.delay.send_notification_to_author(answer)
+    @answer = Answer.new(answers_params)
+    if @answer.save
+      PrivatePub.publish_to "/questions/#{@answer.question_id}/answers", answer: @answer.to_json
+      Answer.delay.send_notification_to_author(@answer)
       render nothing: true
     else
-      render json: answer.errors.to_json, status: :unprocessible_entity
+      render json: @answer.errors.to_json, status: :unprocessible_entity
     end
   end
 
