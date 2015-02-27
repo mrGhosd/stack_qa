@@ -26,7 +26,7 @@ html
               .search-list
             .authentication-links
               - if current_user
-                = link_to user_path(current_user), class: 'user_profile_link' do
+                = link_to user_path(current_user), class: 'user_profile_link', data: {user: "#{current_user.id if current_user}"} do
                   = image_tag current_user.avatar.url || "default_user.png", size: "50", class: "img-circle"
                   span= "#{current_user.surname} #{current_user.name}".blank? ? current_user.email : "#{current_user.surname} #{current_user.name}"
                 = link_to "Выйти", destroy_user_session_path, class: 'btn btn-danger', data: {method: 'delete'}
@@ -42,3 +42,5 @@ html
     .container
       .starter-template
         = yield
+
+  = subscribe_to "/users/#{current_user.id}/rate" if current_user

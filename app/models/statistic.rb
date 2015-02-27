@@ -1,20 +1,20 @@
 class Statistic < ActiveRecord::Base
   belongs_to :user
 
-  delegate :rate, to: :user
-
   def answer_rate(user, answer)
-    binding.pry
-    common_rate = self.rate
+    common_rating = self.rate
     question = answer.question
     params = ActionController::Parameters.new
     answer_rate_params.each do |key, value|
       exec_param = eval(value[:value])
       if exec_param.call(answer, user)
-        common_rate += value[:rate]
-        params.merge({key => self.send(key) + 1})
+        common_rating += value[:rate]
+        params = params.merge({key => self.send(key) + 1})
       end
     end
+    params = params.merge({rate: common_rating})
+    params.each { |key, value| self.send("#{key}=", value) }
+    self.save
   end
 
   private
