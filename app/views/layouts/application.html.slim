@@ -26,6 +26,9 @@ html
               .search-list
             .authentication-links
               - if current_user
+                .rating
+                  div[class="user-rate glyphicon glyphicon-thumbs-#{current_user.statistic.rate >= 0 ? "up" : "down"}"]
+                  span.rate= current_user.statistic.rate.to_s.gsub(/\s+/, "")
                 = link_to user_path(current_user), class: 'user_profile_link', data: {user: "#{current_user.id if current_user}"} do
                   = image_tag current_user.avatar.url || "default_user.png", size: "50", class: "img-circle"
                   span= "#{current_user.surname} #{current_user.name}".blank? ? current_user.email : "#{current_user.surname} #{current_user.name}"
