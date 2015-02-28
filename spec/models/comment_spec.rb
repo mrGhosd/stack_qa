@@ -30,11 +30,15 @@ describe Comment do
     let!(:comment) { create :comment, user_id: user.id }
 
     it "return string that contains correct author name" do
-      expect(comment.author).to eq("#{user.surname} #{user.name}")
+      expect(comment.author).to eq(user.correct_naming)
     end
   end
 
   describe "#humanized_date" do
+    let!(:comment) { create :comment }
 
+    it "return date in user-readable format" do
+      expect(comment.humanized_date).to eq(comment.created_at.strftime("%H:%M:%S %d.%m.%Y"))
+    end
   end
 end
