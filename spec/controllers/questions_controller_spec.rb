@@ -5,9 +5,9 @@ describe QuestionsController do
   let!(:question) { create :question, :unclosed, user_id: subject.current_user.id }
 
   describe "GET #index" do
-    it "return list of all questions" do
+    it "return top list of questions" do
       get :index
-      expect(assigns(:questions)).to eq(Question.all)
+      expect(assigns(:questions)).to eq(Question.top)
     end
 
     it "render the index  template" do

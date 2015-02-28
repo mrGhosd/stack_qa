@@ -5,4 +5,8 @@ module UserStatistic
     else
     end
   end
+
+  def helpfull_callback
+
+  end
 end
