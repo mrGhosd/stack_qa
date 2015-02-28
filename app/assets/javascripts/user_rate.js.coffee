@@ -9,7 +9,6 @@ $ ->
       $(".user-rate").removeClass(".glyphicon-thumbs-down").addClass(".glyphicon-thumbs-up")
 
     $.each(stat, (key, value) ->
-      console.log "key: #{key}, value: #{value}"
       $("#statistic .form-horizontal p.#{key}").text(value)
     )
 
