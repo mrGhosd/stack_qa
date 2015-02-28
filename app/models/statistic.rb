@@ -23,7 +23,7 @@ class Statistic < ActiveRecord::Base
     {
         answers_count: {value: "lambda { |answer, user| true }", rate: 1},
         first_answers_count: {value: "lambda {|answer, user| answer.question.answers.length == 1 && answer.question.answers.first.user_id == user.id}", rate: 1},
-        first_self_answers_count: {value: "lambda {|answer, user| question.user_id == user.id}", rate: 3},
+        first_self_answers_count: {value: "lambda {|answer, user| question.user_id == user.id && answer.question.answers.length == 1 && answer.question.answers.first.user_id == user.id}", rate: 3},
         self_answers_count: { value: "lambda { |answer, user| answer.user_id == answer.question.user_id }", rate: 2 }
     }
   end
