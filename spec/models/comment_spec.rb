@@ -26,7 +26,12 @@ describe Comment do
   end
 
   describe "#author" do
+    let!(:user) { create :user }
+    let!(:comment) { create :comment, user_id: user.id }
 
+    it "return string that contains correct author name" do
+      expect(comment.author).to eq("#{user.surname} #{user.name}")
+    end
   end
 
   describe "#humanized_date" do
