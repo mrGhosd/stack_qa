@@ -83,4 +83,20 @@ describe User do
     end
   end
 
+  describe ".correct_naming" do
+    context "user doesn't have filled-in fields name and surname" do
+      let!(:user) { create :user, name: nil, surname: nil }
+      it "return an user email" do
+        expect(user.correct_naming).to eq user.email
+      end
+    end
+
+    context "user have filled-in fields name and usrname" do
+      let!(:user) { create :user}
+      it "return an user surname and name" do
+        expect(user.correct_naming).to eq "#{user.surname} #{user.name}"
+      end
+    end
+  end
+
 end
