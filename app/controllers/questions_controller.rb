@@ -1,7 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :define_question, only: [:edit, :show, :update, :destroy, :sign_in_question]
-  before_action :widget_data, only: :index
   include Rating
   include UserStatistic
 
@@ -61,10 +60,6 @@ class QuestionsController < ApplicationController
 
   def define_question
     @question = Question.find(params[:id])
-  end
-
-  def widget_data
-    @widget = Widget.last_created
   end
 
   def question_params

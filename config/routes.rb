@@ -22,9 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :users, except: [:new, :create] do
-    post :paginate_users_questions, on: :member
-  end
+  resources :users, except: [:new, :create]
   resources :questions, concerns: [:commentable, :rating] do
     post :sign_in_question, on: :member
     post :rating, on: :member
