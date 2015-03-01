@@ -108,4 +108,24 @@ describe User do
     end
   end
 
+  describe "#has_voted?" do
+    let!(:user){ create :user }
+    let!(:question) { create :question, user_id: user.id }
+
+    context "user voted on this question" do
+      let!(:vote) { create :vote, vote_type: question.class.to_s, vote_id: question.id, user_id: user.id }
+      it "return true" do
+        expect(user.has_voted?(question)).to eq(true)
+      end
+    end
+
+    context "user doesn't vote on this question" do
+      it "return false" do
+        expect(user.has_voted?(question)).to eq(false)
+      end
+    end
+
+
+  end
+
 end
