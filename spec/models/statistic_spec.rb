@@ -10,7 +10,7 @@ describe Statistic do
       let!(:diff_question) { create :question }
       let!(:diff_answer) { create :answer, user_id: user.id, question_id: diff_question.id }
       let!(:answer) { create :answer, user_id: user.id, question_id: diff_question.id }
-      
+
       it "update answers_count attribute" do
         user.statistic.answer_rate(user, answer)
         expect(user.statistic.rate).to eq(1)
@@ -46,6 +46,41 @@ describe Statistic do
         user.statistic.answer_rate(user, answer)
         expect(user.statistic.rate).to eq(3)
         expect(user.statistic.self_answers_count).to eq(1)
+      end
+    end
+  end
+
+  describe "#callback_rate" do
+    let!(:answer){ create :answer, user_id: user.id, question_id: question.id }
+    context "positive rate on question" do
+      it "update questions_positive_rate_count attribute" do
+        user.statistic.callback_rate(user, question, "plus")
+        expect(user.statistic.questions_positive_rate_count).to eq(1)
+        expect(user.statistic.rate).to eq 2
+      end
+    end
+
+    context "positive rate on answer" do
+      it "update answers_positive_rate_count attribute" do
+        user.statistic.callback_rate(user, answer, "plus")
+        expect(user.statistic.answers_positive_rate_count).to eq(1)
+        expect(user.statistic.rate).to eq 1
+      end
+    end
+
+    context "negative rate on question" do
+      it "update questions_negative_rate_count attribute" do
+        user.statistic.callback_rate(user, question, "minus")
+        expect(user.statistic.questions_negative_rate_count).to eq(1)
+        expect(user.statistic.rate).to eq -2
+      end
+    end
+
+    context "negative rate on answer" do
+      it "update answers_negative_rate_count attribute" do
+        user.statistic.callback_rate(user, answer, "minus")
+        expect(user.statistic.answers_negative_rate_count).to eq(1)
+        expect(user.statistic.rate).to eq -1
       end
     end
   end
