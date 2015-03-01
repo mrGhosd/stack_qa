@@ -19,4 +19,13 @@ describe Question do
       expect(Question.created_today).to eq questions_list
     end
   end
+
+  describe "scope .top" do
+    let!(:pos_question) { create :question }
+    let!(:neg_question) { create :question, rate: -1 }
+
+    it "return a list of questions, sortered by an rate" do
+      expect(Question.top).to eq([pos_question, neg_question])
+    end
+  end
 end
