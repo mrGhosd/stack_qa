@@ -28,4 +28,26 @@ describe Question do
       expect(Question.top).to eq([pos_question, neg_question])
     end
   end
+
+  describe "#comments_sum" do
+    let!(:question) { create :question }
+    let!(:question_comment) { create :comment, commentable_id: question.id, commentable_type: question.class.to_s }
+
+
+    context "question answers is not empty" do
+      let!(:answer) { create :answer, question_id: question.id }
+      let!(:answer_comment) { create :comment, commentable_id: answer.id, commentable_type: answer.class.to_s }
+
+      it "return an count of comments in question + each answer comment count" do
+        expect(question.comments_sum).to eq(question.comments.count + answer.comments.count)
+      end
+    end
+
+    context "question doesn't have any answer" do
+      it "return only question comments count" do
+        expect(question.comments_sum).to eq(question.comments.count)
+      end
+    end
+
+  end
 end
