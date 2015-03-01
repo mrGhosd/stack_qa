@@ -1,5 +1,5 @@
 $ ->
-  $(".authentication-links a").click ->
+  $(".authentication-links a.auth-btn").click ->
     $('#myModal ul.nav.nav-tabs li, #myModal .tab-content .tab-pane').removeClass('active')
     action = $(this).data("action")
     $("#myModal").find("a[href=##{action}]").parent().addClass("active")
