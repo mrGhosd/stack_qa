@@ -7,7 +7,7 @@ module ApplicationHelper
   end
 
   def key_for_object(object)
-    klass = object.class.to_s.capitalize.constantize
+    klass = object.class
     max_updated_at = klass.maximum(:updated_at).try(:utc).try(:to_s)
     "#{klass}/#{object.id}-#{max_updated_at}"
   end

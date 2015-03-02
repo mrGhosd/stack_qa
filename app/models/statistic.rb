@@ -4,7 +4,7 @@ class Statistic < ActiveRecord::Base
   def answer_rate(user, answer)
     common_rating = self.rate
     question = answer.question
-    params = ActionController::Parameters.new
+    params = {}
     answer_rate_params.each do |key, value|
       exec_param = eval(value[:value])
       if exec_param.call(answer, user)
@@ -18,7 +18,7 @@ class Statistic < ActiveRecord::Base
   end
 
   def callback_rate(user, object, rate)
-    params = ActionController::Parameters.new
+    params = {}
     rate_callback_params.each do |key, value|
       exec_param = eval(value[:value])
       if exec_param.call(object, rate)

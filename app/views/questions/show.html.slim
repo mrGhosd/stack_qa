@@ -25,14 +25,13 @@
         = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: @question.id, type: "Question"}, remote: true
         = link_to "Подписаться на обновления", "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
     .comments-list
-      - @question.comments.each do |comment|
-        - cache collection_key_helper_for :comment do
-          = render partial: 'comments/comment', locals: {comment: comment}
+      - cache collection_key_helper_for :comment do
+        - @question.comments.each do |comment|
+           = render partial: 'comments/comment', locals: {comment: comment}
     .answers-list data={question: @question.id}
-      - @question.answers.each do |answer|
-        - cache collection_key_helper_for :answer do
-          = render partial: 'answers/answer', locals: { answer: answer }
-
+      - cache collection_key_helper_for :answer do
+        - @question.answers.each do |answer|
+           = render partial: 'answers/answer', locals: { answer: answer }
     .actions-panel
 
 
