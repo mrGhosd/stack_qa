@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :question, touch: true
   has_many :comments, as: :commentable
   include ModelRate

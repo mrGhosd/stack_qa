@@ -25,13 +25,13 @@
         = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: @question.id, type: "Question"}, remote: true
         = link_to "Подписаться на обновления", "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
     .comments-list
-      - cache collection_key_helper_for :comment do
+      - cache key_for_nested_resource(@question, @question.comments) do
         - @question.comments.each do |comment|
-           = render partial: 'comments/comment', locals: {comment: comment}
+          = render partial: 'comments/comment', locals: {comment: comment}
     .answers-list data={question: @question.id}
-      - cache collection_key_helper_for :answer do
+      - cache key_for_nested_resource(@question, @question.answers) do
         - @question.answers.each do |answer|
-           = render partial: 'answers/answer', locals: { answer: answer }
+          = render partial: 'answers/answer', locals: { answer: answer }
     .actions-panel
 
 
