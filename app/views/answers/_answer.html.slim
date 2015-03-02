@@ -14,8 +14,8 @@
       .answer-actions
         - if current_user
           = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: { question: answer.question_id, answer: answer.id, type: "Answer" }, remote: true
-          - if answer.question.in?(current_user.questions) && !answer.question.is_closed
-            = link_to "", "#", class: "glyphicon glyphicon-ok btn btn-success answer-is-helpfull", data: { question: answer.question_id, answer: answer.id }, remote: true
+        - if current_user && answer.question.in?(current_user.questions) && !answer.question.is_closed
+          = link_to "", "#", class: "glyphicon glyphicon-ok btn btn-success answer-is-helpfull", data: { question: answer.question_id, answer: answer.id }, remote: true
         - if current_user && answer.in?(current_user.answers)
             = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
             = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true
