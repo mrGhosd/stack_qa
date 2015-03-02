@@ -6,6 +6,12 @@ module ApplicationHelper
     "#{klass}/collection-#{count}-#{max_updated_at}"
   end
 
+  def key_for_object(object)
+    klass = object.class.to_s.capitalize.constantize
+    max_updated_at = klass.maximum(:updated_at).try(:utc).try(:to_s)
+    "#{klass}/#{object.id}-#{max_updated_at}"
+  end
+
   def username_for_comment(user)
     if user.surname && user.name
       "#{user.surname} #{user.name}"

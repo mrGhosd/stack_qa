@@ -1,4 +1,4 @@
-- cache @question do
+- cache key_for_object @question do
   .question-show
     fieldset
       legend
@@ -26,11 +26,11 @@
         = link_to "Подписаться на обновления", "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
     .comments-list
       - @question.comments.each do |comment|
-        - cache comment do
+        - cache collection_key_helper_for :comment do
           = render partial: 'comments/comment', locals: {comment: comment}
     .answers-list data={question: @question.id}
       - @question.answers.each do |answer|
-        - cache answer do
+        - cache collection_key_helper_for :answer do
           = render partial: 'answers/answer', locals: { answer: answer }
 
     .actions-panel
