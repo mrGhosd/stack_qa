@@ -28,6 +28,7 @@
 //= require common
 //= require rate
 //= require user_rate
+//= require bootstrap-tags
 //= require_tree .
 
 $(document).on("hidden.bs.modal", function(){

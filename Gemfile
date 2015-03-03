@@ -59,6 +59,7 @@ gem 'dotenv-deployment', require: 'dotenv/deployment'
 gem 'unicorn'
 gem 'redis-rails'
 gem 'acts-as-taggable-on'
+gem 'chosen-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

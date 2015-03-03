@@ -13,7 +13,7 @@
   .form-group
     = f.label 'Теги:', class: 'col-md-2 control-label'
     .col-md-5
-      = f.text_area :tag_list, class: 'form-control'
+      = f.text_field :tag_list, class: 'form-control', data: { role: "tagsinput" }
   .form-group
     = f.label 'Категория:', class: 'col-md-2 control-label'
     .col-md-4
