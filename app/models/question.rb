@@ -4,8 +4,13 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :question_users
+  has_many :taggings
+  has_many :tags, through: :taggings
   validates :title, :text, presence: true
   validates :title, uniqueness: true
+
+  acts_as_taggable
+
   include ModelRate
   include QuestionsHelper
 
@@ -23,5 +28,15 @@ class Question < ActiveRecord::Base
     comments = self.comments.count
     comments += self.answers.map{|c| c.comments.count }.inject{|sum, x| sum += x} unless self.answers.blank?
     comments
+  end
+
+  def tag_list
+    self.tags.map(&:name).join(", ")
+  end
+
+  def tag_list=(names)
+    self.tags = names.split(",").map do |n|
+      ActsAsTaggableOn::Tag.where(name: n.strip).first_or_create!
+    end
   end
 end

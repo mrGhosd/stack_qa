@@ -14,6 +14,10 @@
             = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-down btn rate-move", data: {rate: "minus"}
 
         .col-md-8
+          .question-tags
+            .form-group
+              label.col-md-2.control-label="Теги: "
+              = raw @question.tags.map {|t| link_to t, "#", remote: true}.join(", ")
           .question-text
             = @question.text.html_safe
     .question-action

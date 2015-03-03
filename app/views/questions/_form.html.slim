@@ -11,6 +11,10 @@
     .col-md-5
       = f.text_area :text, class: 'form-control redactor', rows: 120, cols: 100
   .form-group
+    = f.label 'Теги:', class: 'col-md-2 control-label'
+    .col-md-5
+      = f.text_area :tag_list, class: 'form-control'
+  .form-group
     = f.label 'Категория:', class: 'col-md-2 control-label'
     .col-md-4
       = f.select(:category_id, Category.all.map {|p| [ p.title, p.id ]}, {}, class: 'form-control')
