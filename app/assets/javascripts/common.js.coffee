@@ -8,7 +8,7 @@ loadCircle = (element, show)->
 
 
 $ ->
-  gif = $("<img src='/assets/ajax-loader.gif' class='js-ajax-load-image'/>")
+  gif = $("<img src='/images/ajax-loader.gif' class='js-ajax-load-image'/>")
   $(document).ajaxStart ->
     loadCircle(gif, true)
   $(document).ajaxComplete ->

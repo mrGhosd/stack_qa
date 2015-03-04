@@ -12,7 +12,6 @@
             .rate-value
               span= @question.rate
             = link_to "", "#", remote: true, class: "glyphicon glyphicon-chevron-down btn rate-move", data: {rate: "minus"}
-
         .col-md-8
           .question-category
             .form-group
@@ -23,7 +22,10 @@
               label.col-md-2.control-label="Теги: "
               = raw @question.tags.map {|t| link_to t, "#", remote: true, class: "question-tag"}.join(", ")
           .question-text
-            = @question.text.html_safe
+            .form-group
+              label
+              .col-md-12
+                = @question.text.html_safe
     .question-action
       - if current_user && @question.in?(current_user.questions)
         = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
