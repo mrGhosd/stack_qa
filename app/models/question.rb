@@ -41,6 +41,7 @@ class Question < ActiveRecord::Base
   end
 
   def self.filter_by(filter_param, order_param)
+    self.first.touch(:updated_at)
     eval(filter_values[filter_param])
   end
 

@@ -78,14 +78,16 @@ questionFilter = (button) ->
     type: "POST"
     data: {filter: filter, order: order}
     success: (response, request) ->
-      if $(".question-filters li.active").find("a").data("filter") == filter
-        $(button).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up") if order == "desc"
-
-      else
-        $(".question-filters li.active").removeClass("active")
-        $(".question-filters a").removeClass("glyphicon glyphicon-chevron-down glyphicon-chevron-up")
-        $(button).parent().addClass("active")
-        $(button).addClass("active glyphicon glyphicon-chevron-down")
+#      if $(".question-filters li.active").find("a").data("filter") == filter
+#        $(button).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up") if order == "desc"
+#
+#      else
+#        $(".question-filters li.active").removeClass("active")
+#        $(".question-filters a").removeClass("glyphicon glyphicon-chevron-down glyphicon-chevron-up")
+#        $(button).parent().addClass("active")
+#        $(button).addClass("active glyphicon glyphicon-chevron-down")
+      $(".question-page-content .questions-list").remove()
+      $(".question-page-content").append(response)
       console.log response
       console.log request
     error: (response, request)->
