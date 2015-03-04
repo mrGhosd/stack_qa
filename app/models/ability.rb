@@ -14,6 +14,7 @@ class Ability
 
   def guest_abilities
     can :read, :all
+    can :filter, Question
   end
 
   def current_user_abilities

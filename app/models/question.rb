@@ -39,4 +39,19 @@ class Question < ActiveRecord::Base
       ActsAsTaggableOn::Tag.where(name: n.strip).first_or_create!
     end
   end
+
+  def self.filter_by(filter_param, order_param)
+    eval(filter_values[filter_param])
+  end
+
+  def self.filter_values
+    {
+        "rate" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
+        "new" => "where(created_at: '#{Date.today} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date)",
+        "views" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
+        "is_closed" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
+        "per_week" => "where(created_at: '#{Date.today-1.week} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date)",
+        "per_month" => "where(created_at: '#{Date.today-1.month} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date)"
+    }
+  end
 end

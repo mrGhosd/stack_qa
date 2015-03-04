@@ -17,6 +17,9 @@ $ ->
   $(".sign-in-question").click ->
     signInQuestion($(this))
 
+  $(".question-filters a").click ->
+    questionFilter($(this))
+
 $(document).delegate(".question_form", "submit", (event)->
   event.preventDefault()
   event.stopPropagation()
@@ -66,3 +69,25 @@ showMessage = (text) ->
   $("body").prepend JST["templates/modal"]
   $("#messageModal .modal-body").html(text)
   $("#messageModal").modal('show')
+
+questionFilter = (button) ->
+  order = $(button).data("order")
+  filter = $(button).data("filter")
+  $(button).attr("data-order", "asc") if $(".question-filters li.active").find("a").data("filter") == filter
+  $.ajax "/questions/filter",
+    type: "POST"
+    data: {filter: filter, order: order}
+    success: (response, request) ->
+      if $(".question-filters li.active").find("a").data("filter") == filter
+        $(button).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up") if order == "desc"
+
+      else
+        $(".question-filters li.active").removeClass("active")
+        $(".question-filters a").removeClass("glyphicon glyphicon-chevron-down glyphicon-chevron-up")
+        $(button).parent().addClass("active")
+        $(button).addClass("active glyphicon glyphicon-chevron-down")
+      console.log response
+      console.log request
+    error: (response, request)->
+      console.log response
+      console.log request

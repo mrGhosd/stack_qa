@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :filter]
   before_action :define_question, only: [:edit, :show, :update, :destroy, :sign_in_question]
   include Rating
   include UserStatistic
@@ -51,7 +51,8 @@ class QuestionsController < ApplicationController
   end
 
   def filter
-
+    @questions = Question.filter_by params[:filter], params[:order]
+    render partial: "questions/collection", locals: {questions: @questions}, layout: false, status: :ok
   end
 
 
