@@ -50,6 +50,10 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def filter
+
+  end
+
 
   def destroy
     @question.destroy
