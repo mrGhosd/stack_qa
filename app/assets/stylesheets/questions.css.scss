@@ -2,6 +2,7 @@
   border: 2px solid #dddddd;
   border-radius: 8px;
   margin: 10px 0px 10px 0px;
+  padding-left: 10px;
   .main-info {
     div{
       display: inline-block;
@@ -56,5 +57,14 @@
     padding: 5px;
     border-radius: 8px;
     color: #ffffff;
+  }
+}
+.category-info{
+  padding:10px;
+  &>div{
+    display: inline-block;
+  }
+  .question-tags{
+    margin-left: 20px;
   }
 }

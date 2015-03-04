@@ -11,8 +11,15 @@ $ ->
 
 
   PrivatePub.subscribe "/questions", (data, channel) ->
-    question = $.parseJSON(data['question'])
-    $(".questions-list").prepend JST["templates/question"](question: question)
+    if $(".question-filters li.active").find("a").attr("filter") == "new"
+      question = data.question
+      $(".questions-list").prepend JST["templates/question"](question: question)
+    else
+      if $(".question-filters a[filter=new] span.badge").lenght > 0
+        count = parseInt($(".question-filters a[filter=new] span.badge").text(), 10) + 1
+      else
+        count = 1
+      $(".question-filters li").find("a[filter=new]").append("<span class='badge'>#{count}</span>")
 
   $(".sign-in-question").click ->
     signInQuestion($(this))
@@ -73,7 +80,7 @@ showMessage = (text) ->
 questionFilter = (button) ->
   order = $(button).attr("order")
   filter = $(button).attr("filter")
-  console.log filter
+  $("span.badge").remove() if filter == "new"
   if $(".question-filters li.active").find("a").attr("filter") == filter
     if($(button).attr("order") == "desc")
       $(button).attr("order", "asc")

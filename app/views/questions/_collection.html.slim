@@ -1,4 +1,4 @@
 .questions-list
-  - cache collection_key_helper_for :question
+  - cache "#{collection_key_helper_for :question} - action #{params[:action]}"
     - questions.each do |question|
       = render partial: 'question', locals: {question: question}

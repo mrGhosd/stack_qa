@@ -1,0 +1,5 @@
+= link_to "На список вопросов", questions_path
+.tag-search
+  h3="Поиск по тегу '#{params[:tag]}':"
+  - cache "#{params[:action]}/#{params[:tag]}/#{collection_key_helper_for :question}" do
+    = render partial: "collection", locals: {questions: @questions}

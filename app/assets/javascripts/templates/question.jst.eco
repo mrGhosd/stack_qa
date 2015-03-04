@@ -1,21 +1,43 @@
 <div class="question-item">
-  <div class="row">
-    <div class="col-md-2">
-      <div class="title">
-        <a href="/questions/<%= @question.id %>"><%= @question.title %></a>
+  <div class="main-info">
+    <div class="question-statistic">
+      <div class="stat-item">
+        <div class="data-icon glyphicon glyphicon-eye-open"></div>
+        <div class="data"><%= @question.views %></div>
       </div>
+      <div class="stat-item">
+        <div class="data-icon glyphicon glyphicon-comment"></div>
+        <div class="data"><%= @question.answers_count %></div>
+      </div>
+      <div class="stat-item">
+        <div class="data-icon glyphicon glyphicon-list-alt"></div>
+        <div class="data"><%= @question.comments_sum %></div>
+      </div>
+    </div>
+    <div class="title">
+      <a href="/questions/<%= @question.id %>"><%= @question.title %></a>
+    </div>
+    <div class="timestamp">
+      <%= @question.humanized_date %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="question-text">
-        <%- @question.text %>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="question-time">
-        <%= @question.created_at %>
-      </div>
-    </div>
-  </div>
+  <!--<div class="row">-->
+    <!--<div class="col-md-2">-->
+      <!--<div class="title">-->
+        <!--<a href="/questions/<%= @question.id %>"><%= @question.title %></a>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-4">-->
+      <!--<div class="question-text">-->
+        <!--<%- @question.text %>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-2">-->
+      <!--<div class="question-time">-->
+        <!--<%= @question.created_at %>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>

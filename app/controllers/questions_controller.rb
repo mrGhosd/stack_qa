@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   def create
     question = Question.new(question_params)
     if question.save
-      PrivatePub.publish_to "/questions", question: question.to_json
+      PrivatePub.publish_to "/questions", question: question.as_json(methods: [:humanized_date, :answers_count, :comments_sum])
       render nothing: true
     else
       render json: question.errors.to_json, status: :forbidden
@@ -53,6 +53,11 @@ class QuestionsController < ApplicationController
   def filter
     @questions = Question.filter_by params[:filter], params[:order]
     render partial: "questions/collection", locals: {questions: @questions}, layout: false, status: :ok
+  end
+
+  def tag
+    @questions =  Question.tagged_with(params[:tag])
+    @questions.first.touch(:updated_at) if @questions.first
   end
 
 

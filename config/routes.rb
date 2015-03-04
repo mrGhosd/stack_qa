@@ -24,7 +24,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :users, except: [:new, :create]
   resources :questions, concerns: [:commentable, :rating] do
-    post :filter, on: :collection
+    collection do
+      post :filter
+      get :tag
+    end
     post :sign_in_question, on: :member
     resources :answers, concerns: [:commentable, :rating] do
       post :helpfull, on: :member

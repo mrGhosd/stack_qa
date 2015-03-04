@@ -45,10 +45,18 @@ class Question < ActiveRecord::Base
     eval(filter_values[filter_param])
   end
 
+  def humanized_date
+    self.created_at.strftime("%H:%M:%S %d.%m.%Y")
+  end
+
+  def answers_count
+    self.answers.count
+  end
+
   def self.filter_values
     {
         "rate" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
-        "new" => "(lambda { |order| where(created_at: '#{Date.today} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date).order(created_at: order.to_sym) }).call(order_param)",
+        "new" => "(lambda { |order| order(created_at: order.to_sym).last(10) }).call(order_param)",
         "views" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
         "is_closed" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
         "per_week" => "(lambda { |order| where(created_at: '#{Date.today-1.week} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date).order(created_at: order.to_sym) }).call(order_param)",
