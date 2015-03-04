@@ -71,25 +71,28 @@ showMessage = (text) ->
   $("#messageModal").modal('show')
 
 questionFilter = (button) ->
-  order = $(button).data("order")
-  filter = $(button).data("filter")
-  $(button).attr("data-order", "asc") if $(".question-filters li.active").find("a").data("filter") == filter
+  order = $(button).attr("order")
+  filter = $(button).attr("filter")
+  console.log filter
+  if $(".question-filters li.active").find("a").attr("filter") == filter
+    if($(button).attr("order") == "desc")
+      $(button).attr("order", "asc")
+      $(button).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up")
+    else
+      $(button).attr("order", "desc")
+      $(button).removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down")
+  else
+    $(".question-filters li.active").removeClass("active")
+    $(button).parent().addClass("active")
+    $(".question-filters a").removeClass("glyphicon glyphicon-chevron-down glyphicon-chevron-up")
+    $(button).addClass("glyphicon glyphicon-chevron-down")
+    $(button).attr("order", "desc")
   $.ajax "/questions/filter",
     type: "POST"
     data: {filter: filter, order: order}
     success: (response, request) ->
-#      if $(".question-filters li.active").find("a").data("filter") == filter
-#        $(button).removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up") if order == "desc"
-#
-#      else
-#        $(".question-filters li.active").removeClass("active")
-#        $(".question-filters a").removeClass("glyphicon glyphicon-chevron-down glyphicon-chevron-up")
-#        $(button).parent().addClass("active")
-#        $(button).addClass("active glyphicon glyphicon-chevron-down")
       $(".question-page-content .questions-list").remove()
       $(".question-page-content").append(response)
-      console.log response
-      console.log request
     error: (response, request)->
       console.log response
       console.log request

@@ -3,17 +3,17 @@
 .questions-page
   ul.question-filters.nav.nav-tabs
     li.active
-      = link_to "Топ оценок", "#", remote: true, class: "glyphicon glyphicon-chevron-down", data: {filter: "rate", order: "desc"}
+      = link_to "Топ оценок", "#", remote: true, class: "glyphicon glyphicon-chevron-down", filter: "rate", order: "desc"
     li
-      = link_to "Новые", "#", remote: true, data: { filter: "new", order: "desc" }
+      = link_to "Новые", "#", remote: true,filter: "new", order: "desc"
     li
-      = link_to "Топ просмотров", "#", remote: true, data: { filter: "views", order: "desc" }
+      = link_to "Топ просмотров", "#", remote: true, filter: "views", order: "desc"
     li
-      = link_to "Отвеченные", "#", remote: true, data: { filter: "is_closed", order: "desc" }
+      = link_to "Отвеченные", "#", remote: true, filter: "is_closed", order: "desc"
     li
-      = link_to "За неделю", "#", remote: true, data: { filter: "per_week", order: "desc" }
+      = link_to "За неделю", "#", remote: true, filter: "per_week", order: "desc"
     li
-      = link_to "За месяц", "#", remote: true, data: { filter: "per_month", order: "desc" }
+      = link_to "За месяц", "#", remote: true, filter: "per_month", order: "desc"
   .question-page-content
     = render partial: "collection", locals: {questions: @questions}
 

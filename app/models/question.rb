@@ -48,11 +48,11 @@ class Question < ActiveRecord::Base
   def self.filter_values
     {
         "rate" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
-        "new" => "where(created_at: '#{Date.today} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date)",
+        "new" => "(lambda { |order| where(created_at: '#{Date.today} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date).order(created_at: order.to_sym) }).call(order_param)",
         "views" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
         "is_closed" => "(lambda { |param, order| order(param + ' ' + order) }).call(filter_param, order_param)",
-        "per_week" => "where(created_at: '#{Date.today-1.week} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date)",
-        "per_month" => "where(created_at: '#{Date.today-1.month} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date)"
+        "per_week" => "(lambda { |order| where(created_at: '#{Date.today-1.week} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date).order(created_at: order.to_sym) }).call(order_param)",
+        "per_month" => "(lambda { |order| where(created_at: '#{Date.today-1.month} 00:00:00'.to_date..'#{Date.today} 23:59:59'.to_date).order(created_at: order.to_sym) }).call(order_param)"
     }
   end
 end
