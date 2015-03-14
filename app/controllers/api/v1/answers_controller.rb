@@ -1,4 +1,5 @@
 class Api::V1::AnswersController < Api::ApiController
+  before_action :doorkeeper_authorize!, only: [:create]
 
   def index
     question = Question.find(params[:question_id])

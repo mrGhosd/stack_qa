@@ -9,6 +9,11 @@ Doorkeeper.configure do
     current_user || warden.authenticate!(scope: :user)
   end
 
+  resource_owner_from_credentials do |routes|
+    u = User.find_for_database_authentication(email: params[:email])
+    u if u && u.valid_password?(params[:password])
+  end
+
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
   admin_authenticator do
     current_user.try(:is_admin?) || redirect_to(root_path(from: "oauth"))
@@ -98,3 +103,4 @@ Doorkeeper.configure do
   # set to true if you want this to be allowed
   # wildcard_redirect_uri false
 end
+Doorkeeper.configuration.token_grant_types << "password"

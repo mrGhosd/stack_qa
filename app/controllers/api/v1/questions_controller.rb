@@ -1,7 +1,7 @@
 class Api::V1::QuestionsController < Api::ApiController
   def index
-    @questions = Question.all
-    render json: @questions
+    questions = Question.all
+    render json: questions.as_json
   end
 
   def create
