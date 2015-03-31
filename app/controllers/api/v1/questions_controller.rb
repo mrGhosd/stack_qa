@@ -1,7 +1,7 @@
 class Api::V1::QuestionsController < Api::ApiController
   def index
     questions = Question.all
-    render json: questions.as_json
+    render json: questions.as_json(methods: [:answers_count, :comments_count])
   end
 
   def create
@@ -11,6 +11,11 @@ class Api::V1::QuestionsController < Api::ApiController
     else
       render json: question.errors.to_json, status: :uprocessible_entity
     end
+  end
+
+  def show
+    question = Question.find(params[:id])
+    render json: question.as_json(only: [:id, :text], methods: [:tag_list, :category])
   end
 
   private

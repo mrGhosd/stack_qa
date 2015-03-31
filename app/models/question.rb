@@ -30,6 +30,10 @@ class Question < ActiveRecord::Base
     comments
   end
 
+  def comments_count
+    self.comments.count
+  end
+
   def tag_list
     self.tags.map(&:name).join(", ")
   end

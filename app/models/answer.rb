@@ -10,4 +10,8 @@ class Answer < ActiveRecord::Base
   def self.send_notification_to_author(answer)
     AnswerMailer.author_notification(answer).deliver
   end
+
+  def user_name
+    self.user.correct_naming
+  end
 end
