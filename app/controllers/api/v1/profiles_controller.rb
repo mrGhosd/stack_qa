@@ -7,7 +7,7 @@ class Api::V1::ProfilesController < Api::ApiController
   end
 
   def me
-    render json: current_resource_owner.to_json(except: [:password, :password_encrypted])
+    render json: current_resource_owner.as_json(except: [:password, :password_encrypted], methods: [:correct_naming, :rate])
   end
 end
 
