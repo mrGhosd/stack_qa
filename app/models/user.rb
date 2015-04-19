@@ -51,6 +51,18 @@ class User <ActiveRecord::Base
     self.statistic.rate
   end
 
+  def questions_count
+    self.questions.count
+  end
+
+  def answers_count
+    self.answers.count
+  end
+
+  def comments_count
+    self.comments.count
+  end
+
   def create_authorization(auth)
     self.authorizations.create(provider: auth.provider, uid: auth.uid.to_s)
   end

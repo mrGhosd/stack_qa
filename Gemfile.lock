@@ -477,7 +477,6 @@ DEPENDENCIES
   therubyracer
   thin
   thinking-sphinx
-  turbolinks
   uglifier (>= 1.3.0)
   unicorn
   whenever

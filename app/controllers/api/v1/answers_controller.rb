@@ -1,5 +1,7 @@
 class Api::V1::AnswersController < Api::ApiController
   before_action :doorkeeper_authorize!, only: [:create]
+  include Rating
+  include UserStatistic
 
   def index
     question = Question.find(params[:question_id])
@@ -9,7 +11,9 @@ class Api::V1::AnswersController < Api::ApiController
   def create
     answer = Answer.new(answers_params)
     if answer.save
-      render json: answer, status: :ok
+      PrivatePub.publish_to "/questions/#{answer.question_id}/answers", answer: answer.to_json
+      Answer.delay.send_notification_to_author(answer)
+      render json: answer.as_json(methods: :user_name), status: :ok
     else
       render json: answer.errors.to_json, status: :unprocessible_entity
     end

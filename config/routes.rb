@@ -43,10 +43,13 @@ Rails.application.routes.draw do
       resources :profiles do
         get :me, on: :collection
       end
-      resources :questions do
-        resources :answers
+      resources :questions, concerns: [:rating] do
+        resources :answers, concerns: [:rating]
       end
-      resources :users
+      resources :users do
+        get :questions, on: :member
+      end
+      resources :categories
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
