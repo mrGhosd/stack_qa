@@ -44,7 +44,9 @@ Rails.application.routes.draw do
         get :me, on: :collection
       end
       resources :questions, concerns: [:rating] do
-        resources :answers, concerns: [:rating]
+        resources :answers, concerns: [:rating] do
+          post :helpfull, on: :member
+        end
       end
       resources :users do
         get :questions, on: :member

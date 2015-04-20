@@ -1,13 +1,15 @@
 module UserStatistic
   def answer_to_question
-    if current_user.statistic.answer_rate(current_user, @answer)
-      PrivatePub.publish_to "/users/#{current_user.id}/rate", statistic: current_user.statistic.as_json
+    user = current_user || current_resource_owner
+    if user.statistic.answer_rate(user, @answer)
+      PrivatePub.publish_to "/users/#{user.id}/rate", statistic: user.statistic.as_json
     end
   end
 
   def rate_callback
-    if current_user.statistic.callback_rate(current_user, @object, @rate)
-      PrivatePub.publish_to "/users/#{current_user.id}/rate", statistic: current_user.statistic.as_json
+    user = current_user || current_resource_owner
+    if user.statistic.callback_rate(user, @object, @rate)
+      PrivatePub.publish_to "/users/#{user.id}/rate", statistic: user.statistic.as_json
     end
   end
 end

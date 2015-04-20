@@ -3,7 +3,7 @@ module Rating
     type = params[:answer_id].blank? ? "Question" : "Answer"
     @object = type.eql?("Answer") ? Answer.find(params[:answer_id]) : Question.find(params[:question_id])
     @rate = params[:rate]
-    if @object.update_rating(current_user, params[:rate])
+    if @object.update_rating(current_user || current_resource_owner, params[:rate])
       rate_callback
       render json: {rate: @object.rate}, status: :ok
     else

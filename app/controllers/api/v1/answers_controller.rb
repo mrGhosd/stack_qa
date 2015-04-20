@@ -24,6 +24,18 @@ class Api::V1::AnswersController < Api::ApiController
     render json: answer
   end
 
+  def helpfull
+    answer = Answer.find(params[:id])
+    question = answer.question
+    if answer.is_helpfull || question.is_closed
+      render nothing: true, status: :unprocessible_entity
+    else
+      answer.update(is_helpfull: true)
+      question.update(is_closed: true)
+     render json: {success: true}, status: :ok
+    end
+  end
+
   private
 
   def answers_params
