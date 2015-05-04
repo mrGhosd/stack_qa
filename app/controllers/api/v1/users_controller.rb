@@ -16,6 +16,11 @@ class Api::V1::UsersController < Api::ApiController
     render json: user.questions.as_json, status: :ok
   end
 
+  def answers
+    user = User.find(params[:id])
+    render json: user.answers.as_json, status: :ok
+  end
+
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end

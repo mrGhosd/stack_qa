@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       end
       resources :users do
         get :questions, on: :member
+        get :answers, on: :member
       end
       resources :categories
     end

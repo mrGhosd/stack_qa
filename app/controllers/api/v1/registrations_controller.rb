@@ -1,4 +1,4 @@
-class Api::V1::RegistrationsController < ApiController
+class Api::V1::RegistrationsController < Api::ApiController
   # prepend_before_filter :allow_params_authentication!, :only => :create
   # skip_before_filter :restrict_access_by_token, :only => :create
   # respond_to :json

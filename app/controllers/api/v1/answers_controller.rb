@@ -19,6 +19,16 @@ class Api::V1::AnswersController < Api::ApiController
     end
   end
 
+  def update
+    answer = Answer.find(params[:id])
+    if answer.update(answers_params)
+      PrivatePub.publish_to "/questions/#{answer.question_id}/answers/edit", answer: answer.to_json
+      render json: answer.as_json(methods: :user_name), status: :ok
+    else
+      render json: answer.errors.to_json, status: :unprocessible_entity
+    end
+  end
+
   def show
     answer = Answer.find(params[:id])
     render json: answer
@@ -34,6 +44,13 @@ class Api::V1::AnswersController < Api::ApiController
       question.update(is_closed: true)
      render json: {success: true}, status: :ok
     end
+  end
+
+  def destroy
+    answer = Answer.find(params[:id])
+    answer.question.update(is_closed: false) if answer.is_helpfull && answer.question.present?
+    answer.destroy
+    render json: {success: true}.to_json, status: :ok
   end
 
   private
