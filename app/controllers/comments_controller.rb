@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  def create # Делать не просто комментарием, а создавать отосительно родительской сущности
+  def create
     if params[:type] == "Question"
       comment = Question.find(params[:question_id]).comments.new(comment_params.merge({user: current_user}))
       message = "/questions/#{params[:question_id]}/comments"

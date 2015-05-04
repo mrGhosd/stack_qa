@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post :filter
       get :tag
     end
+
     post :sign_in_question, on: :member
     resources :answers, concerns: [:commentable, :rating] do
       post :helpfull, on: :member
@@ -43,8 +44,8 @@ Rails.application.routes.draw do
       resources :profiles do
         get :me, on: :collection
       end
-      resources :questions, concerns: [:rating] do
-        resources :answers, concerns: [:rating] do
+      resources :questions, concerns: [:rating, :commentable] do
+        resources :answers, concerns: [:rating, :commentable] do
           post :helpfull, on: :member
         end
       end
