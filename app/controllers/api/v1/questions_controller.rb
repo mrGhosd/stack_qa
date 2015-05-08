@@ -27,7 +27,7 @@ class Api::V1::QuestionsController < Api::ApiController
 
   def show
     question = Question.find(params[:id])
-    render json: question.as_json(only: [:id, :text], methods: [:tag_list, :category])
+    render json: question.as_json(only: [:id, :text], methods: [:tag_list, :category, :answers_count, :comments_count])
   end
 
   def destroy
@@ -39,6 +39,6 @@ class Api::V1::QuestionsController < Api::ApiController
   private
 
   def question_params
-    params.require(:question).permit(:title, :text, :user_id, :category_id, :tag_list)
+    params.require(:question).permit(:title, :text, :user_id, :category_id, :tag_list => [])
   end
 end

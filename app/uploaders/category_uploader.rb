@@ -5,6 +5,10 @@ class CategoryUploader < CarrierWave::Uploader::Base
 
   storage :file
 
+  def default_url
+    "/images/empty-check-box-th.png"
+  end
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{model.id}"
   end

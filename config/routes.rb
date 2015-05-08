@@ -50,8 +50,11 @@ Rails.application.routes.draw do
         end
       end
       resources :users do
-        get :questions, on: :member
-        get :answers, on: :member
+        member do
+          get :questions
+          get :answers
+          get :comments
+        end
       end
       resources :categories
     end

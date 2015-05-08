@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
       PrivatePub.publish_to message, comment: comment.as_json(methods: [:author, :humanized_date])
       render nothing: true
     else
-      render json: comment.errors.to_json, status: :unprocessible_entity
+      render json: comment.errors.to_json, status: :unprocessable_entity
     end
   end
 

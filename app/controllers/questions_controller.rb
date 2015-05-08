@@ -21,7 +21,6 @@ class QuestionsController < ApplicationController
 
   def create
     question = Question.new(question_params)
-    binding.pry
     if question.save
       PrivatePub.publish_to "/questions", question: question.as_json(methods: [:humanized_date, :answers_count, :comments_sum])
       render nothing: true
@@ -74,7 +73,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :text, :user_id, :category_id, :tag_list)
+    params.require(:question).permit(:title, :text, :user_id, :category_id, :tag_list => [])
   end
 
 end

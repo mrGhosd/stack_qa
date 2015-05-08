@@ -5,7 +5,7 @@ class Api::V1::AnswersController < Api::ApiController
 
   def index
     question = Question.find(params[:question_id])
-    render json: question.answers.as_json(methods: :user_name)
+    render json: question.answers.as_json(methods: [:user_name, :comments_count])
   end
 
   def create

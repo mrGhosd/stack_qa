@@ -1,7 +1,7 @@
 class Answer < ActiveRecord::Base
   belongs_to :user, touch: true
   belongs_to :question, touch: true
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   include ModelRate
   validates :text, presence: true
 
@@ -13,5 +13,9 @@ class Answer < ActiveRecord::Base
 
   def user_name
     self.user.correct_naming
+  end
+
+  def comments_count
+    self.comments.count
   end
 end
