@@ -5,7 +5,6 @@ class Api::V1::CommentsController < Api::ApiController
   end
 
   def create
-    binding.pry
     comment = entity.comments.new(comment_params)
     message = entity.class.to_s.eql?("Question") ? "/questions/#{params[:question_id]}/comments" :
         "/questions/#{params[:question_id]}/answers/comments/create"
