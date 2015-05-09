@@ -11,6 +11,11 @@ class Api::V1::UsersController < Api::ApiController
     end
   end
 
+  def show
+    user = User.find(params[:id])
+    render json: user.as_json(except: [:password, :password_encrypted], methods: [:correct_naming, :rate, :questions_count, :answers_count, :comments_count, :statistic])
+  end
+
   def questions
     user = User.find(params[:id])
     render json: user.questions.as_json, status: :ok
@@ -23,7 +28,7 @@ class Api::V1::UsersController < Api::ApiController
 
   def comments
     user = User.find(params[:id])
-    render json: user.comments.as_json, status: :ok
+    render json: user.comments.as_json(methods: [:question, :answer]), status: :ok
   end
 
   def user_params

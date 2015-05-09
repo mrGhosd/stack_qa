@@ -14,6 +14,10 @@ class Comment <ActiveRecord::Base
     end
   end
 
+  def answer
+    Answer.find(self.commentable_id) if self.commentable_type.eql?("Answer")
+  end
+
   def author
     User.find(self.user_id).correct_naming
   end

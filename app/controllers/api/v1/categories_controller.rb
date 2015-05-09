@@ -5,4 +5,14 @@ class Api::V1::CategoriesController < Api::ApiController
     categories = Category.all
     render json: categories.as_json, status: :ok
   end
+
+  def questions
+    category = Category.find(params[:id])
+    render json: category.questions.as_json(methods: [:answers_count, :comments_count, :tag_list]), status: :ok
+  end
+
+  def show
+    category = Category.find(params[:id])
+    render json: category.as_json, status: :ok
+  end
 end

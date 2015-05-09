@@ -46,6 +46,7 @@ gem 'cancancan'
 gem 'doorkeeper'
 gem 'oj'
 gem 'oj_mimic_json'
+gem 'faker'
 gem 'active_model_serializers'
 gem "letter_opener"
 gem 'letter_opener_web'

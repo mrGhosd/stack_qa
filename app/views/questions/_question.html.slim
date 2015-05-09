@@ -20,6 +20,6 @@
         = link_to "", "#", class: "glyphicon glyphicon-remove btn btn-xs btn-danger delete-question", data: {question: question.id, remote: true}
   .category-info
     .category
-      = link_to question.category.title, category_path(question.category)
+      = link_to question.category.title, category_path(question.category) if question.category
     .question-tags
       = raw question.tags.map {|t| link_to t, tag_questions_path(tag: t.name), class: "question-tag"}.join(", ")
