@@ -1,7 +1,7 @@
 class Api::V1::CommentsController < Api::ApiController
   include ApiComments
   def index
-    render json: entity.comments.as_json(methods: [:question, :answer]), status: :ok
+    render json: entity.comments.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:question, :answer]), status: :ok
   end
 
   def create

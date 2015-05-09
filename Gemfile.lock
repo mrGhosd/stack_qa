@@ -407,6 +407,7 @@ GEM
     websocket-extensions (0.1.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
+    will_paginate (3.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -475,3 +476,4 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   whenever
+  will_paginate

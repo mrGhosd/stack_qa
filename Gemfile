@@ -47,6 +47,7 @@ gem 'doorkeeper'
 gem 'oj'
 gem 'oj_mimic_json'
 gem 'faker'
+gem 'will_paginate'
 gem 'active_model_serializers'
 gem "letter_opener"
 gem 'letter_opener_web'

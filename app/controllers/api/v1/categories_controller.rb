@@ -8,7 +8,7 @@ class Api::V1::CategoriesController < Api::ApiController
 
   def questions
     category = Category.find(params[:id])
-    render json: category.questions.as_json(methods: [:answers_count, :comments_count, :tag_list]), status: :ok
+    render json: category.questions.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:answers_count, :comments_count, :tag_list]), status: :ok
   end
 
   def show

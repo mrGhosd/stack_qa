@@ -70,7 +70,7 @@ class User <ActiveRecord::Base
   def self.send_daily_digest
     all.each do |user|
       DailyMailer.digest(user).deliver
-    end
+    end unless Rails.env == "development"
   end
 
   def has_voted?(object)

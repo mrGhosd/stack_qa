@@ -5,7 +5,7 @@ class Api::V1::AnswersController < Api::ApiController
 
   def index
     question = Question.find(params[:question_id])
-    render json: question.answers.as_json(methods: [:user_name, :comments_count])
+    render json: question.answers.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:user_name, :comments_count])
   end
 
   def create

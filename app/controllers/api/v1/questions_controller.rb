@@ -2,7 +2,7 @@ class Api::V1::QuestionsController < Api::ApiController
   before_action :doorkeeper_authorize!, only: :create
 
   def index
-    questions = Question.all
+    questions = Question.paginate(page: params[:page] || 1, per_page: 20).top
     render json: questions.as_json(methods: [:answers_count, :comments_count, :tag_list])
   end
 
