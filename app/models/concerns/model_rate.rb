@@ -4,7 +4,7 @@ module ModelRate
       self.errors[:was_voted] << true
       false
     else
-      vote_exists?(user) ? update_vote(user, rate) : create_vote(user, calc_rate(rate))
+      vote_exists?(user) ? destroy_vote(user, rate) : create_vote(user, calc_rate(rate), rate)
       self.update(rate: calc_rate(rate))
     end
   end
@@ -14,10 +14,14 @@ module ModelRate
   end
 
   def votes_are_same?(user, value)
+    action = value == 1 ? "plus" : "minus"
     vote = user.votes.find_by(vote_id:self.id, vote_type: self.class.to_s)
     if vote
-      return vote.rate == value ? true : false if vote
-      return vote.rate + value == 0 ? false : true unless vote.blank?
+      if vote.vote_value == action
+        return true
+      else
+        return false
+      end
     else
       false
     end
@@ -32,11 +36,15 @@ module ModelRate
     user.votes.find_by(vote_id:self.id, vote_type: self.class.to_s).blank? ? false : true
   end
 
-  def update_vote(user, rate)
-    user.votes.find_by(vote_id:self.id, vote_type: self.class.to_s).update(rate: calc_rate(rate))
+  def destroy_vote(user, rate)
+    user.votes.find_by(vote_id:self.id, vote_type: self.class.to_s).destroy
   end
 
-  def create_vote(user, rate)
-    Vote.create(user_id: user.id, vote_id: self.id, vote_type: self.class.to_s, rate: rate)
+  def update_vote(user, rate)
+    user.votes.find_by(vote_id:self.id, vote_type: self.class.to_s).update(vote_value: rate, rate: calc_rate(rate))
+  end
+
+  def create_vote(user, rate, vote_action)
+    Vote.create(user_id: user.id, vote_id: self.id, vote_value: vote_action, vote_type: self.class.to_s, rate: rate)
   end
 end

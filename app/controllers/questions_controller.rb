@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   include UserStatistic
 
   def index
-    @questions = Question.top
+    @questions = Question.paginate(page: params[:page] || 1, per_page: 20).top
   end
 
   def new

@@ -27,7 +27,7 @@ class Api::V1::QuestionsController < Api::ApiController
 
   def show
     question = Question.find(params[:id])
-    render json: question.as_json(methods: [:tag_list, :category, :answers_count, :comments_count])
+    render json: question.as_json(methods: [:tag_list, :category, :user, :answers_count, :comments_count])
   end
 
   def destroy
