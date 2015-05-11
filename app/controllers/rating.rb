@@ -5,7 +5,7 @@ module Rating
     @rate = params[:rate]
     if @object.update_rating(current_user || current_resource_owner, params[:rate])
       rate_callback
-      render json: {rate: @object.rate}, status: :ok
+      render json: {rate: @object.rate, action: params[:rate]}, status: :ok
     else
       render json: @object.errors.to_json, status: :forbidden
     end

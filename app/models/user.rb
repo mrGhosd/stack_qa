@@ -47,6 +47,10 @@ class User <ActiveRecord::Base
     user
   end
 
+  def vote_on_question(question)
+    self.votes.where(vote_id: question.id, vote_type: question.class.to_s).last
+  end
+
   def rate
     self.statistic.rate
   end
