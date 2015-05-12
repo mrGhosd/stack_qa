@@ -8,6 +8,7 @@ class Question < ActiveRecord::Base
   has_many :tags, through: :taggings
   validates :title, :text, presence: true
   validates :title, uniqueness: true
+  validates :category_id, presence: true
 
   acts_as_taggable
 

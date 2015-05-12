@@ -11,30 +11,61 @@ feature "Question for signed in user", :js do
 
   scenario "see the questions" do
     expect(page).to have_content(question.title)
-    expect(page).to have_content(question.text)
   end
 
-  scenario "create a question" do
-    click_link "Создать вопрос..."
-    within "#new_question" do
-      fill_in "question_title", with: "TEXT"
-      fill_redactor_editor("question_text", "2")
-      select category.title, from: "question_category_id"
-      click_button "Сохранить"
+  context "with valid attributes" do
+    scenario "create a question" do
+      click_link "Создать вопрос..."
+      within "#new_question" do
+        fill_in "question_title", with: "TEXT"
+        fill_in "question_text", with: "2"
+        select category.title, from: "question_category_id"
+        click_button "Сохранить"
+      end
+      sleep 1
+      expect(page).to have_content "TEXT"
     end
-    sleep 1
-    expect(page).to have_content "TEXT"
+  end
+
+  context "with invalid attributes" do
+    scenario "doesn't create a question" do
+      click_link "Создать вопрос..."
+      within "#new_question" do
+        fill_in "question_title", with: ""
+        fill_in "question_text", with: "2"
+        select category.title, from: "question_category_id"
+        click_button "Сохранить"
+      end
+      sleep 1
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
+
+    scenario "doesn't update an question" do
+      find(".glyphicon.glyphicon-pencil", match: :first).click
+      expect(page).to have_content("Редактировать вопрос")
+      within "form" do
+        fill_in "question_title", with: ""
+        fill_in "question_text", with: "2"
+        select category.title, from: "question_category_id"
+        click_button "Сохранить"
+      end
+      expect(page).to have_css(".error")
+      expect(page).to have_css(".error-text")
+      expect(page).to have_content("can't be blank")
+    end
   end
 
   context "existed question was created by current user" do
-    let!(:current_user_question) { create :question, :unclosed, title: "ololo", user_id: user.id }
+    let!(:current_user_question) { create :question, :unclosed, title: "ololo", user_id: user.id, category_id: category.id }
 
     scenario "edit question" do
       find(".glyphicon.glyphicon-pencil", match: :first).click
       expect(page).to have_content("Редактировать вопрос")
       within "form" do
         fill_in "question_title", with: "5"
-        fill_redactor_editor("question_text", "2")
+        fill_in "question_text", with: "2"
         select category.title, from: "question_category_id"
         click_button "Сохранить"
       end
@@ -50,7 +81,8 @@ feature "Question for signed in user", :js do
 end
 
 feature "Question for unsigned in user", :js do
-  let!(:question) { create :question, :unclosed }
+  let!(:category) { create :category }
+  let!(:question) { create :question, :unclosed, category_id: category.id }
   scenario "cannot be answered or edited" do
     visit root_path
     expect(page).to have_content(question.title)
