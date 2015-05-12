@@ -17,13 +17,6 @@ html
             li= link_to "Категории", categories_path
             li = link_to "Админка", admin_categories_path if current_user && current_user.is_admin?
           .navbar-form.navbar-right.content-actions
-            .search-control
-              = select_tag "search_filter", options_for_select([["Без фильтра",""],
-                                                                 ["Вопросы", "Question"], ["Комментарии", "Comment"],
-                                                               ["Ответы", "Answer"], ["Пользователи", "User"]]), class: "form-control"
-              = search_field_tag 'search', nil, class: 'form-control'
-              = link_to "Поиск", "#", remote: true, class: 'btn btn-default search-link'
-              .search-list
             .authentication-links
               - if current_user
                 .rating
