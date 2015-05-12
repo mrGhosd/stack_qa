@@ -51,5 +51,38 @@ feature "Existing user", :js do
     click_button "Отправить"
     expect(page).to have_content("Invalid email or password")
   end
+
+
+end
+
+feature "Edit profile", :js do
+  let!(:user) { create :user, :confirmed }
+
+  before do
+    sign_in user
+    sleep 1
+  end
+
+  context "with valid attributes" do
+    scenario "updating" do
+      visit user_path(user)
+      find(".edit-user", match: :first).click
+      fill_in "user_surname", with: "newSurName"
+      fill_in "user_name", with: "newName"
+      find(".save-user", match: :first).click
+      expect(page).to have_content("newSurName")
+    end
+  end
+
+  context "with invalid attributes" do
+    scenario "doesn't update" do
+      visit user_path(user)
+      find(".edit-user", match: :first).click
+      fill_in "user_surname", with: "newSurName"
+      fill_in "user_email", with: ""
+      find(".save-user", match: :first).click
+      expect(page).to have_content("can't be blank")
+    end
+  end
 end
 

@@ -1,7 +1,11 @@
 - if flash[:alert]
   .alert.alert-danger
     button.close[data-dismiss="alert" aria-hidden="true"]="&times;".html_safe
-    = flash[:alert]
+    - flash[:alert].each do |key, value|
+      p= key
+      ul
+        - value.each do |v|
+          li= v
 
 - if flash[:success]
   .alert.alert-success

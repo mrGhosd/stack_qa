@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
-      render json: @user.errors.to_json
+      redirect_to user_path(@user), alert: @user.errors
     end
   end
 
