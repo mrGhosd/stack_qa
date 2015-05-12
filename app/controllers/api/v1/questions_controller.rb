@@ -19,7 +19,6 @@ class Api::V1::QuestionsController < Api::ApiController
   end
 
   def update
-    binding.pry
     question = Question.find(params[:id])
     if question.update(question_params)
       render json: question.to_json, status: :ok

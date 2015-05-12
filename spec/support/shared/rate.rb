@@ -19,7 +19,7 @@ shared_examples_for "rate" do
     end
 
     context "user voted this question positive" do
-      let!(:vote) { create :vote, user_id: subject.current_user.id, vote_id: object.id, vote_type: object.class.to_s, rate: 1 }
+      let!(:vote) { create :vote, user_id: subject.current_user.id, vote_id: object.id, vote_value: 'plus', vote_type: object.class.to_s, rate: 1 }
       before { object.update(rate: vote.rate) }
       it "doesn't increase a question's rate" do
         post :rate, params.merge({rate: "plus"})
