@@ -13,9 +13,9 @@ class Api::V1::AnswersController < Api::ApiController
     if answer.save
       PrivatePub.publish_to "/questions/#{answer.question_id}/answers", answer: answer.to_json
       Answer.delay.send_notification_to_author(answer)
-      render json: answer.as_json(methods: :user_name), status: :ok
+      render json: answer.as_json(methods: [:user_name, :comments_count]), status: :ok
     else
-      render json: answer.errors.to_json, status: :unprocessible_entity
+      render json: answer.errors.to_json, status: :unprocessable_entity
     end
   end
 
@@ -23,9 +23,9 @@ class Api::V1::AnswersController < Api::ApiController
     answer = Answer.find(params[:id])
     if answer.update(answers_params)
       PrivatePub.publish_to "/questions/#{answer.question_id}/answers/edit", answer: answer.to_json
-      render json: answer.as_json(methods: :user_name), status: :ok
+      render json: answer.as_json(methods: [:comments_count, :user_name]), status: :ok
     else
-      render json: answer.errors.to_json, status: :unprocessible_entity
+      render json: answer.errors.to_json, status: :unprocessable_entity
     end
   end
 
