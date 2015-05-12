@@ -355,6 +355,8 @@ GEM
       slim (~> 3.0)
     slop (3.6.0)
     spring (1.3.5)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -470,6 +472,7 @@ DEPENDENCIES
   sidetiq
   slim-rails
   spring
+  spring-commands-rspec
   therubyracer
   thin
   thinking-sphinx

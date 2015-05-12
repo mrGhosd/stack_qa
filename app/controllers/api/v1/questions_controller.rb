@@ -28,7 +28,7 @@ class Api::V1::QuestionsController < Api::ApiController
   end
 
   def show
-    question = Question.find(params[:id])
+    question = Question.includes([:comments, :category, :user, :tags]).find(params[:id])
     current_user_voted = {"current_user_voted" => current_resource_owner.vote_on_question(question) }
     render json: question.as_json(methods: [:tag_list, :category, :user, :answers_count, :comments_count]).merge(current_user_voted)
   end

@@ -62,6 +62,7 @@ gem 'unicorn'
 gem 'redis-rails'
 gem 'acts-as-taggable-on'
 gem 'chosen-rails'
+gem 'spring-commands-rspec'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

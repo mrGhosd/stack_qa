@@ -4,7 +4,7 @@ class Api::V1::AnswersController < Api::ApiController
   include UserStatistic
 
   def index
-    question = Question.find(params[:question_id])
+    question = Question.includes(:answers).find(params[:question_id])
     render json: question.answers.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:user_name, :comments_count])
   end
 
