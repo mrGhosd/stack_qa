@@ -3,12 +3,13 @@ require 'rails_helper'
 describe "Question" do
   feature "Unsigned user", :js do
     let!(:user){ create :user }
-    let!(:question){ create :question, user_id: user.id }
+    let!(:category) { create :category }
+    let!(:question){ create :question, user_id: user.id, category_id: category.id }
     let!(:comment) { create :comment, user_id: user.id, commentable_id: question.id, commentable_type: "Question" }
 
     before do
       visit root_path
-      click_link(".question-item .title", match: :first)
+      click_link("#{question.title}")
     end
 
     scenario "see list of comments" do
@@ -22,7 +23,8 @@ describe "Question" do
 
   feature "Signed in user", :js do
     let!(:user){ create :user }
-    let!(:question){ create :question, user_id: user.id }
+    let!(:category) { create :category }
+    let!(:question){ create :question, user_id: user.id, category_id: category.id }
     let!(:comment) { create :comment, user_id: user.id, commentable_id: question.id, commentable_type: "Question" }
 
     before do
