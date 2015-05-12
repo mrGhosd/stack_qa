@@ -4,7 +4,7 @@
     = f.hidden_field :user_id, value: current_user.id
     .form-group
       .col-md-5
-        = f.text_area :text, class: 'form-control redactor', placeholder: 'Текст'
+        = f.text_area :text, class: 'form-control', placeholder: 'Текст'
     = f.submit "Отправить", class: 'btn btn-success submit-answer', remote: true, data: {question: @question.id}
     - if params[:action] == "edit"
       = link_to "Отменить", "#", class:'btn btn-default remove-edit-form', remote: true

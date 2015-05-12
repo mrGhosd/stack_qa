@@ -49,7 +49,7 @@ feature "Admin", :js do
         attach_file "category_image", "#{Rails.root}/app/assets/images/Ruby_on_Rails.png"
         click_button "Сохранить"
       end
-      sleep 1
+      sleep 0.1
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
@@ -61,7 +61,7 @@ feature "Admin", :js do
         fill_in "category_title", with: ""
         click_button "Сохранить"
       end
-      sleep 1
+      sleep 0.1
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
       expect(page).to have_content("can't be blank")
@@ -98,10 +98,10 @@ feature "User", :js do
   scenario "hide and show category description" do
     find(".category-title", match: :first).click
     find(".toggle-description").click
-    sleep 1
+    sleep 0.1
     expect(page).to_not have_content category.description
     find(".toggle-description").click
-    sleep 1
+    sleep 0.1
     expect(page).to have_content category.description
   end
 

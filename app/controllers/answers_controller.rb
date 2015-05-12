@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
   include UserStatistic
 
   after_action :answer_to_question, only: :create
+  before_action :sanitaze_text, only: [:create, :update]
 
   def new
     @question = Question.find(params[:question_id])
@@ -17,7 +18,7 @@ class AnswersController < ApplicationController
       Answer.delay.send_notification_to_author(@answer)
       render nothing: true
     else
-      render json: @answer.errors.to_json, status: :unprocessible_entity
+      render json: @answer.errors.to_json, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +34,7 @@ class AnswersController < ApplicationController
       PrivatePub.publish_to "/questions/#{answer.question_id}/answers/edit", answer: answer.to_json
       render nothing: true
     else
-      render json: answer.errors.to_json, status: :unprocessible_entity
+      render json: answer.errors.to_json, status: :unprocessable_entity
     end
   end
 
@@ -59,5 +60,9 @@ class AnswersController < ApplicationController
   private
   def answers_params
     params.require(:answer).permit(:question_id, :user_id, :text)
+  end
+
+  def sanitaze_text
+    params[:answer][:text] = ActionView::Base.full_sanitizer.sanitize(params[:answer][:text])
   end
 end
