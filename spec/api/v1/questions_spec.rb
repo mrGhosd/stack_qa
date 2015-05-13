@@ -152,7 +152,7 @@ describe "Questions API" do
     it "return success status" do
       delete "api/v1/questions/#{question.id}", format: :json,
              id: question.id, access_token: access_token.token
-      expect(response.status).to eq(200)
+      expect(response.status).to eq()
     end
 
   end

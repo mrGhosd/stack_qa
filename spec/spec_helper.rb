@@ -8,6 +8,7 @@ require 'support/features_helper'
 require 'cancan/matchers'
 require 'support/shared/api_authorization'
 require 'support/shared/rate'
+require 'support/shared/comment_api'
 require 'sidekiq/testing'
 
 Sidekiq::Testing.inline!
