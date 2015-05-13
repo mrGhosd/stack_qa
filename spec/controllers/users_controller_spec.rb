@@ -16,7 +16,8 @@ describe UsersController do
   end
 
   describe "GET #show" do
-    let!(:question){ create :question, user_id: subject.current_user.id }
+    let!(:category) { create :category }
+    let!(:question){ create :question, user_id: subject.current_user.id, category_id: category.id }
     let!(:answer){ create :answer, user_id: subject.current_user.id, question_id: question.id }
     let!(:comment) { create :comment, user_id: subject.current_user.id, commentable_type: question.class.to_s, commentable_id: question.id }
 

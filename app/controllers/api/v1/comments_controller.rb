@@ -10,7 +10,7 @@ class Api::V1::CommentsController < Api::ApiController
         "/questions/#{params[:question_id]}/answers/comments/create"
     if comment.save
       PrivatePub.publish_to message, comment: comment.as_json(methods: [:author, :humanized_date])
-      render json: comment.as_json, status: :ok
+      render json: comment.as_json(methods: [:question, :answer, :user]), status: :ok
     else
       render json: comment.errors.to_json, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class Api::V1::CommentsController < Api::ApiController
         "/questions/#{Answer.find(comment.commentable_id).question.id}/answers/comments/edit"
     if comment.update(comment_params)
       PrivatePub.publish_to message, comment: comment.as_json(methods: [:author, :humanized_date])
-      render json: comment.as_json(methods: [:author, :humanized_date]), status: :ok
+      render json: comment.as_json(methods: [:question, :answer, :user]), status: :ok
     else
       render json: comment.errors.to_json, status: :unprocessable_entity
     end

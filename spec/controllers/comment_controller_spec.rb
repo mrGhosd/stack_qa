@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe CommentsController do
   login_user
-  let!(:question){ create :question, user_id: subject.current_user.id }
+  let!(:category) { create :category }
+  let!(:question){ create :question, user_id: subject.current_user.id, category_id: category.id }
   let!(:comment) { create :comment, commentable_id: question.id, commentable_type: "Question", user_id: subject.current_user.id }
 
   describe "POST #create" do

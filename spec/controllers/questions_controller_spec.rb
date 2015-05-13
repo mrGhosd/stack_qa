@@ -2,12 +2,13 @@ require 'rails_helper'
 
 describe QuestionsController do
   login_user
-  let!(:question) { create :question, :unclosed, user_id: subject.current_user.id }
+  let!(:category) { create :category }
+  let!(:question) { create :question, :unclosed, user_id: subject.current_user.id, category_id: category.id }
 
   describe "GET #index" do
     it "return top list of questions" do
       get :index
-      expect(assigns(:questions)).to eq(Question.top)
+      expect(assigns(:questions)).to eq(Question.paginate(page: 1, per_page: 20).top)
     end
 
     it "render the index  template" do
@@ -43,11 +44,11 @@ describe QuestionsController do
   describe "POST #create" do
     context "with valid attributes" do
       it "create a new question" do
-        expect{post :create, question: attributes_for(:question, title: "1", user_id: subject.current_user.id)}.to change(Question, :count).by(1)
+        expect{post :create, question: attributes_for(:question, title: "1", user_id: subject.current_user.id, category_id: category.id)}.to change(Question, :count).by(1)
       end
 
       it "redirect to questions list" do
-        post :create, question: attributes_for(:question, title: "2", user_id: subject.current_user.id)
+        post :create, question: attributes_for(:question, title: "2", user_id: subject.current_user.id, category_id: category.id)
         expect(response.status).to eq(200)
       end
     end
