@@ -31,7 +31,7 @@ class Api::V1::AnswersController < Api::ApiController
 
   def show
     answer = Answer.find(params[:id])
-    render json: answer
+    render json: answer.as_json
   end
 
   def helpfull
