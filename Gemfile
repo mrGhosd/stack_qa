@@ -9,7 +9,8 @@ gem 'pg'
 gem "carrierwave"
 gem "mini_magick"
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '4.0.3'
+gem 'sass', '3.2.19'
 gem 'bootstrap-sass'
 gem 'redactor-rails'
 gem "markitup-rails"
