@@ -2,6 +2,7 @@ class Answer < ActiveRecord::Base
   belongs_to :user, touch: true
   belongs_to :question, touch: true
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :complaints, as: :complaintable, dependent: :destroy
   include ModelRate
   validates :text, presence: true
 

@@ -1,7 +1,8 @@
 class Comment <ActiveRecord::Base
   belongs_to :user
   belongs_to :commentable, polymorphic: true, touch: true
-
+  has_many :complaints, as: :complaintable, dependent: :destroy
+  
   validates :text, presence: true
 
   default_scope { order(created_at: :desc) }

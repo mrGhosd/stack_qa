@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   belongs_to :category
   has_many :answers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :complaints, as: :complaintable, dependent: :destroy
   has_many :question_users, dependent: :destroy
   has_many :taggings
   has_many :tags, through: :taggings
