@@ -18,3 +18,9 @@
                     comment: comment.id,
                     type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
                     remote: true }
+          = link_to "", "#", class: "btn btn-warning btn-xs complain-comment glyphicon glyphicon-lock",
+            data: {question: comment.question.id,
+                   answer: "#{comment.commentable.id if comment.commentable.class == Answer}",
+                   comment: comment.id,
+                   type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
+                   remote: true}, title: "Пожаловаться"

@@ -14,6 +14,9 @@ $ ->
     event.stopPropagation()
     removeComment($(this))
 
+  $(".complain-comment").click ->
+    complainComment($(this))
+
   $(document).delegate(".comment-form", "submit", (event)->
     event.preventDefault()
     event.stopPropagation()
@@ -123,7 +126,24 @@ removeComment = (button) ->
     success: ->
       $(button).closest(".comment-item").fadeOut('slow')
 
+complainComment = (button) ->
+  type = $(button).data("type")
+  question = $(button).data("question")
+  answer = $(button).data("answer")
+  comment = $(button).data("comment")
 
+  if type == "Question"
+    url = "/questions/#{question}/comments/#{comment}/complaints"
+  if type == "Answer"
+    url = "/questions/#{question}/answers/#{answer}/comments/#{comment}/complaints"
+
+  $.ajax url,
+    type: "POST"
+    data: {complaint: {complaintable_id: comment, complaintable_type: "Comment" }}
+    success: (response, request) ->
+      text = "<div class='complain_message'>Благодарим вас за бдительность. " +
+          "В ближайшее время мы рассмотрим данную жалобу</div>"
+      showMessage(text)
 
 editComment = (button)->
   type = $(button).data("type")
@@ -141,3 +161,8 @@ editComment = (button)->
     template = JST["templates/comment_form"](form: {question: question, answer: answer, action: "Update", type: type, comment: comment, text: text, request_type: "PUT", cancel: true})
     $(button).closest(".comment-item").hide()
     $(button).closest(".comment-item").after template
+
+showMessage = (text) ->
+  $("body").prepend JST["templates/modal"]
+  $("#messageModal .modal-body").html(text)
+  $("#messageModal").modal('show')
