@@ -1,0 +1,4 @@
+.complaint-item
+  .user
+    = complaint.user.correct_naming
+    = complaint.parent.try(:title) || complaint.parent.try(:text).first(10)

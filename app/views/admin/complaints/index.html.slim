@@ -1,0 +1,5 @@
+.complaints-list
+  - @complaints.each do |complaint|
+    = render "complaint", locals: { complaint: complaint }
+
+  = will_paginate @complaints
