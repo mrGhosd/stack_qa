@@ -1,5 +1,5 @@
 class Api::V1::AnswersController < Api::ApiController
-  before_action :doorkeeper_authorize!, only: [:create]
+  before_action :doorkeeper_authorize!, only: [:create, :update, :helpfull, :destroy]
   include Rating
   include UserStatistic
 

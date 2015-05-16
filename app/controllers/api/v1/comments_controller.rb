@@ -1,4 +1,5 @@
 class Api::V1::CommentsController < Api::ApiController
+  before_action :doorkeeper_authorize!, only: [:create, :update, :destroy]
   include ApiComments
 
   def index
