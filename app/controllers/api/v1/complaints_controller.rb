@@ -1,4 +1,5 @@
-class Api::V1::ComplaintsController < ApplicationController
+class Api::V1::ComplaintsController < Api::ApiController
+  before_action :doorkeeper_authorize!, only: :create
   include ComplaintsEntities
 
   def create

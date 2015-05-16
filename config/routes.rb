@@ -50,9 +50,9 @@ Rails.application.routes.draw do
       resources :profiles do
         get :me, on: :collection
       end
-      resources :questions, concerns: [:rating, :commentable] do
+      resources :questions, concerns: [:rating, :commentable, :complaints] do
         get :filter, on: :collection
-        resources :answers, concerns: [:rating, :commentable] do
+        resources :answers, concerns: [:rating, :commentable, :complaints] do
           post :helpfull, on: :member
         end
       end
