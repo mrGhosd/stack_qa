@@ -7,6 +7,7 @@ describe Question do
   it { should have_many :answers }
   it { should belong_to(:user) }
   it { should have_many :comments }
+  it { should have_many :complaints }
   it { should have_many :question_users }
   it { should belong_to(:category) }
   it { should have_db_index :title }
