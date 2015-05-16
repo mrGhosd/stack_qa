@@ -5,6 +5,13 @@
       span.comment-author= " &mdash; #{link_to username_for_comment(comment.user), user_path(comment.user)}".html_safe
       span.comment-date= " в #{comment.created_at.strftime("%H:%M:%S %d.%m.%Y")}"
     .comment-right-part
+      - if current_user
+        = link_to "", "#", class: "btn btn-warning btn-xs complain-comment glyphicon glyphicon-lock",
+                  data: {question: comment.question.id,
+                         answer: "#{comment.commentable.id if comment.commentable.class == Answer}",
+                         comment: comment.id,
+                         type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
+                         remote: true}, title: "Пожаловаться"
       - if current_user && comment.in?(current_user.comments)
         .comment-actions
           = link_to "", "#", class: 'btn btn-success btn-xs edit-comment glyphicon glyphicon-pencil',
@@ -18,9 +25,3 @@
                     comment: comment.id,
                     type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
                     remote: true }
-          = link_to "", "#", class: "btn btn-warning btn-xs complain-comment glyphicon glyphicon-lock",
-            data: {question: comment.question.id,
-                   answer: "#{comment.commentable.id if comment.commentable.class == Answer}",
-                   comment: comment.id,
-                   type: "#{comment.commentable.class == Answer ? "Answer" : "Question"}",
-                   remote: true}, title: "Пожаловаться"

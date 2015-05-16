@@ -51,4 +51,11 @@ feature "Admin", :js do
     expect(page).to have_content(question.title)
     expect(page).to have_content(user.correct_naming)
   end
+
+  scenario "delete a complaint" do
+    visit admin_complaints_path
+    find(".delete-complaint", match: :first).click
+    expect(page).to_not have_content(question.title)
+    expect(page).to_not have_content(user.correct_naming)
+  end
 end

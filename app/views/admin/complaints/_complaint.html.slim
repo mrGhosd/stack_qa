@@ -1,4 +1,7 @@
 .complaint-item
   .user
-    = complaint.user.correct_naming
-    = complaint.parent.try(:title) || complaint.parent.try(:text).first(10)
+    = link_to complaint.user.correct_naming, user_path(complaint.user)
+  .parent
+    = link_to(complaint.parent.try(:title) || complaint.parent.try(:text).first(10), question_path(complaint.parent.try(:question) || complaint.parent))
+  .actions
+    = link_to "", "#", remote: true, class: "btn btn-xs btn-danger delete-complaint glyphicon glyphicon-remove", data: {complaint: complaint.id}
