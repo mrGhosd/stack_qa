@@ -20,7 +20,8 @@
           - if current_user && answer.in?(current_user.answers)
             = link_to "", "#", class: 'btn btn-info edit-answer glyphicon glyphicon-pencil', data: {question: answer.question_id, answer: answer.id}, remote: true
             = link_to "", "#", class: 'btn btn-danger remove-answer glyphicon glyphicon-remove', data: {question: answer.question_id, answer: answer.id}, remote: true
+            = link_to "", "#", class: 'btn btn-warning glyphicon glyphicon-lock complain-answer', data: {question: answer.question_id, answer: answer.id}, remote: true, title: "Пожаловаться"
       .answer-comments-list
-        - cache "#{Answer.maximum(:updated_at)}# #{Comment.maximum(:updated_at)}#"
+        - cache "#{answer.id} #{Answer.maximum(:updated_at)}# #{Comment.maximum(:updated_at)}#"
           - answer.comments.each do |comment|
             = render partial: "comments/comment", locals: { comment: comment }

@@ -71,6 +71,17 @@ $ ->
       success: ->
         $(item).fadeOut('slow')
 
+  $(".complain-answer").click ->
+    question = $(this).data("question")
+    answer = $(this).data("answer")
+    $.ajax "/questions/#{question}/answers/#{answer}/complaints",
+      type: "POST"
+      data: { complaint: {complaintable_id: answer, complaintable_type: "Answer" } }
+      success: (response, request) ->
+        text = "<div class='complain_message'>Благодарим вас за бдительность. " +
+            "В ближайшее время мы рассмотрим данную жалобу</div>"
+        showMessage(text)
+
   $(".answer-is-helpfull").click ->
     markAnswerAsHelpful($(this))
 
@@ -117,3 +128,9 @@ markAnswerAsHelpful = (button) ->
     error: (response, request)->
       console.log response
       console.log request
+
+
+showMessage = (text) ->
+  $("body").prepend JST["templates/modal"]
+  $("#messageModal .modal-body").html(text)
+  $("#messageModal").modal('show')
