@@ -37,12 +37,12 @@ feature "User", :js do
 end
 
 feature "Admin", :js do
-  let!(:user) { create :user }
+  let!(:user) { create :user, :admin }
   let!(:category) { create :category }
   let!(:question) { create :question, user_id: user.id, category_id: category.id }
   let!(:complaint) { create :complaint, complaintable_type: question.class.to_s, complaintable_id: question.id, user_id: user.id }
 
-  before do
+  before :each do
     sign_in user
   end
 
