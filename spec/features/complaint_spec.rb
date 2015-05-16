@@ -35,3 +35,20 @@ feature "User", :js do
     end
   end
 end
+
+feature "Admin", :js do
+  let!(:user) { create :user }
+  let!(:category) { create :category }
+  let!(:question) { create :question, user_id: user.id, category_id: category.id }
+  let!(:complaint) { create :complaint, complaintable_type: question.class.to_s, complaintable_id: question.id, user_id: user.id }
+
+  before do
+    sign_in user
+  end
+
+  scenario "visit admin complaint_path and see a list of complaints" do
+    visit admin_complaints_path
+    expect(page).to have_content(question.title)
+    expect(page).to have_content(user.correct_naming)
+  end
+end
