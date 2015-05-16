@@ -2,7 +2,12 @@ class ComplaintsController < ApplicationController
   include ComplaintsEntities
 
   def create
-    complaint = entity.complaints.cre
+    complaint = entity.complaints.new(complaints_params)
+    if complaint.save
+      render json: {success: true}, status: :ok
+    else
+      render json: {success: false}, status: :unprocessable_entity
+    end
   end
 
   private

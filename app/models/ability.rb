@@ -24,6 +24,7 @@ class Ability
                   RedactorRails::Document,
                   RedactorRails::Picture, RedactorRails::Asset]
     can [:sign_in_question], Question
+    can :create, Complaint
     can :rate, [Question, Answer]
     can :create, [Question, Answer, Comment]
     can :helpfull, Answer do |resource|

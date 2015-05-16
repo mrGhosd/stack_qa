@@ -1,4 +1,4 @@
-module ComplaintsEntities do
+module ComplaintsEntities
   def entity
     parent = if params[:comment_id].present?
                "Comment"
