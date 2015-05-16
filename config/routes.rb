@@ -14,23 +14,26 @@ Rails.application.routes.draw do
   get "/search", to: "search#index"
 
   concern :commentable do
-    resources :comments
+    resources :comments, concerns: :complaints
   end
 
   concern :rating do
     post :rate
   end
 
+  concern :complaints do
+    resources :complaints, only: :create
+  end
+
   resources :categories
   resources :users, except: [:new, :create]
-  resources :questions, concerns: [:commentable, :rating] do
+  resources :questions, concerns: [:commentable, :rating, :complaints] do
     collection do
       post :filter
       get :tag
     end
-
     post :sign_in_question, on: :member
-    resources :answers, concerns: [:commentable, :rating] do
+    resources :answers, concerns: [:commentable, :rating, :complaints] do
       post :helpfull, on: :member
     end
   end
