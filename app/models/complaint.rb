@@ -3,13 +3,13 @@ class Complaint < ActiveRecord::Base
   belongs_to :complaintable, polymorphic: true, touch: true
 
   def parent
-    case self.commentable_type
+    case self.complaintable_type
       when "Question"
-        Question.find(self.commentable_id)
+        Question.find(self.complaintable_id)
       when "Answer"
-        Answer.find(self.commentable_id)
+        Answer.find(self.complaintable_id)
       when "Comment"
-        Comment.find(self.commentable_id)
+        Comment.find(self.complaintable_id)
       else
         nil
     end
