@@ -19,4 +19,15 @@ describe Admin::ComplaintsController do
       expect(response).to render_template :index
     end
   end
+
+  describe "DELETE #destroy" do
+    it "delete a somplaint" do
+      expect { delete :destroy, id: complaint.id }.to change(Complaint, :count).by(-1)
+    end
+
+    it "return success response" do
+      delete :destroy, id: complaint.id
+      expect(response.status).to eq(200)
+    end
+  end
 end
