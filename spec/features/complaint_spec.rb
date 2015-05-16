@@ -58,4 +58,14 @@ feature "Admin", :js do
     expect(page).to_not have_content(question.title)
     expect(page).to_not have_content(user.correct_naming)
   end
+
+  scenario "delete parent entity" do
+    visit admin_complaints_path
+    expect {
+      find(".delete-parent", match: :first).click
+    }.to change(Question, :count).by(-1)
+    expect(page).to_not have_content(question.title)
+    expect(page).to_not have_content(user.correct_naming)
+
+  end
 end
