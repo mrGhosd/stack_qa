@@ -5,3 +5,4 @@
     = link_to(complaint.parent.try(:title) || complaint.parent.try(:text).first(10), question_path(complaint.parent.try(:question) || complaint.parent))
   .actions
     = link_to "", "#", remote: true, class: "btn btn-xs btn-danger delete-complaint glyphicon glyphicon-remove", data: {complaint: complaint.id}
+    = link_to "", "#", remote: true, class: "btn btn-xs btn-danger delete-parent-complaint glyphicon glyphicon-upload", data: {complaint: complaint.id}

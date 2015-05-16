@@ -21,8 +21,24 @@ describe Admin::ComplaintsController do
   end
 
   describe "DELETE #destroy" do
-    it "delete a somplaint" do
+    it "delete a complaint" do
       expect { delete :destroy, id: complaint.id }.to change(Complaint, :count).by(-1)
+    end
+
+    it "return success response" do
+      delete :destroy, id: complaint.id
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "DELETE #parent" do
+
+    it "destroy a complaint" do
+      expect { delete :parent, id: complaint.id }.to change(Complaint, :count).by(-1)
+    end
+
+    it "delete a complaint's parent" do
+      expect { delete :parent, id: complaint.id }.to change(Question, :count).by(-1)
     end
 
     it "return success response" do
