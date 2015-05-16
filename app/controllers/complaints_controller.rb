@@ -2,7 +2,7 @@ class ComplaintsController < ApplicationController
   include ComplaintsEntities
 
   def create
-    complaint = entity.complaints.new(complaints_params)
+    complaint = entity.complaints.new(complaints_params.merge({user_id: current_user.id}))
     if complaint.save
       render json: {success: true}, status: :ok
     else

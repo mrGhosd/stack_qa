@@ -34,6 +34,7 @@
         = link_to "Ответить...", "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
         = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: @question.id, type: "Question"}, remote: true
         = link_to "Подписаться на обновления", "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
+        = link_to "Пожаловаться", "#", remote: true, class: "btn btn-danger complain-question", data: {question: @question.id}
     .comments-list
       - cache key_for_nested_resource(@question, @question.comments) do
         - @question.comments.each do |comment|

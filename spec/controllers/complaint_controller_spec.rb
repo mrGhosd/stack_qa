@@ -6,8 +6,6 @@ describe ComplaintsController do
   let!(:question) { create :question, user_id: subject.current_user.id, category_id: category.id }
   let!(:complaint) { create :complaint, user_id: subject.current_user.id, complaintable_id: question.id, complaintable_type: question.class.to_s }
 
-
-
   describe "POST #create" do
     it "create a new complaint" do
       expect { post :create, question_id: question.id, complaint: attributes_for(:complaint,

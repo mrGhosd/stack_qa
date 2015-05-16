@@ -12,8 +12,7 @@ feature "User", :js do
 
     scenario "create complaint" do
       visit question_path(question)
-      find('complain-question', match: :first).click
-      sleep 0.2
+      find('.complain-question', match: :first).click
       expect(page).to have_css(".complain_message")
     end
   end

@@ -27,6 +27,10 @@ $ ->
   $(".question-filters a").click ->
     questionFilter($(this))
 
+  $(".complain-question").click ->
+    complainQuestion($(this))
+
+
 $(document).delegate(".question_form", "submit", (event)->
   event.preventDefault()
   event.stopPropagation()
@@ -70,6 +74,15 @@ signInQuestion = (button)->
     error: (response, request)->
       showMessage(response.error)
 
+complainQuestion = (button) ->
+  question = $(button).data("question")
+  $.ajax "/questions/#{question}/complaints",
+    type: "POST"
+    data: {complaint: {complaintable_id: question, complaintable_type: "Question" } }
+    success: (response, request) ->
+      text = "<div class='complain_message'>Благодарим вас за бдительность. " +
+          "В ближайшее время мы рассмотрим данную жалобу</div>"
+      showMessage(text)
 
 
 showMessage = (text) ->
