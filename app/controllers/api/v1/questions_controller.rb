@@ -1,10 +1,11 @@
+require 'will_paginate/array'
 class Api::V1::QuestionsController < Api::ApiController
   before_action :doorkeeper_authorize!, only: [:create, :update]
   include UserStatistic
   include Rating
 
   def index
-    questions = Question.paginate(page: params[:page] || 1, per_page: 20).top
+    questions = Question.top.paginate(page: params[:page] || 1, per_page: 20)
     render json: questions.as_json(methods: [:answers_count, :comments_count, :tag_list])
   end
 
@@ -25,6 +26,11 @@ class Api::V1::QuestionsController < Api::ApiController
     else
       render json: question.errors.to_json, status: :uprocessable_entity
     end
+  end
+
+  def filter
+    questions = Question.filter(params[:filter]).paginate(page: params[:page] || 1, per_page: 20)
+    render json: questions.as_json(except: :tags, methods: [:answers_count, :comments_count, :tag_list])
   end
 
   def show

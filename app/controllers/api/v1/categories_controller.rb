@@ -2,7 +2,7 @@ class Api::V1::CategoriesController < Api::ApiController
   # before_action :doorkeeper_authorize!
 
   def index
-    categories = Category.paginate(page: params[:page] || 1, per_page: 5)
+    categories = Category.paginate(page: params[:page] || 1, per_page: 10)
     render json: categories.as_json, status: :ok
   end
 

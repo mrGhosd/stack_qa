@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -63,6 +63,7 @@ gem 'unicorn'
 gem 'redis-rails'
 gem 'acts-as-taggable-on'
 gem 'chosen-rails'
+gem 'spring'
 gem 'spring-commands-rspec'
 
 # Use ActiveModel has_secure_password
@@ -99,7 +100,7 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+
 end
 
 

@@ -18,17 +18,17 @@ class Api::V1::UsersController < Api::ApiController
 
   def questions
     user = User.find(params[:id])
-    render json: user.questions.paginate(page: params[:page] || 1, per_page: 10).as_json, status: :ok
+    render json: user.questions.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:answers_count, :comments_count, :tag_list]), status: :ok
   end
 
   def answers
     user = User.find(params[:id])
-    render json: user.answers.paginate(page: params[:page] || 1, per_page: 10).as_json, status: :ok
+    render json: user.answers.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:question, :user]), status: :ok
   end
 
   def comments
     user = User.find(params[:id])
-    render json: user.comments.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:question, :answer]), status: :ok
+    render json: user.comments.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:question, :answer, :user]), status: :ok
   end
 
   def user_params

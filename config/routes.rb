@@ -45,6 +45,7 @@ Rails.application.routes.draw do
         get :me, on: :collection
       end
       resources :questions, concerns: [:rating, :commentable] do
+        get :filter, on: :collection
         resources :answers, concerns: [:rating, :commentable] do
           post :helpfull, on: :member
         end
