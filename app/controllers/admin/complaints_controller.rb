@@ -8,4 +8,11 @@ class Admin::ComplaintsController < AdminController
     complaint.destroy
     head :ok
   end
+
+  def parent
+    complaint = Complaint.find(params[:id])
+    complaint.parent.try(:destroy)
+    complaint.destroy
+    head :ok
+  end
 end
