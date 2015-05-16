@@ -25,4 +25,13 @@ feature "User", :js do
       expect(page).to have_css(".complain_message")
     end
   end
+
+  context "Comment" do
+    let!(:comment) { create :comment, commentable_id: question.id, commentable_type: question.class.to_s, user_id: user.id }
+    scenario "create complaint" do
+      visit question_path(question)
+      find('.complain-comment', match: :first).click
+      expect(page).to have_css(".complain_message")
+    end
+  end
 end
