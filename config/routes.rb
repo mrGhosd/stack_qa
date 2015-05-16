@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories
-    resources :complaints, only: :index
+    resources :complaints, only: [:index, :destroy]
   end
 
   namespace :api do
