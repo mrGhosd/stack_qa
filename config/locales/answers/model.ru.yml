@@ -1,0 +1,11 @@
+ru:
+  activerecord:
+    attributes:
+      answer:
+        text: 'Текст'
+    errors:
+      models:
+        answer:
+          attributes:
+            text:
+              blank: 'не может быть пустым'

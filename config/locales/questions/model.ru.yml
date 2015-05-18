@@ -1,0 +1,19 @@
+ru:
+  activerecord:
+    attributes:
+      question:
+        title: 'Заголовок'
+        text: 'Текст'
+        category_id: 'Категория'
+        tags: 'Тэги'
+        rate: 'Рейтинг'
+        views: 'Просмотры'
+    errors:
+      models:
+        question:
+          attributes:
+            title:
+              blank: 'не может быть пустым'
+              taken: "уже занят"
+            text:
+              blank: 'не может быть пустым'

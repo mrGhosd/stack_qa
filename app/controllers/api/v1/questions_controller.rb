@@ -15,7 +15,7 @@ class Api::V1::QuestionsController < Api::ApiController
       PrivatePub.publish_to "/questions", question: question.as_json(methods: [:humanized_date, :answers_count, :comments_sum])
       render json: question.to_json, status: :ok
     else
-      render json: question.errors.to_json, status: :uprocessible_entity
+      render json: question.errors.to_json, status: :unprocessable_entity
     end
   end
 
