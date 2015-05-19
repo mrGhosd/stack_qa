@@ -25,7 +25,7 @@ class User <ActiveRecord::Base
   end
 
   def correct_naming
-    if self.surname && self.name
+    if self.surname.present? && self.name.present?
       "#{self.surname} #{self.name}"
     else
       "#{self.email}"
