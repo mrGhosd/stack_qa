@@ -1,4 +1,5 @@
 .questions-list
-  - cache "#{collection_key_helper_for :question} - action #{params[:action]}"
+  - cache "#{collection_key_helper_for :question} - action #{params[:action]} - #{params[:page]}"
     - questions.each do |question|
       = render partial: 'question', locals: {question: question}
+    = will_paginate questions, :renderer => BootstrapPagination::Rails unless params[:action].eql?("filter")

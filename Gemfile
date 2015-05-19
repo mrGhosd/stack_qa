@@ -65,6 +65,7 @@ gem 'acts-as-taggable-on'
 gem 'chosen-rails'
 gem 'spring'
 gem 'spring-commands-rspec'
+gem 'will_paginate-bootstrap'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
