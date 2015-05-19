@@ -29,8 +29,6 @@ html
               - else
                 = link_to "Регистрация", "#", class: "auth-btn btn btn-primary reg", remote: true, data: {action: "registration"}
                 = link_to "Войти", "#", class: "auth-btn btn btn-success auth", remote: true, data: {action: "authorization"}
-    - if flash
-      = render template: "shared/flash_messages"
     - if params[:js] == "dialog_window"
       javascript:
         setTimeout("$('.authentication-links a.auth').click()", 500);
