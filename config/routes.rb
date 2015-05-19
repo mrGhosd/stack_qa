@@ -61,6 +61,7 @@ Rails.application.routes.draw do
           get :questions
           get :answers
           get :comments
+          get :statistic
         end
       end
       resources :categories do

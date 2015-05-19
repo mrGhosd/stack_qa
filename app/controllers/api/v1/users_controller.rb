@@ -16,6 +16,11 @@ class Api::V1::UsersController < Api::ApiController
     render json: user.as_json(except: [:password, :password_encrypted], methods: [:correct_naming, :rate, :questions_count, :answers_count, :comments_count, :statistic])
   end
 
+  def statistic
+    user = User.find(params[:id])
+    render json: user.statistic.as_json
+  end
+
   def questions
     user = User.find(params[:id])
     render json: user.questions.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:answers_count, :comments_count, :tag_list]), status: :ok
