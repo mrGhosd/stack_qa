@@ -29,6 +29,8 @@
 //= require user_rate
 //= require bootstrap-tags
 //= require complaints
+//= require i18n
+//= require i18n/translations
 //= require_tree .
 
 $(document).on("hidden.bs.modal", function(){

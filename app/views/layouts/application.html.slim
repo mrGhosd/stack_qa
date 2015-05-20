@@ -28,7 +28,7 @@ html
                 = link_to "Выйти", destroy_user_session_path, class: 'btn btn-danger', data: {method: 'delete'}
               - else
                 = link_to "Регистрация", "#", class: "auth-btn btn btn-primary reg", remote: true, data: {action: "registration"}
-                = link_to "Войти", "#", class: "auth-btn btn btn-success auth", remote: true, data: {action: "authorization"}
+                = link_to t("share.auth.sign_in"), "#", class: "auth-btn btn btn-success auth", remote: true, data: {action: "authorization"}
     - if params[:js] == "dialog_window"
       javascript:
         setTimeout("$('.authentication-links a.auth').click()", 500);
@@ -36,5 +36,8 @@ html
     .container
       .starter-template
         = yield
+  coffee:
+    I18n.defaultLocale = "#{I18n.default_locale}";
+    I18n.locale = "#{I18n.locale}";
 
   = subscribe_to "/users/#{current_user.id}/rate" if current_user
