@@ -51,7 +51,7 @@ class QuestionsController < ApplicationController
   end
 
   def filter
-    @questions = Question.filter_by(params[:filter], params[:order]).limit(30)
+    @questions = Question.filter_by(params[:filter], params[:order]).first(30)
     render partial: "questions/collection", locals: {questions: @questions}, layout: false, status: :ok
   end
 

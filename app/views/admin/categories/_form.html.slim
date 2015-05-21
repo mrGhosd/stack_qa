@@ -1,18 +1,18 @@
-= link_to "На список категорий", admin_categories_path, class: 'btn btn-primary'
+= link_to t('category.list'), admin_categories_path, class: 'btn btn-primary'
 = form_for [:admin, @category], html: { class: 'form-horizontal category-form' }, data: {type: :json}, remote: true do |f|
   - if params[:action] == "edit"
     = f.hidden_field :action, value: "edit", data: {category: @category.id}
   .form-group
-    = f.label 'Заголовок:', class: 'control-label col-md-2'
+    = f.label t('category.title'), class: 'control-label col-md-2'
     .col-md-4
       = f.text_field :title, class: 'form-control', data: {name: "title"}
   .form-group
-    = f.label 'Описание:', class: 'control-label col-md-2'
+    = f.label t('category.text'), class: 'control-label col-md-2'
     .col-md-4
       = f.text_area :description, class: 'form-control', data: {name: "description"}
   .form-group
-    = f.label 'Изображение:', class: 'control-label col-md-2'
+    = f.label t('category.image'), class: 'control-label col-md-2'
     .col-md-4
       = f.file_field :image, data: {name: "image"}
   .col-md-offset-1
-    = f.submit "Сохранить", class: 'btn btn-success'
+    = f.submit t('category.save'), class: 'btn btn-success'

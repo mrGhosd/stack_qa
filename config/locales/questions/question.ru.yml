@@ -11,6 +11,7 @@ ru:
     complaint: "Пожаловаться"
     save: "Сохранить"
     back: "Назад"
+    created_at: "Создан в"
     create:
       title: "Создать вопрос"
     edit:

@@ -1,4 +1,4 @@
-= link_to "Создать", new_admin_category_path, class: 'btn btn-primary'
+= link_to t('category.create'), new_admin_category_path, class: 'btn btn-primary'
 .categories-list
   - @categories.each do |category|
     = render partial: 'categories/category', locals: {category: category}

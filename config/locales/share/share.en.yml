@@ -1,5 +1,7 @@
 en:
   share:
+    admin_title: "Admin page"
+    exit: "To site"
     auth:
       sign_in: "Sign in"
       sign_up: "Sign up"

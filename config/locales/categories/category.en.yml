@@ -1,0 +1,15 @@
+en:
+  category:
+    create_title: "Create category"
+    edit_title: "Edit category"
+    list: "Categories list"
+    create: "Create"
+    hide: "Hide"
+    edit: "Edit"
+    destroy: "Destroy"
+    empty_questions: "There is no questions"
+    title: "Title"
+    text: "Description"
+    image: "Image"
+    save: "Save"
+    back: "Back"

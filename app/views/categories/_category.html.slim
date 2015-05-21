@@ -7,5 +7,5 @@
       .timestamp.col-md-4= category.created_at
     - if current_user && current_user.is_admin?
       .row.actions
-        = link_to "Редактировать", edit_admin_category_path(category), class: 'btn btn-success'
-        = link_to "Удалить", "#", class: 'btn btn-danger delete-category', data: { category: category.id }, remote: true
+        = link_to t('category.edit'), edit_admin_category_path(category), class: 'btn btn-success'
+        = link_to t('category.destroy'), "#", class: 'btn btn-danger delete-category', data: { category: category.id }, remote: true

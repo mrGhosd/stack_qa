@@ -6,13 +6,13 @@
       .category-desc
         = @category.description.html_safe
       .category-hide
-        = link_to "Скрыть", "#", class: "btn btn-primary glyphicon glyphicon-arrow-up toggle-description", remote: true
+        = link_to t('category.hide'), "#", class: "btn btn-primary glyphicon glyphicon-arrow-up toggle-description", remote: true
   .col-md-2
     .category-image
       = image_tag @category.image.url(:small) || "empty-check-box-th.png"
 .categories-questions.row
   - if @category.questions.blank?
-    h3 = "В данной категории еще нет вопросов"
+    h3 = t('category.empty_questions')
     = link_to "Создать", new_question_path, class: 'btn btn-success'
   - else
     - @category.questions.each do |question|

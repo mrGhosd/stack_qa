@@ -13,7 +13,7 @@
     .title
       = link_to question.title, question_path(question)
     .timestamp
-      = question.created_at.strftime("Создан в %H:%m, %m.%d.%Y ")
+      = question.created_at.strftime("#{t("question.created_at")} %H:%m, %m.%d.%Y ")
     - if current_user && question.in?(current_user.questions)
       .actions-panel
         = link_to "", edit_question_path(question), class: "glyphicon glyphicon-pencil btn btn-xs btn-success"

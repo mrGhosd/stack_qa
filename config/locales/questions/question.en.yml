@@ -11,6 +11,7 @@ en:
     complaint: "Complaint"
     save: "Save"
     back: "Back"
+    created_at: "Created at"
     create:
       title: "Create question"
     edit:

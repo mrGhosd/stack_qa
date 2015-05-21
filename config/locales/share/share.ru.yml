@@ -1,5 +1,7 @@
 ru:
   share:
+    admin_title: "Админка"
+    exit: "На сайт"
     auth:
       sign_in: "Войти"
       sign_up: "Регистрация"
