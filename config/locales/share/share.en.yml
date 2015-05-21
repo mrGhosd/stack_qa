@@ -2,3 +2,7 @@ en:
   share:
     auth:
       sign_in: "Sign in"
+      sign_up: "Sign up"
+    menu:
+      categories: "Categories"
+      admin: "Admin"

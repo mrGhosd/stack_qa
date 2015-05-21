@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :users, except: [:new, :create]
+  resources :users, except: [:new, :create] do
+    post :locale, on: :collection
+  end
   resources :questions, concerns: [:commentable, :rating, :complaints] do
     collection do
       post :filter

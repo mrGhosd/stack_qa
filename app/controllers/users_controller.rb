@@ -22,6 +22,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def locale
+    if params[:locale].downcase.to_sym == :en
+      session[:locale] = "ru"
+    else
+      session[:locale] = "en"
+    end
+    head :ok
+  end
+
   private
 
   def user_params

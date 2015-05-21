@@ -14,10 +14,11 @@ html
             = link_to "StackQ&A", root_path
         .collapse.navbar-collapse
           ul.nav.navbar-nav
-            li= link_to "Категории", categories_path
-            li = link_to "Админка", admin_categories_path if current_user && current_user.is_admin?
+            li= link_to t("share.menu.categories"), categories_path
+            li = link_to t("share.menu.admin"), admin_categories_path if current_user && current_user.is_admin?
           .navbar-form.navbar-right.content-actions
             .authentication-links
+              = link_to I18n.locale.upcase, "#", class: "btn btn-warning change-locale", remote: true
               - if current_user
                 .rating
                   div[class="user-rate glyphicon glyphicon-thumbs-#{current_user.statistic.rate >= 0 ? "up" : "down"}"]
@@ -27,7 +28,7 @@ html
                   span= "#{current_user.surname} #{current_user.name}".blank? ? current_user.email : "#{current_user.surname} #{current_user.name}"
                 = link_to "Выйти", destroy_user_session_path, class: 'btn btn-danger', data: {method: 'delete'}
               - else
-                = link_to "Регистрация", "#", class: "auth-btn btn btn-primary reg", remote: true, data: {action: "registration"}
+                = link_to t("share.auth.sign_up"), "#", class: "auth-btn btn btn-primary reg", remote: true, data: {action: "registration"}
                 = link_to t("share.auth.sign_in"), "#", class: "auth-btn btn btn-success auth", remote: true, data: {action: "authorization"}
     - if params[:js] == "dialog_window"
       javascript:

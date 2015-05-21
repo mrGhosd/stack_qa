@@ -1,0 +1,8 @@
+ru:
+  share:
+    auth:
+      sign_in: "Войти"
+      sign_up: "Регистрация"
+    menu:
+      categories: "Категории"
+      admin: "Админка"

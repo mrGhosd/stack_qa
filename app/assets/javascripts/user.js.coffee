@@ -13,6 +13,9 @@ $ ->
   $("#profile .edit-user").click ->
     editUser($(this))
 
+  $(".change-locale").click ->
+    changeLocale($(this))
+
 $(document).delegate(".user-image", "change", ->
   reader = new FileReader()
   reader.onload = (event) ->
@@ -29,7 +32,12 @@ $(document).delegate(".user-image", "change", ->
 
 
 
-
+changeLocale = (link) ->
+  $.ajax "/users/locale",
+    type: "POST"
+    data: {locale: $(link).text() }
+    success: (response, request) ->
+      window.location.reload()
 
 editUser = (button) ->
   user = button.data("user")
