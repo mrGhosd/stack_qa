@@ -1,29 +1,29 @@
 .row
   fieldset
     legend
-      span= "Основная информация"
+      span= t("user.show.profile")
       - if @user == current_user
         = link_to "", "#", remote: true, class: "btn btn-success glyphicon glyphicon-pencil btn-sm edit-user", data: {user: @user.id}
     .col-md-10
       form.form-horizontal
         .form-group
-          label.col-md-2.control-label= "Фамилия:"
+          label.col-md-2.control-label= t("user.surname")
           .col-md-4
             p= @user.surname || "-"
         .form-group
-          label.col-md-2.control-label= "Имя:"
+          label.col-md-2.control-label= t("user.name")
           .col-md-4
             p= @user.name || "-"
         .form-group
-          label.col-md-2.control-label= "Email:"
+          label.col-md-2.control-label= t("user.email")
           .col-md-4
             p= @user.email
         .form-group
-          label.col-md-2.control-label= "Дата рождения:"
+          label.col-md-2.control-label= t("user.date_of_birth")
           .col-md-4
             p= @user.date_of_birth || "-"
         .form-group
-          label.col-md-2.control-label= "Место рождения:"
+          label.col-md-2.control-label= t("user.place_of_birth")
           .col-md-4
             p= @user.place_of_birth || "-"
     .col-md-2
