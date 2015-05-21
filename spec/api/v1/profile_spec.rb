@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe "Profile API" do
   describe "GET /me" do
-    let!(:api_path) { "/api/v1/profiles/me" }
-    it_behaves_like "API Authenticable"
 
     context "authorized" do
       let!(:me){ create :user }
