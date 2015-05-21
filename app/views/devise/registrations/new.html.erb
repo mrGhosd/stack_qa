@@ -1,15 +1,15 @@
 <div class="tab-pane" id="registration">
-    <%= form_for(User.new, url: registration_path(:user), html: {class: 'form-horizontal'}) do |f| %>
+    <%= form_for(User.new, url: registration_path(:user), html: {class: 'modal-form form-horizontal'}) do |f| %>
 
       <div class="form-group">
-        <%= f.label :email, 'Электронная почта:', class: 'control-label col-md-4'%>
+        <%= f.label :email, t('share.modal_window.email'), class: 'control-label col-md-4'%>
         <div class="col-md-6">
             <%= f.email_field :email, autofocus: true , class: 'form-control' %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :password, 'Пароль:', class: 'control-label col-md-4' %>
+        <%= f.label :password, t('share.modal_window.password'), class: 'control-label col-md-4' %>
         <% if @validatable %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %>
@@ -19,7 +19,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation, 'Подтверждение пароля:', class: 'control-label col-md-4' %>
+        <%= f.label :password_confirmation, t('share.modal_window.password_confirmation'), class: 'control-label col-md-4' %>
         <div class="col-md-6">
             <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
         </div>

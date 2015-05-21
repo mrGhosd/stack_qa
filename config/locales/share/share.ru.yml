@@ -6,3 +6,11 @@ ru:
     menu:
       categories: "Категории"
       admin: "Админка"
+    modal_window:
+      auth: "Авторизация"
+      reg: "Регистрация"
+      send: "Отправить"
+      close: "Закрыть"
+      email: "Электронная почта"
+      password: "Пароль"
+      password_confirmation: "Подтверждение пароля"

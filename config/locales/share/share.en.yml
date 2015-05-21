@@ -6,3 +6,12 @@ en:
     menu:
       categories: "Categories"
       admin: "Admin"
+    modal_window:
+      auth: "Sign in"
+      reg: "Sign up"
+      send: "Send"
+      close: "Close"
+      email: "Email"
+      password: "Password"
+      password_confirmation: "Confirm password"
+

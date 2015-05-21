@@ -82,3 +82,28 @@ body>.alert{
 .bootstrap-tagsinput {
   width: 100% !important;
 }
+.modal-form{
+  margin-top: 15px;
+}
+.modal-footer{
+  .social{
+    float: left;
+    a{
+      height: 32px;
+      width:32px;
+      display: inline-block;
+    }
+    .facebook{
+      background-image: url("facebook.png");
+    }
+    .twitter{
+      background-image: url("twitter.png");
+    }
+    .vkontakte{
+
+    }
+    .instagram{
+
+    }
+  }
+}
