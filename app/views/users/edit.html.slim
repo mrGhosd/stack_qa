@@ -3,23 +3,23 @@
     .row
       .col-md-8
         .form-group
-          label.col-md-4.control-label="Фамилия:"
+          label.col-md-4.control-label= t("user.surname")
           .col-md-7
             = f.text_field :surname, class: "form-control"
         .form-group
-          label.col-md-4.control-label="Имя:"
+          label.col-md-4.control-label=t("user.name")
           .col-md-7
             = f.text_field :name, class: "form-control"
         .form-group
-          label.col-md-4.control-label="Email:"
+          label.col-md-4.control-label=t("user.email")
           .col-md-7
             = f.text_field :email, class: "form-control"
         .form-group
-          label.col-md-4.control-label="Дата рождения:"
+          label.col-md-4.control-label=t("user.date_of_birth")
           .col-md-7
             = f.text_field :date_of_birth, class: "form-control datepicker"
         .form-group
-          label.col-md-4.control-label="Место рождения:"
+          label.col-md-4.control-label=t("user.place_of_birth")
           .col-md-7
             = f.text_field :place_of_birth, class: "form-control"
 
@@ -29,4 +29,4 @@
         = f.file_field :avatar, class: "user-image"
 
     .col-md-offset-1
-      = f.submit "Сохранить", class: "btn btn-success save-user"
+      = f.submit t("share.menu.save"), class: "btn btn-success save-user"

@@ -6,6 +6,7 @@ en:
     menu:
       categories: "Categories"
       admin: "Admin"
+      save: "Save"
     modal_window:
       title: "System message"
       auth: "Sign in"

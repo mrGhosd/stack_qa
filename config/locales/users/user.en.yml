@@ -1,0 +1,9 @@
+en:
+  user:
+    edit:
+      title: "Edit user"
+    surname: "Surname"
+    name: "Name"
+    email: "Email"
+    date_of_birth: "Date of birth"
+    place_of_birth: "Place of birth"

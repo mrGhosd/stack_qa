@@ -1,0 +1,9 @@
+ru:
+  user:
+    edit:
+      title: "Редактировать пользователя"
+    surname: "Фамилия"
+    name: "Имя"
+    email: "Email"
+    date_of_birth: "Дата рождения"
+    place_of_birth: "Место рождения"

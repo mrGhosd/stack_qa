@@ -44,7 +44,7 @@ editUser = (button) ->
   $.ajax "/users/#{user}/edit",
     type: "GET"
     success: (response, request) ->
-      showUserModalWindow("Редактировать пользователя", response)
+      showUserModalWindow("#{I18n.t("user.edit.title")}", response)
     error: (response, request) ->
       showUserModalWindow("Ошибка при загрузке", response)
 

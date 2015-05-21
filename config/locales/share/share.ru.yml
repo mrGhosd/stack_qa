@@ -6,6 +6,7 @@ ru:
     menu:
       categories: "Категории"
       admin: "Админка"
+      save: "Сохранить"
     modal_window:
       title: "Сообщение"
       auth: "Авторизация"
