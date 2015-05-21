@@ -3,21 +3,21 @@
   - if params[:action] == "edit"
     = f.hidden_field :action, value: "edit", data: {question: @question.id}
   .form-group
-    = f.label 'Заголовок:', class: 'col-md-2 control-label'
+    = f.label t('question.title'), class: 'col-md-2 control-label'
     .col-md-4
       = f.text_field :title, class: 'form-control'
   .form-group
-    = f.label 'Текст вопроса:', class: 'col-md-2 control-label'
+    = f.label t('question.text'), class: 'col-md-2 control-label'
     .col-md-5
-      = f.text_area :text, class: 'form-control', rows: 120, cols: 10
+      = f.text_area :text, class: 'form-control', rows: 10, cols: 10
   .form-group
-    = f.label 'Теги:', class: 'col-md-2 control-label'
+    = f.label t('question.tags'), class: 'col-md-2 control-label'
     .col-md-5
       = f.text_field :tag_list, class: 'form-control', data: { role: "tagsinput" }
   .form-group
-    = f.label 'Категория:', class: 'col-md-2 control-label'
+    = f.label t('question.category'), class: 'col-md-2 control-label'
     .col-md-4
       = f.select(:category_id, Category.all.map {|p| [ p.title, p.id ]}, {}, class: 'form-control')
   .col-md-offset-2
-    = f.submit 'Сохранить', class: 'btn btn-success'
-    = link_to 'Назад', questions_path, class: 'btn btn-default submit-btn'
+    = f.submit t('question.save'), class: 'btn btn-success'
+    = link_to t('question.back'), questions_path, class: 'btn btn-default submit-btn'

@@ -2,9 +2,16 @@ ru:
   question:
     title: "Название"
     category: "Категория"
+    text: "Текст"
     tags: "Теги"
     back: "Назад"
     answer: "Ответить"
     comment: "Добавить комментарий"
     subscribe: "Подписаться"
     complaint: "Пожаловаться"
+    save: "Сохранить"
+    back: "Назад"
+    create:
+      title: "Создать вопрос"
+    edit:
+      title: "Редактировать вопрос"

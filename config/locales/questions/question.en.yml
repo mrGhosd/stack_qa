@@ -2,9 +2,16 @@ en:
   question:
     title: "Title"
     category: "Category"
+    text: "Text"
     tags: "Tags"
     back: "Back"
     answer: "Answer"
     comment: "Add comment"
     subscribe: "Subscribe"
     complaint: "Complaint"
+    save: "Save"
+    back: "Back"
+    create:
+      title: "Create question"
+    edit:
+      title: "Edit question"
