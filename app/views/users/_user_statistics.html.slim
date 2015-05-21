@@ -1,42 +1,42 @@
 .row
   form.form-horizontal
     .form-group
-      label.col-md-3.control-label="Рейтинг:"
+      label.col-md-3.control-label= t("user.statistic.rate")
       .col-md-4
         p.rate= @statistic.rate
     .form-group
-      label.col-md-3.control-label="Ответов:"
+      label.col-md-3.control-label= t("user.statistic.answers")
       .col-md-4
         p.answers_count= @statistic.answers_count
     .form-group
-      label.col-md-3.control-label="Положительных голосов за вопрос:"
+      label.col-md-3.control-label= t("user.statistic.positive_questions_count")
       .col-md-4
         p.questions_positive_rate_count= @statistic.questions_positive_rate_count
     .form-group
-      label.col-md-3.control-label="Негативных голосов за вопрос:"
+      label.col-md-3.control-label= t("user.statistic.negative_questions_count")
       .col-md-4
         p.questions_negative_rate_count= @statistic.questions_negative_rate_count
     .form-group
-      label.col-md-3.control-label="Положительных голосов за ответ:"
+      label.col-md-3.control-label= t("user.statistic.positive_answers_count")
       .col-md-4
         p.answers_positive_rate_count= @statistic.answers_positive_rate_count
     .form-group
-      label.col-md-3.control-label="Негативных голосов за ответ:"
+      label.col-md-3.control-label= t("user.statistic.negative_answers_count")
       .col-md-4
         p.answers_negative_rate_count= @statistic.answers_negative_rate_count
     .form-group
-      label.col-md-3.control-label="Полезных ответов на вопрос:"
+      label.col-md-3.control-label= t("user.statistic.helpfull_answers")
       .col-md-4
         p.helpfull_answers_count= @statistic.helpfull_answers_count
     .form-group
-      label.col-md-3.control-label="Первых ответов на вопрос:"
+      label.col-md-3.control-label= t("user.statistic.first_answes")
       .col-md-4
         p.first_answers_count= @statistic.first_answers_count
     .form-group
-      label.col-md-3.control-label="Первых ответов на свой вопрос:"
+      label.col-md-3.control-label= t("user.statistic.first_self_answers")
       .col-md-4
         p.first_self_answers_count= @statistic.first_self_answers_count
     .form-group
-      label.col-md-3.control-label="Ответов на свои вопросы"
+      label.col-md-3.control-label= t("user.statistic.self_answers")
       .col-md-4
         p.self_answers_count= @statistic.self_answers_count

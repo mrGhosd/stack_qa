@@ -3,7 +3,7 @@
     .comment-text-body
       span.text= comment.text
       span.comment-author= " &mdash; #{link_to username_for_comment(comment.user), user_path(comment.user)}".html_safe
-      span.comment-date= " в #{comment.created_at.strftime("%H:%M:%S %d.%m.%Y")}"
+      span.comment-date= " #{t("share.prefixe.in")} #{comment.created_at.strftime("%H:%M:%S %d.%m.%Y")}"
     .comment-right-part
       - if current_user
         = link_to "", "#", class: "btn btn-warning btn-xs complain-comment glyphicon glyphicon-lock",
