@@ -21,4 +21,12 @@ en:
       in: "in"
     compliant:
       text: "In the meaining time administratos will watch on your complian"
+    create_question: "Create question"
+    filter:
+      rate: "Rate"
+      new: "New"
+      views: "Views"
+      answered: "Answered"
+      week: "For week"
+      month: "For month"
 
