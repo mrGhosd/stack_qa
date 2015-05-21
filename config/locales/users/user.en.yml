@@ -2,6 +2,12 @@ en:
   user:
     edit:
       title: "Edit user"
+    show:
+      profile: "Profile"
+      quesitons: "Questions"
+      answers: "Answers"
+      comments: "Comments"
+      statistic: "Statistic"
     surname: "Surname"
     name: "Name"
     email: "Email"

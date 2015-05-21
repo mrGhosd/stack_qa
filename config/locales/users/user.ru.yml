@@ -2,6 +2,12 @@ ru:
   user:
     edit:
       title: "Редактировать пользователя"
+    show:
+      profile: "Профиль"
+      quesitons: "Вопросы"
+      answers: "Ответы"
+      comments: "Комментарии"
+      statistic: "Статистика"
     surname: "Фамилия"
     name: "Имя"
     email: "Email"

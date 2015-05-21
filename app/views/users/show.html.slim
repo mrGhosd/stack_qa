@@ -1,15 +1,15 @@
 ul.nav.nav-pills.profile-navigation
   li.active
-    = link_to "Профиль", "#", data: {page: "profile"}, remote: true
+    = link_to t("user.show.profile"), "#", data: {page: "profile"}, remote: true
   - if @user == current_user
     li
-      = link_to "Вопросы", "#", data: {page: "questions"}, remote: true
+      = link_to t("user.show.quesitons"), "#", data: {page: "questions"}, remote: true
     li
-      = link_to "Ответы", "#", data: {page: "answers"}, remote: true
+      = link_to t("user.show.answers"), "#", data: {page: "answers"}, remote: true
     li
-      = link_to "Комментарии", "#", data: {page: "comments"}, remote: true
+      = link_to t("user.show.comments"), "#", data: {page: "comments"}, remote: true
     li
-      = link_to "Статистика", "#", data: {page: "statistic"}, remote: true
+      = link_to t("user.show.statistic"), "#", data: {page: "statistic"}, remote: true
 
 .profile-pages
   #profile.active
