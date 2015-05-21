@@ -1,7 +1,7 @@
 <form class="form-horizontal comment-form">
   <div class="form-group">
     <div class="col-md-5">
-      <textarea class="form-control comment-text" name="text" placeholder="Текст"><%= @form.text if @form.text %></textarea>
+      <textarea class="form-control comment-text" name="text" placeholder="<%= I18n.t('comment.text') %>"><%= @form.text if @form.text %></textarea>
     </div>
   </div>
   <input type="submit" class="btn btn-success submit-comment" data-question="<%= @form.question if @form.question %>"
@@ -9,8 +9,8 @@
          data-comment="<%= @form.comment if @form.comment %>"
          data-type="<%= @form.type if @form.type %>"
          data-action="<%= @form.action if @form.action %>"
-         data-request-type="<%= @form.request_type if @form.request_type %>" value="Отправить"/>
+         data-request-type="<%= @form.request_type if @form.request_type %>" value="<%= I18n.t('comment.send') %>"/>
   <% if @form.cancel: %>
-    <a href="#" data-remote="true" class="btn btn-default remove-comment-form">Отмена</a>
+    <a href="#" data-remote="true" class="btn btn-default remove-comment-form"><%= I18n.t('comment.cancel') %></a>
   <% end %>
 </form>

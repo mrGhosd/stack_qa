@@ -15,11 +15,11 @@
         .col-md-8
           .question-category
             .form-group
-              label.col-md-2.control-label="Категория: "
+              label.col-md-2.control-label= t('question.category')
               = raw link_to @question.category.title, category_path(@question.category)
           .question-tags
             .form-group
-              label.col-md-2.control-label="Теги: "
+              label.col-md-2.control-label= t('question.tags')
               = raw @question.tags.map {|t| link_to t, "#", remote: true, class: "question-tag"}.join(", ")
           .question-text
             .form-group
@@ -30,11 +30,11 @@
       - if current_user && @question.in?(current_user.questions)
         = link_to "", edit_question_path(@question), class: "glyphicon glyphicon-pencil btn btn-success"
       - if current_user.present?
-        = link_to 'Назад', questions_path, class: 'btn btn-default'
-        = link_to "Ответить...", "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
+        = link_to t("question.back"), questions_path, class: 'btn btn-default'
+        = link_to t("question.answer"), "#", class: 'btn btn-primary add-answer', data: {question: @question.id}, remote: true
         = link_to "", "#", class: "glyphicon glyphicon-comment btn btn-info add-comment", data: {question: @question.id, type: "Question"}, remote: true
-        = link_to "Подписаться на обновления", "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
-        = link_to "Пожаловаться", "#", remote: true, class: "btn btn-danger complain-question", data: {question: @question.id}
+        = link_to t('question.subscribe'), "#", remote: true, class: "btn btn-warning sign-in-question", data: {question: @question.id}
+        = link_to t('question.complaint'), "#", remote: true, class: "btn btn-danger complain-question", data: {question: @question.id}
     .comments-list
       - cache key_for_nested_resource(@question, @question.comments) do
         - @question.comments.each do |comment|

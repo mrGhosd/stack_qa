@@ -1,0 +1,10 @@
+en:
+  question:
+    title: "Title"
+    category: "Category"
+    tags: "Tags"
+    back: "Back"
+    answer: "Answer"
+    comment: "Add comment"
+    subscribe: "Subscribe"
+    complaint: "Complaint"

@@ -1,0 +1,10 @@
+ru:
+  question:
+    title: "Название"
+    category: "Категория"
+    tags: "Теги"
+    back: "Назад"
+    answer: "Ответить"
+    comment: "Добавить комментарий"
+    subscribe: "Подписаться"
+    complaint: "Пожаловаться"
