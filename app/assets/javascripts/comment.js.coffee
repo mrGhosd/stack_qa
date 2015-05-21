@@ -141,8 +141,7 @@ complainComment = (button) ->
     type: "POST"
     data: {complaint: {complaintable_id: comment, complaintable_type: "Comment" }}
     success: (response, request) ->
-      text = "<div class='complain_message'>Благодарим вас за бдительность. " +
-          "В ближайшее время мы рассмотрим данную жалобу</div>"
+      text = "<div class='complain_message'><%= I18n.t('share.compliant.text') %></div>"
       showMessage(text)
 
 editComment = (button)->
