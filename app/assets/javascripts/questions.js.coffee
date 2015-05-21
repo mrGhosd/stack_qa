@@ -80,7 +80,7 @@ complainQuestion = (button) ->
     type: "POST"
     data: {complaint: {complaintable_id: question, complaintable_type: "Question" } }
     success: (response, request) ->
-      text = "<div class='complain_message'><%= I18n.t('share.compliant.text') %></div>"
+      text = "<div class='complain_message'>#{I18n.t("share.compliant.text")}</div>"
       showMessage(text)
 
 
