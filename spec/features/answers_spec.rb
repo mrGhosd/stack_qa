@@ -6,7 +6,7 @@ feature "Answers for unsigned user", :js do
     visit root_path
     find(".question-item .title", match: :first).click
     expect(page).to have_content(question.title)
-    expect(page).to_not have_content("Ответить...")
+    expect(page).to_not have_css(".add-answer")
   end
 end
 
@@ -23,13 +23,13 @@ feature "Answers for signed in user", :js do
 
   scenario "is available from question page" do
     expect(page).to have_content(question.title)
-    expect(page).to have_content("Ответить...")
+    expect(page).to have_css(".add-answer")
   end
 
   context "with valid attributes" do
     scenario "create an answer" do
       find(".add-answer").click
-      fill_in "answer_text",with: "POOOOO"
+      fill_in "answer_text", with: "POOOOO"
       find('.submit-answer').click
       expect(page).to have_content("POOOOO")
     end
@@ -37,7 +37,7 @@ feature "Answers for signed in user", :js do
     scenario "update question" do
       find(".edit-answer", match: :first).click
       fill_in "answer_text", with: "POOOOO"
-      sleep 0.1
+      wait_for_ajax
       find('.submit-answer').click
       expect(page).to have_content("POOOOO")
     end
@@ -59,7 +59,7 @@ feature "Answers for signed in user", :js do
 
   scenario "mark answer as helpfull" do
     find(".answer-is-helpfull", match: :first).click
-    sleep 0.3
+    wait_for_ajax
     expect(page).to have_css(".correct-answer-icon")
   end
 

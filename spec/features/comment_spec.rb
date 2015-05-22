@@ -43,7 +43,7 @@ describe "Question" do
         expect(page).to have_css(".comment-form")
         within ".comment-form" do
           fill_in "text", with: "TEXT"
-          click_button "Отправить"
+          find(".submit-comment", match: :first).click
         end
         expect(page).to have_content("TEXT")
       end
@@ -53,7 +53,7 @@ describe "Question" do
         expect(page).to have_css(".comment-form")
         within ".comment-form" do
           fill_in "text", with: "OLOLO"
-          click_button "Отправить"
+          find(".submit-comment", match: :first).click
         end
         expect(page).to have_content("OLOLO")
       end
@@ -64,11 +64,10 @@ describe "Question" do
         find(:css, ".add-comment").click
         expect(page).to have_css(".comment-form")
         within ".comment-form" do
-          click_button "Отправить"
+          find(".submit-comment", match: :first).click
         end
         expect(page).to have_css(".error")
         expect(page).to have_css(".error-text")
-        expect(page).to have_content("can't be blank")
       end
 
       scenario "update an existed comment" do
@@ -76,11 +75,10 @@ describe "Question" do
         expect(page).to have_css(".comment-form")
         within ".comment-form" do
           fill_in "text", with: ""
-          click_button "Отправить"
+          find(".submit-comment", match: :first).click
         end
         expect(page).to have_css(".error")
         expect(page).to have_css(".error-text")
-        expect(page).to have_content("can't be blank")
       end
     end
 

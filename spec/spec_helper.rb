@@ -16,6 +16,7 @@ Sidekiq::Testing.inline!
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  config.include FeatureHelper
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation

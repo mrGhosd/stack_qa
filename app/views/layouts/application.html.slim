@@ -14,8 +14,8 @@ html
             = link_to "StackQ&A", root_path
         .collapse.navbar-collapse
           ul.nav.navbar-nav
-            li= link_to t("share.menu.categories"), categories_path
-            li = link_to t("share.menu.admin"), admin_categories_path if current_user && current_user.is_admin?
+            li= link_to t("share.menu.categories"), categories_path, class: "categories-list"
+            li = link_to t("share.menu.admin"), admin_categories_path, class: "admin-page" if current_user && current_user.is_admin?
           .navbar-form.navbar-right.content-actions
             .authentication-links
               = link_to I18n.locale.upcase, "#", class: "btn btn-warning change-locale", remote: true

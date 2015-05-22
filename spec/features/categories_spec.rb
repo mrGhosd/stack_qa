@@ -6,19 +6,19 @@ feature "Admin", :js do
 
   before do
     sign_in admin
-    click_link("Админка")
+    find(".admin-page").click
   end
 
   context "with valid attributes" do
     scenario "Create a new category" do
-      click_link "Создать"
+      find(".category-create").click
       within ".category-form" do
         fill_in "category_title", with: "TITLE"
         fill_in "category_description", with: "1"
         attach_file "category_image", "#{Rails.root}/app/assets/images/Ruby_on_Rails.png"
-        click_button "Сохранить"
+        find(".submit-category").click
       end
-      sleep 1
+      wait_for_ajax
       expect(page).to have_content("TITLE")
     end
 
@@ -27,44 +27,42 @@ feature "Admin", :js do
       within ".category-form" do
         fill_in "category_title", with: "EDIT_TITLE"
         attach_file "category_image", "#{Rails.root}/app/assets/images/Ruby_on_Rails.png"
-        click_button "Сохранить"
+        find(".submit-category").click
       end
-      sleep 1
+      wait_for_ajax
       expect(page).to have_content("EDIT_TITLE")
     end
   end
 
   context "with invalid attributes" do
     scenario "Create a new category" do
-      click_link "Создать"
+      find(".category-create").click
       within "#new_category" do
         fill_in "category_title", with: ""
         fill_in "category_description", with: "1"
         attach_file "category_image", "#{Rails.root}/app/assets/images/Ruby_on_Rails.png"
-        click_button "Сохранить"
+        find(".submit-category").click
       end
-      sleep 0.1
+      wait_for_ajax
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
-      expect(page).to have_content("can't be blank")
     end
 
     scenario "Update existing category" do
       find(".row.actions .btn.btn-success", match: :first).click
       within ".category-form" do
         fill_in "category_title", with: ""
-        click_button "Сохранить"
+        find(".submit-category").click
       end
-      sleep 0.1
+      wait_for_ajax
       expect(page).to have_css(".error")
       expect(page).to have_css(".error-text")
-      expect(page).to have_content("can't be blank")
     end
   end
 
   scenario "delete category" do
     find(".row.actions .btn.btn-danger", match: :first).click
-    sleep 1
+    wait_for_ajax
     expect(page).to_not have_content(category.title)
   end
 end
@@ -76,7 +74,7 @@ feature "User", :js do
 
   before do
     sign_in user
-    click_link "Категории"
+    find(".categories-list").click
   end
 
   scenario "see the list of categories" do
@@ -92,10 +90,10 @@ feature "User", :js do
   scenario "hide and show category description" do
     find(".category-title", match: :first).click
     find(".toggle-description").click
-    sleep 0.1
+    wait_for_ajax
     expect(page).to_not have_content category.description
     find(".toggle-description").click
-    sleep 0.1
+    wait_for_ajax
     expect(page).to have_content category.description
   end
 
