@@ -34,3 +34,4 @@ ru:
     search:
       title: "Поиск"
       submit: "Отправить"
+      empty: "Совпадений нет"

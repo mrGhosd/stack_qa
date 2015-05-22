@@ -1,7 +1,30 @@
 $ ->
   $(".search-text").on "keyup", ->
-    console.log $(this).val()
-
+    if $(this).val() == ""
+      $(".search-popup").remove()
+    else
+      $.ajax "/search",
+        type: "GET"
+        data: {query: $(this).val()}
+        success: (request, response)->
+          $(".search-popup ul").html("")
+          if $(".search-popup").length == 0
+            $(".search-form").append("<div class='search-popup'><ul></ul></div>")
+#          console.log request
+          if request.search.length == 0
+            $(".search-popup ul").append("<li class='empty-list'>#{I18n.t("share.search.empty")}</li>")
+          for object in request.search.slice(0, 9)
+            console.log object
+            if object.question_id != null
+              url = object.id
+              image = "question"
+            else
+              url = object.question_id
+              image = "answer"
+            $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 10)}</a></li>")
+        error: (request, response) ->
+          console.log request
+          console.log response
 
 
 

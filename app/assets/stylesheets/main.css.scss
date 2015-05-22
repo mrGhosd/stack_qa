@@ -107,3 +107,34 @@ body>.alert{
     }
   }
 }
+.search-popup{
+  position: absolute;
+  width:17.5%;
+  height: 340px;
+  background-color: #CCCCFF;
+  border: 2px solid #ccc;
+  ul{
+    list-style-type: none;
+    padding:0px;
+    li{
+      margin-top: 10px;
+      a{
+        display: inline-block;
+        width: 100%;
+        padding-left: 25px;
+        height: 26px;
+        padding-top: 5px;
+      }
+    }
+    li.empty-list{
+      font-size: 18px;
+      font-style: italic;
+      color: #000;
+    }
+    .question-icon{
+      background-image: url("question_mark_filled-25.png");
+      background-position: left center;
+      background-repeat: no-repeat;
+    }
+  }
+}

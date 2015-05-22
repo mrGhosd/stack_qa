@@ -34,3 +34,4 @@ en:
     search:
       title: "Search"
       submit: "Submit"
+      empty: "There is no match"
