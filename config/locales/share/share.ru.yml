@@ -31,3 +31,6 @@ ru:
       answered: "Отвеченные"
       week: "За неделю"
       month: "За месяц"
+    search:
+      title: "Поиск"
+      submit: "Отправить"

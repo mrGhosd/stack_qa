@@ -1,0 +1,5 @@
+form.navbar-form.navbar-left.search-form role="search"
+  .form-group
+    = text_field_tag "search", nil, class: "form-control search-text", placeholder: t("share.search.title")
+  button type="submit" class="btn btn-primary search-submit"
+    = t("share.search.submit")

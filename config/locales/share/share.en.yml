@@ -31,4 +31,6 @@ en:
       answered: "Answered"
       week: "For week"
       month: "For month"
-
+    search:
+      title: "Search"
+      submit: "Submit"

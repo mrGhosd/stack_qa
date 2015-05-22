@@ -1,4 +1,10 @@
 $ ->
+  $(".search-text").on "keyup", ->
+    console.log $(this).val()
+
+
+
+
   $(".search-control .search-link").click ->
     $(".search-item").remove()
     filter = $("#search_filter").val()

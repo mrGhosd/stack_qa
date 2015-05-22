@@ -16,6 +16,7 @@ html
           ul.nav.navbar-nav
             li= link_to t("share.menu.categories"), categories_path, class: "categories-list"
             li = link_to t("share.menu.admin"), admin_categories_path, class: "admin-page" if current_user && current_user.is_admin?
+          = render partial: "shared/search"
           .navbar-form.navbar-right.content-actions
             .authentication-links
               = link_to I18n.locale.upcase, "#", class: "btn btn-warning change-locale", remote: true
