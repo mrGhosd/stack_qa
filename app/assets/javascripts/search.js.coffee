@@ -14,13 +14,13 @@ $ ->
           if request.search.length == 0
             $(".search-popup ul").append("<li class='empty-list'>#{I18n.t("share.search.empty")}</li>")
           for object in request.search.slice(0, 9)
-            console.log object
-            if object.question_id != null
-              url = object.id
-              image = "question"
-            else
+            console.log object.question_id
+            if object.question_id
               url = object.question_id
               image = "answer"
+            else
+              url = object.id
+              image = "question"
             $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 10)}</a></li>")
         error: (request, response) ->
           console.log request
