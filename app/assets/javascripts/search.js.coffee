@@ -13,13 +13,13 @@ $ ->
           if $(".search-popup").length == 0
             $(".search-form").append("<div class='search-popup'><ul></ul></div>")
 
-          if request.search.length == 0
-            $(".search-popup ul").append("<li class='empty-list'>#{I18n.t("share.search.empty")}</li>")
+#          if request.search.length == 0
+#            $(".search-popup ul").append("<li class='empty-list'>#{I18n.t("share.search.empty")}</li>")
 
           for object in request.search.slice(0, 9)
-            url = object.id
-            image = "question"
-            $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 25)}</a></li>")
+#            url = object.id
+#            image = "question"
+            $(".search-popup ul").append("<li><a href=\"/questions/#{object.id}\" class=\"question-icon\">#{object.text.substring(0, 25)}</a></li>")
         error: (request, response) ->
           console.log request
           console.log response
