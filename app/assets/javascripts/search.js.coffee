@@ -20,7 +20,8 @@ $ ->
             else
               url = object.id
               image = "question"
-            console.log object.text.length
+            console.log object
+            console.log object.text.length + " " + object.text
             if object.text
               $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 25)}</a></li>")
         error: (request, response) ->
