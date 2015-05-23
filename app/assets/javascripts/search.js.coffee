@@ -21,7 +21,7 @@ $ ->
             else
               url = object.id
               image = "question"
-            $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 10)}</a></li>")
+            $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 25)}</a></li>")
         error: (request, response) ->
           console.log request
           console.log response
