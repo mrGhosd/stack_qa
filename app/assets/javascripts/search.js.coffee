@@ -17,8 +17,7 @@ $ ->
           for object in request.search.slice(0, 9)
             url = object.id
             image = "question"
-            if object
-              $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 25)}</a></li>")
+            $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 25)}</a></li>")
         error: (request, response) ->
           console.log request
           console.log response
