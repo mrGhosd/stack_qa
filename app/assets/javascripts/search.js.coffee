@@ -7,6 +7,8 @@ $ ->
         type: "GET"
         data: {query: $(this).val()}
         success: (request, response)->
+          console.log request
+          console.log response
           $(".search-popup ul").html("")
           if $(".search-popup").length == 0
             $(".search-form").append("<div class='search-popup'><ul></ul></div>")
