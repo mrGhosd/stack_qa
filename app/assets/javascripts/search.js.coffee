@@ -21,7 +21,7 @@ $ ->
             else
               url = object.id
               image = "question"
-            console.log object.text
+            console.log object.text == undefined
             $(".search-popup ul").append("<li><a href=\"/questions/#{url}\" class=\"#{image}-icon\">#{object.text.substring(0, 25)}</a></li>")
         error: (request, response) ->
           console.log request
