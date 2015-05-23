@@ -1,2 +1,13 @@
-- @result.each do |result|
-  = render partial: "results", locals: {result: result}, layout: nil
+h3 = t("share.search.page_title")
+.search-header
+  form.form-inline.full-search-form role="search"
+    .form-group
+      .col-md-10
+        = text_field_tag "search", nil, class: "form-control full-search-text", placeholder: t("share.search.title")
+    button type="submit" class="btn btn-primary full-search-submit"
+      = t("share.search.submit")
+- if @collection.length > 0
+  - @collection.each do |question|
+    = render partial: "questions/question", locals: {question: question}
+- else
+  p= t("share.search.empty")

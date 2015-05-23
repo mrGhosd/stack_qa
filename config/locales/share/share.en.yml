@@ -35,3 +35,5 @@ en:
       title: "Search"
       submit: "Submit"
       empty: "There is no match"
+      all_result: "All results"
+      page_title: "Search page"

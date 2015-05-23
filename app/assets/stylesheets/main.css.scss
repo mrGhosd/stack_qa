@@ -110,7 +110,6 @@ body>.alert{
 .search-popup{
   position: absolute;
   width:17.5%;
-  height: 340px;
   background-color: #CCCCFF;
   border: 2px solid #ccc;
   ul{
@@ -140,6 +139,11 @@ body>.alert{
       background-image: url("../images/answers-25.png");
       background-position: left center;
       background-repeat: no-repeat;
+    }
+  }
+  .show-all-search{
+    a{
+      cursor: pointer;
     }
   }
 }
