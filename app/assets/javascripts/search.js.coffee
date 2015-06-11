@@ -18,7 +18,7 @@ $ ->
 
           for object in request.search.slice(0, 9)
             $(".search-popup ul").append("<li>" +
-              "<a href=\"/questions/#{object.id}\" class=\"question-icon\">#{object.text.substring(0, 25)}</a></li>")
+              "<a href=\"/questions/#{object.id}\" class=\"question-icon\">#{object.title || object.text.substring(0, 25)}</a></li>")
 
           if request.search.length > 10
             $(".search-popup ul").append("<li class='show-all-search'><a>#{I18n.t("share.search.all_result")}</a></li>")
