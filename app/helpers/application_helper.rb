@@ -23,8 +23,7 @@ module ApplicationHelper
       children_updated_at =  children[0].class.maximum(:updated_at)
     end
     parent_updated_at = parent.class.maximum(:updated_at)
-    "#{parent_updated_at} - #{parent.class}/#{parent.id}/#{children.count}- #{parent.comments.maximum(:updated_at)} - #{children_updated_at}"
-    binding.pry
+    "#{parent_updated_at} - #{parent.class}/#{parent.id}/#{children.count} - #{parent.comments.maximum(:updated_at)} - #{children_updated_at}"
   end
 
   def username_for_comment(user)
