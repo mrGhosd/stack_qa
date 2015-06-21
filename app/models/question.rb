@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :category
   has_many :answers, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
@@ -32,9 +32,9 @@ class Question < ActiveRecord::Base
     comments
   end
 
-  def comments_count
-    self.comments.size
-  end
+  # def comments_count
+  #   @comments_count ||= self.comments.size
+  # end
 
   def tag_list
     self.tags.map(&:name).join(", ")
@@ -55,9 +55,9 @@ class Question < ActiveRecord::Base
     self.created_at.strftime("%H:%M:%S %d.%m.%Y")
   end
 
-  def answers_count
-    self.answers.size
-  end
+  # def answers_count
+  #   @answers_count ||= self.answers.size
+  # end
 
   def self.filter_values
     {

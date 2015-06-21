@@ -1,6 +1,6 @@
 class Answer < ActiveRecord::Base
-  belongs_to :user, touch: true
-  belongs_to :question, touch: true
+  belongs_to :user, touch: true, counter_cache: true
+  belongs_to :question, touch: true, counter_cache: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :complaints, as: :complaintable, dependent: :destroy
   include ModelRate

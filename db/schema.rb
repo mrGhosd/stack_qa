@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150516165043) do
+ActiveRecord::Schema.define(version: 20150621125030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(version: 20150516165043) do
     t.integer  "user_id"
     t.integer  "question_id"
     t.text     "text"
-    t.boolean  "is_helpfull", default: false
+    t.boolean  "is_helpfull",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "rate",        default: 0,     null: false
+    t.integer  "rate",           default: 0,     null: false
+    t.integer  "comments_count", default: 0
   end
 
+  add_index "answers", ["comments_count"], name: "index_answers_on_comments_count", using: :btree
   add_index "answers", ["rate"], name: "index_answers_on_rate", using: :btree
 
   create_table "authorizations", force: :cascade do |t|
@@ -132,19 +134,23 @@ ActiveRecord::Schema.define(version: 20150516165043) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string   "title",       limit: 255
+    t.string   "title",          limit: 255
     t.text     "text"
-    t.boolean  "is_closed",               default: false
+    t.boolean  "is_closed",                  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "category_id"
-    t.integer  "rate",                    default: 0,     null: false
-    t.integer  "views",                   default: 0,     null: false
-    t.text     "tags",                    default: [],                 array: true
+    t.integer  "rate",                       default: 0,     null: false
+    t.integer  "views",                      default: 0,     null: false
+    t.text     "tags",                       default: [],                 array: true
+    t.integer  "comments_count",             default: 0
+    t.integer  "answers_count",              default: 0
   end
 
+  add_index "questions", ["answers_count"], name: "index_questions_on_answers_count", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
+  add_index "questions", ["comments_count"], name: "index_questions_on_comments_count", using: :btree
   add_index "questions", ["is_closed"], name: "index_questions_on_is_closed", using: :btree
   add_index "questions", ["rate"], name: "index_questions_on_rate", using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
@@ -226,10 +232,16 @@ ActiveRecord::Schema.define(version: 20150516165043) do
     t.date     "date_of_birth"
     t.string   "place_of_birth",         limit: 255
     t.string   "avatar",                 limit: 255
+    t.integer  "questions_count",                    default: 0
+    t.integer  "answers_count",                      default: 0
+    t.integer  "comments_count",                     default: 0
   end
 
+  add_index "users", ["answers_count"], name: "index_users_on_answers_count", using: :btree
+  add_index "users", ["comments_count"], name: "index_users_on_comments_count", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["password"], name: "index_users_on_password", using: :btree
+  add_index "users", ["questions_count"], name: "index_users_on_questions_count", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|

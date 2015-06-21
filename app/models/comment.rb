@@ -1,6 +1,6 @@
 class Comment <ActiveRecord::Base
-  belongs_to :user
-  belongs_to :commentable, polymorphic: true, touch: true
+  belongs_to :user, counter_cache: true
+  belongs_to :commentable, polymorphic: true, touch: true, counter_cache: :comments_count
   has_many :complaints, as: :complaintable, dependent: :destroy
   
   validates :text, presence: true
