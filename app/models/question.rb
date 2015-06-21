@@ -17,7 +17,7 @@ class Question < ActiveRecord::Base
 
   scope :created_today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) }
   scope :top, -> { order(rate: :desc) }
-  scope :filter, -> (param) { includes(:comments, :answers).sort_by(&param.to_sym).reverse }
+  scope :filter, -> (param) { order(param => "desc") }
 
   def self.signed_users(question)
     question.question_users.each do |signin|
