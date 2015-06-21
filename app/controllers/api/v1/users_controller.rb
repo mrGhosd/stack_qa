@@ -13,7 +13,7 @@ class Api::V1::UsersController < Api::ApiController
 
   def show
     user = User.find(params[:id])
-    render json: user.as_json(except: [:password, :password_encrypted], methods: [:correct_naming, :rate, :questions_count, :answers_count, :comments_count, :statistic])
+    render json: user.as_json(except: [:password, :password_encrypted], methods: [:correct_naming, :rate, :statistic])
   end
 
   def statistic
@@ -23,7 +23,7 @@ class Api::V1::UsersController < Api::ApiController
 
   def questions
     user = User.find(params[:id])
-    render json: user.questions.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [:answers_count, :comments_count, :tag_list]), status: :ok
+    render json: user.questions.paginate(page: params[:page] || 1, per_page: 10).as_json(methods: [ :tag_list]), status: :ok
   end
 
   def answers
