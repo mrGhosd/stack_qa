@@ -33,7 +33,7 @@ class Question < ActiveRecord::Base
   end
 
   def comments_count
-    self.comments.count
+    self.comments.size
   end
 
   def tag_list
@@ -56,7 +56,7 @@ class Question < ActiveRecord::Base
   end
 
   def answers_count
-    self.answers.count
+    self.answers.size
   end
 
   def self.filter_values
