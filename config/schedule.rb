@@ -13,8 +13,8 @@
 #   rake "some:great:rake:task"
 # end
 #
-every 1.minutes do
-  rake "ts:rebuild"
-end
+# every 1.minutes do
+  # rake "ts:rebuild"
+# end
 
 # Learn more: http://github.com/javan/whenever
