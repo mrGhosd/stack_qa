@@ -6,7 +6,7 @@ class Api::V1::QuestionsController < Api::ApiController
 
   def index
     questions = Question.filter("rate").paginate(page: params[:page] || 1, per_page: 20)
-    render json: questions.as_json(only: [:id, :user_id, :title, :views, :rate, :created_at, :answers_count, :comments_count])
+    render json: questions.as_json(only: [:id, :user_id, :title, :views, :rate, :created_at, :answers_count, :comments_count], methods: :category)
   end
 
   def create
