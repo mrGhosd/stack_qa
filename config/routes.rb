@@ -70,5 +70,9 @@ Rails.application.routes.draw do
         get :questions, on: :member
       end
     end
+
+    namespace :v2 do
+      resources :questions
+    end
   end
 end

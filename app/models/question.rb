@@ -32,10 +32,6 @@ class Question < ActiveRecord::Base
     comments
   end
 
-  # def comments_count
-  #   @comments_count ||= self.comments.size
-  # end
-
   def tag_list
     self.tags.map(&:name).join(", ")
   end

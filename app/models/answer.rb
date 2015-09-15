@@ -12,6 +12,10 @@ class Answer < ActiveRecord::Base
     AnswerMailer.author_notification(answer).deliver
   end
 
+  def as_json(params = {})
+    super({methods: :comments}.merge(params))
+  end
+
   def user_name
     self.user.correct_naming
   end
