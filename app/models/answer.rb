@@ -13,7 +13,7 @@ class Answer < ActiveRecord::Base
   end
 
   def as_json(params = {})
-    super({methods: :comments}.merge(params))
+    super({methods: [:comments, :user]}.merge(params))
   end
 
   def user_name
